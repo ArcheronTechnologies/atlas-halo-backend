@@ -395,7 +395,7 @@ class BraFeatures(Base):
 
 @dataclass
 class DatabaseConfig:
-    """Database connection configuration"""
+    """Database connection configuration - supports Railway DATABASE_URL or individual vars"""
     host: str = os.getenv('POSTGRES_HOST', 'localhost')
     port: int = int(os.getenv('POSTGRES_PORT', '5432'))
     database: str = os.getenv('POSTGRES_DB', 'atlas_ai')
@@ -403,6 +403,22 @@ class DatabaseConfig:
     password: str = os.getenv('POSTGRES_PASSWORD', 'secure_password')
     pool_size: int = int(os.getenv('POSTGRES_POOL_SIZE', '10'))
     max_overflow: int = int(os.getenv('POSTGRES_MAX_OVERFLOW', '20'))
+
+    @classmethod
+    def from_url(cls, database_url: str):
+        """Parse Railway's DATABASE_URL format: postgresql://user:pass@host:port/db"""
+        import re
+        match = re.match(r'postgresql://([^:]+):([^@]+)@([^:]+):(\d+)/(.+)', database_url)
+        if match:
+            username, password, host, port, database = match.groups()
+            return cls(
+                host=host,
+                port=int(port),
+                database=database,
+                username=username,
+                password=password
+            )
+        return cls()
 
 class PostGISDatabase:
     """Production PostgreSQL + PostGIS database implementation"""
@@ -1508,10 +1524,17 @@ class PostGISDatabase:
         logger.info("🔒 Database connections closed")
 
 # Singleton instance
-database = PostGISDatabase()
+# Check for Railway's DATABASE_URL first, then fall back to individual vars
+_database_config = None
+if os.getenv('DATABASE_URL'):
+    _database_config = DatabaseConfig.from_url(os.getenv('DATABASE_URL'))
+else:
+    _database_config = DatabaseConfig()
+
+database = PostGISDatabase(_database_config)
 
 async def get_database() -> PostGISDatabase:
-    """Get database instance"""
+    """Get database instance - Railway compatible"""
     if not database.engine:
         await database.initialize()
     return database

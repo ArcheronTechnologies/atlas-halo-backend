@@ -115,20 +115,21 @@ async def lifespan(app: FastAPI):
     # Startup
     logger.info(f"🚀 Starting Atlas AI {APP_VERSION}")
 
-    # Test database connection
+    # Test database connection (non-blocking - allow startup without DB)
     try:
         db = await get_database()
         await db.execute_query("SELECT 1")
         logger.info("✅ Database connection established")
     except Exception as e:
-        logger.error(f"❌ Database connection failed: {e}")
+        logger.warning(f"⚠️  Database connection failed (non-critical): {e}")
+        logger.warning("⚠️  API will start but database-dependent features won't work")
 
-    # Initialize rate limiter
+    # Initialize rate limiter (non-blocking)
     try:
         await rate_limiter.connect()
         logger.info("✅ Rate limiter initialized")
     except Exception as e:
-        logger.error(f"❌ Rate limiter initialization failed: {e}")
+        logger.warning(f"⚠️  Rate limiter initialization failed (continuing anyway): {e}")
 
     # Start background data ingestion service
     try:
