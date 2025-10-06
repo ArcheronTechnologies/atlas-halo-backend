@@ -1,1 +1,1 @@
-web: sh -c "daphne -b 0.0.0.0 -p \$PORT main:app"
+web: daphne -b 0.0.0.0 --port $PORT main:app
