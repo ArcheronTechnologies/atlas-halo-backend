@@ -1,1 +1,1 @@
-web: uvicorn main:app --host :: --port $PORT --log-level info
+web: uvicorn test_simple:app --host :: --port $PORT --log-level info
