@@ -5,9 +5,10 @@ pydantic_core==2.14.1
 python-dotenv==1.0.0
 python-multipart==0.0.20
 
-# ASGI Server - using gunicorn + uvicorn worker to avoid websockets issues
+# ASGI Server - using gunicorn + uvicorn worker
 gunicorn==22.0.0
 uvicorn==0.30.6
+websockets==13.1
 
 # Database
 asyncpg==0.29.0
