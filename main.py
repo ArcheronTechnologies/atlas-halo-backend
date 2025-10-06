@@ -9,7 +9,6 @@ from fastapi.middleware.gzip import GZipMiddleware
 from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
 from contextlib import asynccontextmanager
-import uvicorn
 import logging
 from datetime import datetime
 import os
