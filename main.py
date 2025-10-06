@@ -112,75 +112,10 @@ APP_DESCRIPTION = """
 # Lifespan event handler
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Startup
+    # Startup - MINIMAL for Railway deployment
     logger.info(f"🚀 Starting Atlas AI {APP_VERSION}")
-
-    # Test database connection (non-blocking - allow startup without DB)
-    db = None
-    try:
-        db = await get_database()
-        await db.execute_query("SELECT 1")
-        logger.info("✅ Database connection established")
-    except Exception as e:
-        logger.warning(f"⚠️  Database connection failed (non-critical): {e}")
-        logger.warning("⚠️  API will start but database-dependent features won't work")
-
-    # Initialize rate limiter (non-blocking)
-    try:
-        await rate_limiter.connect()
-        logger.info("✅ Rate limiter initialized")
-    except Exception as e:
-        logger.warning(f"⚠️  Rate limiter initialization failed (continuing anyway): {e}")
-
-    # Start background data ingestion service
-    try:
-        # Configure data ingestion (15 minute intervals)
-        ingestion_config = IngestionConfig(
-            collection_interval_minutes=15,
-            enabled=True  # Set to False to disable
-        )
-        await start_ingestion_service(ingestion_config)
-        logger.info("✅ Data ingestion service started")
-    except Exception as e:
-        logger.error(f"❌ Data ingestion service failed to start: {e}")
-
-    # Start prediction validation & refinement scheduler (only if DB available)
-    if db:
-        try:
-            model_path = os.path.join(
-                os.path.dirname(__file__),
-                '..',
-                'models',
-                'production',
-                'crime_prediction_model.joblib'
-            )
-            await start_prediction_scheduler(db, model_path)
-            logger.info("✅ Prediction scheduler started (daily validation at 3 AM)")
-        except Exception as e:
-            logger.error(f"❌ Prediction scheduler failed to start: {e}")
-
-    # Initialize push notification service (only if DB available)
-    if db and hasattr(db, 'pool'):
-        try:
-            from backend.services.push_notification_service import initialize_push_service
-
-            # Use the asyncpg pool from the database instance
-            initialize_push_service(db.pool)
-            logger.info("✅ Push notification service initialized")
-        except Exception as e:
-            logger.error(f"❌ Push notification service failed to initialize: {e}")
-
-    # Initialize ML training monitor (only if DB available)
-    if db and hasattr(db, 'pool'):
-        try:
-            from backend.monitoring.ml_training_monitor import initialize_ml_monitor
-
-            await initialize_ml_monitor(db.pool)
-            logger.info("✅ ML training monitor initialized")
-        except Exception as e:
-            logger.error(f"❌ ML training monitor failed to initialize: {e}")
-
-    logger.info("🎉 Atlas AI startup completed successfully")
+    logger.info("✅ Minimal startup mode - services disabled for initial deployment")
+    logger.info("🎉 Atlas AI ready to accept requests")
 
     yield
 
