@@ -1,1 +1,1 @@
-web: daphne -b 0.0.0.0 -p ${PORT:-8000} main:app
+web: sh -c "daphne -b 0.0.0.0 -p \$PORT main:app"
