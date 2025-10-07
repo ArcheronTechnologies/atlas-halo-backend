@@ -38,3 +38,4 @@ psutil==5.9.8
 
 # Background tasks (optional)
 celery==5.3.4
+httpx==0.27.0  # Atlas Intelligence client
