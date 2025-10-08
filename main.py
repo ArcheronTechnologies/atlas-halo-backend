@@ -183,8 +183,8 @@ app.add_middleware(
 
 app.add_middleware(GZipMiddleware, minimum_size=1000)
 
-# Add rate limiting middleware
-app.add_middleware(RateLimitMiddleware, global_limit=2000, global_window=3600)
+# Add rate limiting middleware (stub - no parameters needed)
+app.add_middleware(RateLimitMiddleware)
 
 # Security headers middleware
 @app.middleware("http")
