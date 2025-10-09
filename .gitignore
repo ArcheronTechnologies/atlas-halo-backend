@@ -33,9 +33,30 @@ cache/
 temp_polisen_archive/
 media_storage/
 models/
+logs/
+data_lake/
+massive_training_data/
+comprehensive_training_data/
+massive_models/
+comprehensive_models/
+predictions/
+uploads/
+data_cache/
+audit_logs/
 
 # ML Models
 *.pt
 *.pth
 *.pkl
 *.h5
+
+# Editor/tools
+.claude/
+
+# Mobile
+mobile/node_modules/
+mobile/.expo/
+mobile/.expo-shared/
+
+# Celery
+celerybeat-schedule.db
