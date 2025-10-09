@@ -111,18 +111,9 @@ APP_DESCRIPTION = """
 # Lifespan event handler
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Startup
+    # Startup - MINIMAL for Railway deployment
     logger.info(f"🚀 Starting Atlas AI {APP_VERSION}")
-
-    # Initialize database
-    try:
-        db = await get_database()
-        await db.initialize()
-        logger.info("✅ Database initialized")
-    except Exception as e:
-        logger.error(f"❌ Database initialization failed: {e}")
-        logger.warning("⚠️  Continuing without database - some features will be unavailable")
-
+    logger.info("✅ Minimal startup mode - services disabled for initial deployment")
     logger.info("🎉 Atlas AI ready to accept requests")
 
     yield
@@ -204,35 +195,13 @@ async def add_security_headers_middleware(request: Request, call_next):
 # Health check endpoint
 @app.get("/health", tags=["health"])
 async def health_check():
-    """Health check with graceful database handling"""
-    health_status = {
-        "status": "healthy",
-        "timestamp": datetime.now().isoformat(),
-        "version": APP_VERSION,
-        "services": {}
-    }
-
-    # Check database
+    """Simple health check"""
     try:
         db = await get_database()
-        if db.pool:
-            await db.execute_query("SELECT 1")
-            health_status["services"]["database"] = "healthy"
-        else:
-            health_status["services"]["database"] = "not_configured"
-            health_status["status"] = "degraded"
+        await db.execute_query("SELECT 1")
+        return {"status": "healthy", "timestamp": datetime.now().isoformat()}
     except Exception as e:
-        health_status["services"]["database"] = f"unhealthy: {str(e)}"
-        health_status["status"] = "degraded"
-
-    # Check Atlas Intelligence
-    try:
-        atlas_url = os.getenv("ATLAS_INTELLIGENCE_URL", "not_configured")
-        health_status["services"]["atlas_intelligence"] = atlas_url
-    except Exception:
-        health_status["services"]["atlas_intelligence"] = "not_configured"
-
-    return health_status
+        raise HTTPException(status_code=503, detail=f"Unhealthy: {str(e)}")
 
 # Root endpoint
 @app.get("/", tags=["info"])
