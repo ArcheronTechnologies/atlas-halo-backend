@@ -7,9 +7,83 @@ import logging
 import httpx
 import os
 from typing import Dict, Optional, List
-from datetime import datetime
+from datetime import datetime, timedelta
+from collections import defaultdict
+import asyncio
 
 logger = logging.getLogger(__name__)
+
+
+class CircuitBreaker:
+    """Circuit breaker pattern for external service calls"""
+
+    def __init__(self, failure_threshold: int = 5, timeout_seconds: int = 60):
+        self.failure_threshold = failure_threshold
+        self.timeout = timedelta(seconds=timeout_seconds)
+        self.failures = 0
+        self.last_failure_time = None
+        self.state = "closed"  # closed, open, half-open
+
+    def record_success(self):
+        """Record successful call"""
+        self.failures = 0
+        self.state = "closed"
+
+    def record_failure(self):
+        """Record failed call"""
+        self.failures += 1
+        self.last_failure_time = datetime.now()
+
+        if self.failures >= self.failure_threshold:
+            self.state = "open"
+            logger.warning(f"Circuit breaker OPEN after {self.failures} failures")
+
+    def can_attempt(self) -> bool:
+        """Check if call should be attempted"""
+        if self.state == "closed":
+            return True
+
+        if self.state == "open":
+            # Check if timeout period has passed
+            if self.last_failure_time and datetime.now() - self.last_failure_time > self.timeout:
+                self.state = "half-open"
+                logger.info("Circuit breaker HALF-OPEN - attempting recovery")
+                return True
+            return False
+
+        # half-open state
+        return True
+
+    def is_open(self) -> bool:
+        """Check if circuit is open"""
+        return self.state == "open" and not self.can_attempt()
+
+
+class ResponseCache:
+    """Simple in-memory cache for Atlas Intelligence responses"""
+
+    def __init__(self, ttl_seconds: int = 300):
+        self.cache: Dict[str, tuple[datetime, Dict]] = {}
+        self.ttl = timedelta(seconds=ttl_seconds)
+
+    def get(self, key: str) -> Optional[Dict]:
+        """Get cached response if not expired"""
+        if key in self.cache:
+            timestamp, value = self.cache[key]
+            if datetime.now() - timestamp < self.ttl:
+                return value
+            else:
+                # Expired - remove
+                del self.cache[key]
+        return None
+
+    def set(self, key: str, value: Dict):
+        """Store response in cache"""
+        self.cache[key] = (datetime.now(), value)
+
+    def clear(self):
+        """Clear all cached responses"""
+        self.cache.clear()
 
 
 class AtlasIntelligenceClient:
@@ -40,6 +114,15 @@ class AtlasIntelligenceClient:
             timeout=self.timeout,
             limits=httpx.Limits(max_keepalive_connections=20, max_connections=100)
         )
+
+        # Circuit breaker for fault tolerance
+        self.circuit_breaker = CircuitBreaker(
+            failure_threshold=5,
+            timeout_seconds=60
+        )
+
+        # Response cache for performance
+        self.cache = ResponseCache(ttl_seconds=300)  # 5 minute cache
 
         logger.info(f"✅ Atlas Intelligence client initialized: {self.base_url}")
 
@@ -129,6 +212,22 @@ class AtlasIntelligenceClient:
                 "processing_time_ms": 450
             }
         """
+        # Check circuit breaker
+        if self.circuit_breaker.is_open():
+            logger.warning("Circuit breaker OPEN - using fallback")
+            return self._fallback_media_analysis(media_type)
+
+        # Generate cache key (hash of file bytes + media type)
+        import hashlib
+        cache_key = f"media_{media_type}_{hashlib.md5(file_bytes).hexdigest()}"
+
+        # Check cache (only for quick analysis to avoid stale results)
+        if analysis_depth == "quick":
+            cached = self.cache.get(cache_key)
+            if cached:
+                logger.info(f"Cache HIT for {media_type} analysis")
+                return cached
+
         try:
             # Determine content type
             content_type = self._get_content_type(filename, media_type)
@@ -150,13 +249,22 @@ class AtlasIntelligenceClient:
             response.raise_for_status()
             result = response.json()
 
+            # Record success
+            self.circuit_breaker.record_success()
+
+            # Cache result (only for quick analysis)
+            if analysis_depth == "quick":
+                self.cache.set(cache_key, result)
+
             logger.info(f"Media analyzed: {media_type} - {len(result.get('objects_detected', []))} objects detected")
             return result
 
         except httpx.HTTPStatusError as e:
+            self.circuit_breaker.record_failure()
             logger.error(f"Atlas analyze media failed: {e.response.status_code} - {e.response.text}")
             return self._fallback_media_analysis(media_type)
         except Exception as e:
+            self.circuit_breaker.record_failure()
             logger.error(f"Atlas analyze media error: {e}")
             return self._fallback_media_analysis(media_type)
 
