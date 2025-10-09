@@ -1,0 +1,41 @@
+# Large data directories not needed for deployment
+_ARCHIVED/
+data_lake/
+massive_training_data/
+massive_models/
+comprehensive_training_data/
+
+# Mobile app (separate deployment)
+mobile/
+mobile-basic-backup/
+
+# Logs
+logs/
+*.log
+
+# Development files
+.claude/
+.env.local
+.env.development
+
+# Git
+.git/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
