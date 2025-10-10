@@ -195,13 +195,23 @@ async def add_security_headers_middleware(request: Request, call_next):
 # Health check endpoint
 @app.get("/health", tags=["health"])
 async def health_check():
-    """Simple health check"""
+    """Simple health check - returns 200 even if database is not yet configured"""
+    response = {
+        "status": "healthy",
+        "timestamp": datetime.now().isoformat(),
+        "database": "not_configured"
+    }
+
+    # Try database connection but don't fail if it's not available
     try:
         db = await get_database()
         await db.execute_query("SELECT 1")
-        return {"status": "healthy", "timestamp": datetime.now().isoformat()}
+        response["database"] = "connected"
     except Exception as e:
-        raise HTTPException(status_code=503, detail=f"Unhealthy: {str(e)}")
+        logger.warning(f"Database not available during health check: {e}")
+        response["database"] = "unavailable"
+
+    return response
 
 # Root endpoint
 @app.get("/", tags=["info"])
