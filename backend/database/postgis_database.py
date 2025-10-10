@@ -406,9 +406,10 @@ class DatabaseConfig:
 
     @classmethod
     def from_url(cls, database_url: str):
-        """Parse Railway's DATABASE_URL format: postgresql://user:pass@host:port/db"""
+        """Parse Railway's DATABASE_URL format: postgres://user:pass@host:port/db or postgresql://..."""
         import re
-        match = re.match(r'postgresql://([^:]+):([^@]+)@([^:]+):(\d+)/(.+)', database_url)
+        # Support both postgres:// and postgresql:// schemes
+        match = re.match(r'postgres(?:ql)?://([^:]+):([^@]+)@([^:]+):(\d+)/(.+)', database_url)
         if match:
             username, password, host, port, database = match.groups()
             return cls(
