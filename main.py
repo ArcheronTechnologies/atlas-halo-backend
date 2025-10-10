@@ -224,6 +224,30 @@ async def root():
         "timestamp": datetime.now().isoformat()
     }
 
+# Database initialization endpoint
+@app.post("/admin/init-db", tags=["admin"])
+async def initialize_database():
+    """Initialize database with PostGIS and create all tables"""
+    try:
+        db = await get_database()
+
+        # Enable PostGIS extension
+        await db._ensure_postgis_extension()
+
+        # Create all tables
+        await db._create_tables()
+
+        return {
+            "status": "success",
+            "message": "Database initialized successfully with PostGIS and all tables created"
+        }
+    except Exception as e:
+        logger.error(f"Database initialization failed: {e}")
+        return {
+            "status": "error",
+            "message": str(e)
+        }
+
 # Include API routers
 app.include_router(mobile_router)
 app.include_router(auth_router)
