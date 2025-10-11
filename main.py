@@ -111,10 +111,24 @@ APP_DESCRIPTION = """
 # Lifespan event handler
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Startup - MINIMAL for Railway deployment
+    # Startup - FULL MODE with data ingestion enabled
     logger.info(f"🚀 Starting Atlas AI {APP_VERSION}")
-    logger.info("✅ Minimal startup mode - services disabled for initial deployment")
-    logger.info("🎉 Atlas AI ready to accept requests")
+
+    # Start data ingestion service
+    try:
+        await start_ingestion_service()
+        logger.info("✅ Data ingestion service started")
+    except Exception as e:
+        logger.error(f"⚠️  Data ingestion service failed to start: {e}")
+
+    # Start prediction scheduler
+    try:
+        await start_prediction_scheduler()
+        logger.info("✅ Prediction scheduler started")
+    except Exception as e:
+        logger.error(f"⚠️  Prediction scheduler failed to start: {e}")
+
+    logger.info("🎉 Atlas AI ready with all services enabled")
 
     yield
 
