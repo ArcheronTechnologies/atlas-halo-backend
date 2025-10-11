@@ -8,17 +8,22 @@ logger = logging.getLogger(__name__)
 class SmartDataScheduler:
     """Smart scheduler for data ingestion (stub implementation)"""
 
-    def __init__(self):
+    def __init__(self, collection_interval_minutes: int = 15):
         self.is_running = False
-        logger.info("SmartDataScheduler initialized")
+        self.collection_interval_minutes = collection_interval_minutes
+        logger.info(f"SmartDataScheduler initialized (interval: {collection_interval_minutes}min)")
+
+    async def initialize(self):
+        """Initialize the scheduler (async setup if needed)"""
+        logger.info("SmartDataScheduler async initialization complete")
 
     async def start(self):
         """Start the smart scheduler"""
         self.is_running = True
         logger.info("SmartDataScheduler started")
 
-    async def stop(self):
-        """Stop the smart scheduler"""
+    def stop(self):
+        """Stop the smart scheduler (synchronous)"""
         self.is_running = False
         logger.info("SmartDataScheduler stopped")
 
