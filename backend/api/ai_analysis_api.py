@@ -336,11 +336,11 @@ async def analyze_video(
 
         try:
             # Get video analyzer
-            analyzer = get_video_analyzer(keyframe_fps=keyframe_fps)
+            analyzer = get_video_analyzer()
             classifier = get_incident_classifier()
 
             # Analyze video
-            analysis = analyzer.analyze_video(tmp_path, max_duration_seconds=max_duration)
+            analysis = await analyzer.analyze(video_data, filename=file.filename)
 
             if 'error' in analysis:
                 raise HTTPException(status_code=500, detail=f"Analysis failed: {analysis['error']}")
