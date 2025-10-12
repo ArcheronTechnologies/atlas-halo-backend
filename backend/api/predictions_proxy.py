@@ -382,11 +382,18 @@ async def get_temporal_risk(
                     "confidence": round(sum(confidences) / len(confidences), 2) if confidences else 0.5
                 }
 
+            # Calculate average confidence across all neighborhoods
+            avg_confidence = 0.5
+            if neighborhoods:
+                confidences = [n["confidence"] for n in neighborhoods.values()]
+                avg_confidence = sum(confidences) / len(confidences) if confidences else 0.5
+
             return {
                 "neighborhoods": neighborhoods,
                 "data_quality": {
                     "total_incidents_analyzed": len(incidents),
-                    "confidence": sum(hr["confidence"] for hr in hourly_risk) / len(hourly_risk) if hourly_risk else 0.5
+                    "confidence": round(avg_confidence, 2),
+                    "neighborhood_count": len(neighborhoods)
                 },
                 "location": {"lat": lat, "lon": lon},
                 "radius_km": radius_km,
