@@ -604,3 +604,4 @@ def _generate_audio_summary(analysis: Dict, classification: Dict) -> str:
         summary_parts.append(f"~{analysis['speaker_count_estimate']} speakers detected")
 
     return ". ".join(summary_parts) + "."
+# Railway cache bypass Sun Oct 12 13:49:34 CEST 2025
