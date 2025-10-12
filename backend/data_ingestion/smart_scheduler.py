@@ -8,7 +8,7 @@ from datetime import datetime
 from dataclasses import dataclass
 from sqlalchemy.dialects.postgresql import insert
 
-from backend.database.postgis_database import get_database, Incident
+from backend.database.postgis_database import get_database
 
 logger = logging.getLogger(__name__)
 
