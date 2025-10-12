@@ -81,7 +81,9 @@ async def get_prediction_hotspots(
     lat: float = Query(..., ge=-90, le=90),
     lon: float = Query(..., ge=-180, le=180),
     radius_km: float = Query(10, ge=0.1, le=100),
-    hours_ahead: int = Query(24, ge=1, le=168)
+    hours_ahead: int = Query(24, ge=0, le=168),  # Allow 0 for current time
+    min_risk: float = Query(0.0, ge=0.0, le=1.0),  # Minimum risk score filter
+    limit: int = Query(50, ge=1, le=200)  # Max predictions to return
 ):
     """
     Generate ML-based crime hotspot predictions using historical incident data
@@ -196,10 +198,14 @@ async def get_prediction_hotspots(
             # Sort by risk score
             predictions.sort(key=lambda x: x["risk_score"], reverse=True)
 
-            logger.info(f"Generated {len(predictions)} predictions for +{hours_ahead}h from {len(incidents)} incidents")
+            # Filter by minimum risk score
+            filtered_predictions = [p for p in predictions if p["risk_score"] >= min_risk]
+
+            logger.info(f"Generated {len(filtered_predictions)} predictions (filtered from {len(predictions)}) for +{hours_ahead}h from {len(incidents)} incidents")
 
             return {
-                "predictions": predictions[:50],  # Top 50 hotspots
+                "predictions": filtered_predictions[:limit],  # Apply limit
+                "count": len(filtered_predictions),
                 "timestamp": current_time.isoformat(),
                 "hours_ahead": hours_ahead,
                 "area": {
@@ -209,7 +215,8 @@ async def get_prediction_hotspots(
                 "metadata": {
                     "total_incidents_analyzed": len(incidents),
                     "clusters_identified": len(clusters),
-                    "target_hour": target_hour
+                    "target_hour": target_hour,
+                    "min_risk_filter": min_risk
                 }
             }
 
