@@ -21,6 +21,7 @@ from backend.security.input_validation import add_security_headers
 # Import routers
 from backend.api.mobile_endpoints import router as mobile_router
 from backend.api.auth_endpoints import router as auth_router
+from backend.api.simple_proxy import router as proxy_router  # Simple proxy to Atlas Intelligence
 from backend.api.incidents_api import router as incidents_router
 from backend.api.media_api import router as media_router
 from backend.api.admin_endpoints import router as admin_router
@@ -114,19 +115,9 @@ async def lifespan(app: FastAPI):
     # Startup - FULL MODE with data ingestion enabled
     logger.info(f"🚀 Starting Atlas AI {APP_VERSION}")
 
-    # Start data ingestion service
-    try:
-        await start_ingestion_service()
-        logger.info("✅ Data ingestion service started")
-    except Exception as e:
-        logger.error(f"⚠️  Data ingestion service failed to start: {e}")
-
-    # Start prediction scheduler
-    try:
-        await start_prediction_scheduler()
-        logger.info("✅ Prediction scheduler started")
-    except Exception as e:
-        logger.error(f"⚠️  Prediction scheduler failed to start: {e}")
+    # Data ingestion and prediction services disabled - using Atlas Intelligence proxy instead
+    logger.info("⚠️  Data ingestion disabled - using Atlas Intelligence API proxy")
+    logger.info("⚠️  Prediction scheduler disabled - queries Atlas Intelligence directly")
 
     logger.info("🎉 Atlas AI ready with all services enabled")
 
@@ -135,18 +126,7 @@ async def lifespan(app: FastAPI):
     # Shutdown
     logger.info("🔄 Atlas AI shutting down gracefully...")
 
-    # Stop background services
-    try:
-        await stop_ingestion_service()
-        logger.info("✅ Data ingestion service stopped")
-    except Exception as e:
-        logger.error(f"Error stopping ingestion service: {e}")
-
-    try:
-        await stop_prediction_scheduler()
-        logger.info("✅ Prediction scheduler stopped")
-    except Exception as e:
-        logger.error(f"Error stopping prediction scheduler: {e}")
+    # No background services to stop (using Atlas Intelligence proxy)
 
     logger.info("✅ Shutdown completed")
 
@@ -263,6 +243,7 @@ async def initialize_database():
         }
 
 # Include API routers
+app.include_router(proxy_router)  # Simple Atlas Intelligence proxy (takes precedence)
 app.include_router(mobile_router)
 app.include_router(auth_router)
 app.include_router(incidents_router)  # Comprehensive incidents API
