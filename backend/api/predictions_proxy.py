@@ -36,6 +36,62 @@ def haversine_distance(lat1: float, lon1: float, lat2: float, lon2: float) -> fl
     return R * c
 
 
+def cluster_incidents_into_neighborhoods(incidents: List[Dict], center_lat: float, center_lon: float, radius_km: float) -> Dict[str, Dict]:
+    """
+    Cluster incidents into neighborhoods using spatial proximity
+    Creates real geographic neighborhoods with boundaries
+    """
+    if not incidents:
+        return {}
+
+    # Use larger grid cells (0.05 degrees ≈ 5.5 km) for neighborhood-level clustering
+    grid_size = 0.05
+    neighborhood_clusters = defaultdict(list)
+
+    for inc in incidents:
+        # Filter by distance from center
+        dist = haversine_distance(center_lat, center_lon, inc["latitude"], inc["longitude"])
+        if dist > radius_km:
+            continue
+
+        # Assign to grid cell (neighborhood)
+        grid_lat = round(inc["latitude"] / grid_size) * grid_size
+        grid_lon = round(inc["longitude"] / grid_size) * grid_size
+        neighborhood_key = (grid_lat, grid_lon)
+        neighborhood_clusters[neighborhood_key].append(inc)
+
+    # Create neighborhood objects with names and boundaries
+    neighborhoods = {}
+    for (grid_lat, grid_lon), neighborhood_incidents in neighborhood_clusters.items():
+        # Calculate actual center from incidents
+        avg_lat = sum(inc["latitude"] for inc in neighborhood_incidents) / len(neighborhood_incidents)
+        avg_lon = sum(inc["longitude"] for inc in neighborhood_incidents) / len(neighborhood_incidents)
+
+        # Generate neighborhood name based on grid position
+        # In production, this would use reverse geocoding API
+        neighborhood_name = f"Zone_{abs(int(avg_lat*100))}{abs(int(avg_lon*100))}"
+
+        # Calculate boundary box (for polygon rendering)
+        lats = [inc["latitude"] for inc in neighborhood_incidents]
+        lons = [inc["longitude"] for inc in neighborhood_incidents]
+
+        neighborhoods[neighborhood_name] = {
+            "name": neighborhood_name,
+            "lat": avg_lat,
+            "lon": avg_lon,
+            "bounds": {
+                "north": max(lats) + 0.01,
+                "south": min(lats) - 0.01,
+                "east": max(lons) + 0.01,
+                "west": min(lons) - 0.01
+            },
+            "incidents": neighborhood_incidents,
+            "incident_count": len(neighborhood_incidents)
+        }
+
+    return neighborhoods
+
+
 def calculate_risk_score(incidents: List[Dict], target_hour: int) -> float:
     """
     Calculate risk score based on historical incident patterns
@@ -273,68 +329,58 @@ async def get_temporal_risk(
 
             incidents = data.get("incidents", [])
 
-            # Analyze hourly patterns
-            hour_incidents = defaultdict(list)
-            for inc in incidents:
-                try:
-                    occurred_at = datetime.fromisoformat(inc["occurred_at"].replace('Z', '+00:00'))
-                    hour_incidents[occurred_at.hour].append(inc)
-                except:
-                    continue
+            # Cluster incidents into real geographic neighborhoods
+            neighborhood_clusters = cluster_incidents_into_neighborhoods(incidents, lat, lon, radius_km)
 
-            # Generate risk for next 24 hours
+            # Calculate hourly risk for each neighborhood
             current_time = datetime.now()
-            hourly_risk = []
+            neighborhoods = {}
 
-            for hour_offset in range(24):
-                future_time = current_time + timedelta(hours=hour_offset)
-                target_hour = future_time.hour
+            for neighborhood_name, neighborhood_data in neighborhood_clusters.items():
+                neighborhood_incidents = neighborhood_data["incidents"]
 
-                # Get incidents at this hour historically
-                hour_data = hour_incidents.get(target_hour, [])
+                # Analyze hourly patterns for this neighborhood
+                hour_incidents = defaultdict(list)
+                for inc in neighborhood_incidents:
+                    try:
+                        occurred_at = datetime.fromisoformat(inc["occurred_at"].replace('Z', '+00:00'))
+                        hour_incidents[occurred_at.hour].append(inc)
+                    except:
+                        continue
 
-                # Calculate risk
-                if hour_data:
-                    risk_score = calculate_risk_score(hour_data, target_hour)
-                    confidence = min(1.0, len(hour_data) / 10)
-                else:
-                    # Default risk based on time of day
-                    if 20 <= target_hour or target_hour <= 3:
-                        risk_score = 0.6  # Night
-                    elif 12 <= target_hour <= 18:
-                        risk_score = 0.5  # Afternoon/Evening
+                # Calculate risk for all 24 hours
+                hourly_risk_dict = {}
+                confidences = []
+
+                for hour in range(24):
+                    hour_data = hour_incidents.get(hour, [])
+
+                    if hour_data:
+                        risk_score = calculate_risk_score(hour_data, hour)
+                        confidence = min(1.0, len(hour_data) / 10)
                     else:
-                        risk_score = 0.3  # Morning
-                    confidence = 0.3
+                        # Default risk based on time of day
+                        if 20 <= hour or hour <= 3:
+                            risk_score = 0.6  # Night
+                        elif 12 <= hour <= 18:
+                            risk_score = 0.5  # Afternoon/Evening
+                        else:
+                            risk_score = 0.3  # Morning
+                        confidence = 0.3
 
-                hourly_risk.append({
-                    "hour": target_hour,
-                    "hour_offset": hour_offset,
-                    "timestamp": future_time.isoformat(),
-                    "risk_score": round(risk_score, 3),
-                    "confidence": round(confidence, 2),
-                    "incident_count": len(hour_data)
-                })
+                    hourly_risk_dict[hour] = round(risk_score, 3)
+                    confidences.append(confidence)
 
-            # Transform hourly_risk array into neighborhoods format for mobile app
-            # Create a single neighborhood representing the queried area
-            area_name = f"Area_{int(lat*100)}_{int(lon*100)}"
-
-            # Convert list of hourly risk to dict indexed by hour
-            hourly_risk_dict = {}
-            for hr in hourly_risk:
-                hourly_risk_dict[hr["hour"]] = hr["risk_score"]
-
-            neighborhoods = {
-                area_name: {
-                    "name": area_name,
-                    "lat": lat,
-                    "lon": lon,
+                # Build neighborhood object
+                neighborhoods[neighborhood_name] = {
+                    "name": neighborhood_name,
+                    "lat": neighborhood_data["lat"],
+                    "lon": neighborhood_data["lon"],
+                    "bounds": neighborhood_data["bounds"],
                     "hourly_risk": hourly_risk_dict,
-                    "total_incidents": len(incidents),
-                    "confidence": sum(hr["confidence"] for hr in hourly_risk) / len(hourly_risk) if hourly_risk else 0.5
+                    "total_incidents": neighborhood_data["incident_count"],
+                    "confidence": round(sum(confidences) / len(confidences), 2) if confidences else 0.5
                 }
-            }
 
             return {
                 "neighborhoods": neighborhoods,
