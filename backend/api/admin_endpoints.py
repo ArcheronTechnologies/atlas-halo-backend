@@ -8,7 +8,7 @@ from typing import Dict, Any
 import logging
 
 from ..services.data_ingestion_service import get_ingestion_service
-from ..data_ingestion.comprehensive_swedish_collector import ComprehensiveSwedishCollector, CollectionTarget
+# Removed: comprehensive_swedish_collector - now using Atlas Intelligence API
 
 logger = logging.getLogger(__name__)
 
