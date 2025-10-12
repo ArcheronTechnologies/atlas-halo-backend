@@ -30,6 +30,7 @@ from backend.api.sensor_fusion_api import sensor_fusion_router
 from backend.api.ml_training_api import ml_training_router
 from backend.api.comments_api import comments_router
 from backend.api.predictions_endpoints import router as predictions_router
+from backend.api.predictions_proxy import router as predictions_proxy_router  # ML predictions without PostGIS
 from backend.api.ai_analysis_api import router as ai_analysis_router
 from backend.api.clustering_api import router as clustering_router
 from backend.api.map_api import router as map_router
@@ -252,7 +253,8 @@ app.include_router(admin_router)  # Admin endpoints for data collection & system
 app.include_router(websocket_router)
 app.include_router(sensor_fusion_router)
 app.include_router(ml_training_router)
-app.include_router(predictions_router)  # ML predictions API
+app.include_router(predictions_proxy_router)  # ML predictions API (PostGIS-free)
+# app.include_router(predictions_router)  # Original predictions disabled - requires PostGIS
 app.include_router(ai_analysis_router)  # AI-powered photo/video/audio analysis
 app.include_router(clustering_router)  # Anonymous incident report clustering
 app.include_router(map_router)  # High-performance map API with H3 spatial indexing
