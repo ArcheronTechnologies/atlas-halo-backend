@@ -246,7 +246,7 @@ async def initialize_database():
 app.include_router(proxy_router)  # Simple Atlas Intelligence proxy (takes precedence)
 app.include_router(mobile_router)
 app.include_router(auth_router)
-app.include_router(incidents_router)  # Comprehensive incidents API
+# app.include_router(incidents_router)  # Disabled - using Atlas Intelligence proxy instead
 app.include_router(media_router)  # Media upload and management
 app.include_router(admin_router)  # Admin endpoints for data collection & system management
 app.include_router(websocket_router)
