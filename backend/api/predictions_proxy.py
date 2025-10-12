@@ -316,20 +316,44 @@ async def get_temporal_risk(
                     "incident_count": len(hour_data)
                 })
 
+            # Transform hourly_risk array into neighborhoods format for mobile app
+            # Create a single neighborhood representing the queried area
+            area_name = f"Area_{int(lat*100)}_{int(lon*100)}"
+
+            # Convert list of hourly risk to dict indexed by hour
+            hourly_risk_dict = {}
+            for hr in hourly_risk:
+                hourly_risk_dict[hr["hour"]] = hr["risk_score"]
+
+            neighborhoods = {
+                area_name: {
+                    "name": area_name,
+                    "lat": lat,
+                    "lon": lon,
+                    "hourly_risk": hourly_risk_dict,
+                    "total_incidents": len(incidents),
+                    "confidence": sum(hr["confidence"] for hr in hourly_risk) / len(hourly_risk) if hourly_risk else 0.5
+                }
+            }
+
             return {
+                "neighborhoods": neighborhoods,
+                "data_quality": {
+                    "total_incidents_analyzed": len(incidents),
+                    "confidence": sum(hr["confidence"] for hr in hourly_risk) / len(hourly_risk) if hourly_risk else 0.5
+                },
                 "location": {"lat": lat, "lon": lon},
                 "radius_km": radius_km,
-                "hourly_risk": hourly_risk,
-                "timestamp": current_time.isoformat(),
-                "total_incidents": len(incidents)
+                "timestamp": current_time.isoformat()
             }
 
     except Exception as e:
         logger.error(f"Error calculating temporal risk: {e}", exc_info=True)
         return {
+            "neighborhoods": {},
+            "data_quality": {"total_incidents_analyzed": 0, "confidence": 0.0},
             "location": {"lat": lat, "lon": lon},
             "radius_km": radius_km,
-            "hourly_risk": [],
             "timestamp": datetime.now().isoformat(),
             "error": str(e)
         }
