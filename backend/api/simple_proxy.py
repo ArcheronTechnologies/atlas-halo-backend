@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/api/v1", tags=["proxy"])
 
-ATLAS_INTELLIGENCE_URL = os.getenv("ATLAS_INTELLIGENCE_URL", "https://loving-purpose-production.up.railway.app")
+ATLAS_INTELLIGENCE_URL = os.getenv("ATLAS_INTELLIGENCE_URL", "https://loving-purpose-production.up.railway.app").replace("ttps://", "https://")
 
 @router.get("/incidents")
 async def get_incidents(
