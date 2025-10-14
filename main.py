@@ -13,6 +13,7 @@ import logging
 from datetime import datetime
 import os
 from pathlib import Path
+import uvicorn
 
 # Security imports
 from backend.security.rate_limiting import RateLimitMiddleware, rate_limiter
@@ -31,11 +32,13 @@ from backend.api.ml_training_api import ml_training_router
 from backend.api.comments_api import comments_router
 from backend.api.predictions_endpoints import router as predictions_router
 from backend.api.predictions_proxy import router as predictions_proxy_router  # ML predictions without PostGIS
+from backend.api.predictions_geojson import router as predictions_geojson_router  # Predictions with OSM GeoJSON boundaries
 from backend.api.ai_analysis_api import router as ai_analysis_router
 from backend.api.clustering_api import router as clustering_router
 from backend.api.map_api import router as map_router
-from backend.api.ml_monitoring_api import router as ml_monitoring_router
+# from backend.api.ml_monitoring_api import router as ml_monitoring_router  # ML monitoring moved to Atlas
 from backend.api.deprecated_routes import deprecated_router
+from backend.api.debug_endpoints import router as debug_router
 
 # Import database
 from backend.database.postgis_database import get_database
@@ -114,20 +117,39 @@ APP_DESCRIPTION = """
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Startup - FULL MODE with data ingestion enabled
-    logger.info(f"🚀 Starting Atlas AI {APP_VERSION}")
+    logger.info(f"🚀 Starting Halo Backend {APP_VERSION}")
 
-    # Data ingestion and prediction services disabled - using Atlas Intelligence proxy instead
-    logger.info("⚠️  Data ingestion disabled - using Atlas Intelligence API proxy")
-    logger.info("⚠️  Prediction scheduler disabled - queries Atlas Intelligence directly")
+    # Start data ingestion service (pulls from Atlas Intelligence)
+    try:
+        atlas_url = os.getenv('ATLAS_INTELLIGENCE_URL', 'https://atlas-intelligence-production.up.railway.app')
+        logger.info(f"📡 Configuring data ingestion from Atlas Intelligence: {atlas_url}")
 
-    logger.info("🎉 Atlas AI ready with all services enabled")
+        config = IngestionConfig(
+            collection_interval_minutes=15,
+            enabled=True
+        )
+        await start_ingestion_service(config)
+        logger.info("✅ Data ingestion service started")
+    except Exception as e:
+        logger.error(f"❌ Failed to start data ingestion service: {e}")
+        logger.info("⚠️  Continuing without data ingestion")
+
+    # Prediction scheduler disabled - queries Atlas Intelligence directly via proxy
+    logger.info("⚠️  Prediction scheduler disabled - using Atlas Intelligence proxy")
+
+    logger.info("🎉 Halo Backend ready")
 
     yield
 
     # Shutdown
-    logger.info("🔄 Atlas AI shutting down gracefully...")
+    logger.info("🔄 Halo Backend shutting down gracefully...")
 
-    # No background services to stop (using Atlas Intelligence proxy)
+    # Stop data ingestion service
+    try:
+        await stop_ingestion_service()
+        logger.info("✅ Data ingestion service stopped")
+    except Exception as e:
+        logger.warning(f"⚠️  Error stopping data ingestion service: {e}")
 
     logger.info("✅ Shutdown completed")
 
@@ -190,23 +212,12 @@ async def add_security_headers_middleware(request: Request, call_next):
 # Health check endpoint
 @app.get("/health", tags=["health"])
 async def health_check():
-    """Simple health check - returns 200 even if database is not yet configured"""
-    response = {
+    """Simple health check - returns 200 without database check to avoid blocking"""
+    return {
         "status": "healthy",
         "timestamp": datetime.now().isoformat(),
-        "database": "not_configured"
+        "message": "API is running"
     }
-
-    # Try database connection but don't fail if it's not available
-    try:
-        db = await get_database()
-        await db.execute_query("SELECT 1")
-        response["database"] = "connected"
-    except Exception as e:
-        logger.warning(f"Database not available during health check: {e}")
-        response["database"] = "unavailable"
-
-    return response
 
 # Root endpoint
 @app.get("/", tags=["info"])
@@ -244,7 +255,7 @@ async def initialize_database():
         }
 
 # Include API routers
-app.include_router(proxy_router)  # Simple Atlas Intelligence proxy (takes precedence)
+app.include_router(proxy_router)  # Simple Atlas Intelligence proxy (with correct hours_ago calculation)
 app.include_router(mobile_router)
 app.include_router(auth_router)
 # app.include_router(incidents_router)  # Disabled - using Atlas Intelligence proxy instead
@@ -254,15 +265,17 @@ app.include_router(websocket_router)
 app.include_router(sensor_fusion_router)
 app.include_router(ml_training_router)
 app.include_router(predictions_proxy_router)  # ML predictions API (PostGIS-free)
+app.include_router(predictions_geojson_router)  # Predictions with OSM GeoJSON boundaries from predictions table
 # app.include_router(predictions_router)  # Original predictions disabled - requires PostGIS
 app.include_router(ai_analysis_router)  # AI-powered photo/video/audio analysis
 app.include_router(clustering_router)  # Anonymous incident report clustering
 app.include_router(map_router)  # High-performance map API with H3 spatial indexing
-app.include_router(ml_monitoring_router)  # ML training and model performance monitoring
+# app.include_router(ml_monitoring_router)  # ML monitoring moved to Atlas Intelligence
 app.include_router(comments_router)  # Incident comments and discussion system
 
 # Include deprecated routes (for backward compatibility - removal date: 2026-04-03)
 app.include_router(deprecated_router)
+app.include_router(debug_router)
 
 # Development server
 if __name__ == "__main__":

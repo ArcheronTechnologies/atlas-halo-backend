@@ -185,16 +185,16 @@ async def get_prediction_hotspots(
 
         # Query pre-computed predictions within bounding box
         # Use DISTINCT ON to get only the latest prediction for each grid cell
+        # Show latest predictions regardless of expiry (fallback until new ones generated)
         query = """
             SELECT DISTINCT ON (grid_lat, grid_lon)
                    grid_lat, grid_lon, latitude, longitude,
                    bounds_north, bounds_south, bounds_east, bounds_west,
                    neighborhood_name, hourly_predictions,
                    historical_count, incident_types, avg_severity,
-                   computed_at
+                   computed_at, boundary_geojson
             FROM predictions
-            WHERE expires_at > NOW()
-            AND latitude BETWEEN $1 AND $2
+            WHERE latitude BETWEEN $1 AND $2
             AND longitude BETWEEN $3 AND $4
             ORDER BY grid_lat, grid_lon, computed_at DESC
         """
@@ -226,8 +226,16 @@ async def get_prediction_hotspots(
             if dist > radius_km:
                 continue
 
+            # Parse boundary_geojson if present
+            boundary_geojson = None
+            if row['boundary_geojson']:
+                if isinstance(row['boundary_geojson'], str):
+                    boundary_geojson = json.loads(row['boundary_geojson'])
+                else:
+                    boundary_geojson = row['boundary_geojson']
+
             # Build prediction from cached data
-            predictions.append({
+            prediction_obj = {
                 "id": f"pred_{int(row['grid_lat']*1000)}_{int(row['grid_lon']*1000)}_{hours_ahead}",
                 "neighborhood_name": row['neighborhood_name'],
                 "latitude": float(row['latitude']),
@@ -250,7 +258,13 @@ async def get_prediction_hotspots(
                     "avg_severity": float(row['avg_severity']),
                     "recency": hour_prediction.get('confidence', 0.5)
                 }
-            })
+            }
+
+            # Add boundary if available
+            if boundary_geojson:
+                prediction_obj["boundary"] = boundary_geojson
+
+            predictions.append(prediction_obj)
 
         # Sort by risk score
         predictions.sort(key=lambda x: x["risk_score"], reverse=True)
