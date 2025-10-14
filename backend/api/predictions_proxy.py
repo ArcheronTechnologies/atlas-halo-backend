@@ -184,8 +184,10 @@ async def get_prediction_hotspots(
         max_lon = lon + lon_delta
 
         # Query pre-computed predictions within bounding box
+        # Use DISTINCT ON to get only the latest prediction for each grid cell
         query = """
-            SELECT grid_lat, grid_lon, latitude, longitude,
+            SELECT DISTINCT ON (grid_lat, grid_lon)
+                   grid_lat, grid_lon, latitude, longitude,
                    bounds_north, bounds_south, bounds_east, bounds_west,
                    neighborhood_name, hourly_predictions,
                    historical_count, incident_types, avg_severity,
@@ -194,7 +196,7 @@ async def get_prediction_hotspots(
             WHERE expires_at > NOW()
             AND latitude BETWEEN $1 AND $2
             AND longitude BETWEEN $3 AND $4
-            ORDER BY computed_at DESC
+            ORDER BY grid_lat, grid_lon, computed_at DESC
         """
 
         results = await conn.fetch(query, min_lat, max_lat, min_lon, max_lon)
