@@ -1,0 +1,22 @@
+{
+  "threat_type": "SURVEILLANCE_DRONE",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "mountain",
+  "generated_at": "2025-09-22T11:11:37.127304",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.3954826253527013,
+  "filename": "SURVEILLANCE_DRONE_mountain_0069.wav",
+  "file_path": "complete_27_class_military_collection/SURVEILLANCE_DRONE_mountain_0069.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.3954826295375824,
+    "dynamic_range_db": 50.28858380813047,
+    "snr_db": 0.025609932610896818,
+    "thd_percent": 4.255543336962028
+  },
+  "sample_index": 69,
+  "threat_category": "SURVEILLANCE_RECON",
+  "priority_level": "LOW_MEDIUM"
+}

@@ -1,0 +1,22 @@
+{
+  "threat_type": "PERSONNEL_VEHICLE",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "forest",
+  "generated_at": "2025-09-22T11:11:33.739841",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.3658699726410707,
+  "filename": "PERSONNEL_VEHICLE_forest_0192.wav",
+  "file_path": "complete_27_class_military_collection/PERSONNEL_VEHICLE_forest_0192.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.3658699691295624,
+    "dynamic_range_db": 61.85357995388543,
+    "snr_db": 15.89581235649242,
+    "thd_percent": 62.05099503228541
+  },
+  "sample_index": 192,
+  "threat_category": "PERSONNEL_ACTIVITY",
+  "priority_level": "MEDIUM"
+}

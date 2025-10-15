@@ -1,0 +1,22 @@
+{
+  "threat_type": "ELECTRONIC_JAMMING",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "mountain",
+  "generated_at": "2025-09-22T11:11:39.978691",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.20926422753467108,
+  "filename": "ELECTRONIC_JAMMING_mountain_0069.wav",
+  "file_path": "complete_27_class_military_collection/ELECTRONIC_JAMMING_mountain_0069.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.20926421880722046,
+    "dynamic_range_db": 53.46370546897596,
+    "snr_db": 0.21089065578615437,
+    "thd_percent": 307.05848506753784
+  },
+  "sample_index": 69,
+  "threat_category": "SURVEILLANCE_RECON",
+  "priority_level": "LOW_MEDIUM"
+}

@@ -1,0 +1,22 @@
+{
+  "threat_type": "TRANSPORT_AIRCRAFT",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "maritime",
+  "generated_at": "2025-09-22T11:11:27.657546",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.36511610871847644,
+  "filename": "TRANSPORT_AIRCRAFT_maritime_0113.wav",
+  "file_path": "complete_27_class_military_collection/TRANSPORT_AIRCRAFT_maritime_0113.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.36511608958244324,
+    "dynamic_range_db": 50.858044382240806,
+    "snr_db": 4.550791505967884,
+    "thd_percent": 2.4128413884384985
+  },
+  "sample_index": 113,
+  "threat_category": "LOGISTICS_TRANSPORT",
+  "priority_level": "MEDIUM"
+}

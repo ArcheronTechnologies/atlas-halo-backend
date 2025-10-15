@@ -1,0 +1,98 @@
+{
+  "overall_metrics": {
+    "target_robustness": 0.9,
+    "achieved_robustness": 0.044270833333333336,
+    "robustness_improvement": 0.0,
+    "avg_inference_time": 39.28128480911255,
+    "adaptation_effectiveness": 0.04
+  },
+  "robustness_results": {
+    "fgsm": {
+      "eps_0.05": {
+        "clean_accuracy": 0.0453125,
+        "adversarial_accuracy": 0.0453125,
+        "qadt_r_accuracy": 0.0453125,
+        "robustness_improvement": 0.0,
+        "avg_inference_time_ms": 42.51664876937866,
+        "avg_bit_width": 6.864868855476379,
+        "total_samples": 640
+      },
+      "eps_0.1": {
+        "clean_accuracy": 0.0453125,
+        "adversarial_accuracy": 0.0453125,
+        "qadt_r_accuracy": 0.0453125,
+        "robustness_improvement": 0.0,
+        "avg_inference_time_ms": 39.874184131622314,
+        "avg_bit_width": 6.864503304163615,
+        "total_samples": 640
+      },
+      "eps_0.15": {
+        "clean_accuracy": 0.0453125,
+        "adversarial_accuracy": 0.0453125,
+        "qadt_r_accuracy": 0.0453125,
+        "robustness_improvement": 0.0,
+        "avg_inference_time_ms": 39.518654346466064,
+        "avg_bit_width": 6.864085038503011,
+        "total_samples": 640
+      }
+    },
+    "pgd": {
+      "eps_0.05": {
+        "clean_accuracy": 0.0453125,
+        "adversarial_accuracy": 0.0453125,
+        "qadt_r_accuracy": 0.0453125,
+        "robustness_improvement": 0.0,
+        "avg_inference_time_ms": 42.960143089294434,
+        "avg_bit_width": 6.865463026364645,
+        "total_samples": 640
+      },
+      "eps_0.1": {
+        "clean_accuracy": 0.0453125,
+        "adversarial_accuracy": 0.0453125,
+        "qadt_r_accuracy": 0.0453125,
+        "robustness_improvement": 0.0,
+        "avg_inference_time_ms": 39.493608474731445,
+        "avg_bit_width": 6.865721893310547,
+        "total_samples": 640
+      },
+      "eps_0.15": {
+        "clean_accuracy": 0.0453125,
+        "adversarial_accuracy": 0.0390625,
+        "qadt_r_accuracy": 0.0390625,
+        "robustness_improvement": 0.0,
+        "avg_inference_time_ms": 39.08071517944336,
+        "avg_bit_width": 6.865929524103801,
+        "total_samples": 640
+      }
+    }
+  },
+  "adaptation_results": {
+    "decisions_made": 2,
+    "precision_increases": 2,
+    "precision_decreases": 0,
+    "efficiency_optimizations": 0,
+    "avg_confidence": 0.539296817779541,
+    "avg_inference_time": 39.28128480911255,
+    "confidence_improvements": 0,
+    "bit_width_changes": [
+      {
+        "batch": 0,
+        "action": "increase_precision",
+        "old_width": 6,
+        "new_width": 7,
+        "reason": "low_confidence_0.434"
+      },
+      {
+        "batch": 1,
+        "action": "increase_precision",
+        "old_width": 7,
+        "new_width": 8,
+        "reason": "low_confidence_0.526"
+      }
+    ],
+    "confidence_std": 0.043193554122549556,
+    "inference_time_std": 8.557220928621145
+  },
+  "target_achieved": false,
+  "performance_acceptable": "True"
+}

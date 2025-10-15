@@ -1,0 +1,15 @@
+{
+  "cycle": 3,
+  "overall_accuracy": 0.8346666666666667,
+  "class_accuracies": {
+    "background": 0.782,
+    "vehicle": 0.807,
+    "aircraft": 0.915
+  },
+  "meets_95_target": false,
+  "ensemble_models": [
+    "background_specialist",
+    "vehicle_specialist",
+    "aircraft_specialist"
+  ]
+}

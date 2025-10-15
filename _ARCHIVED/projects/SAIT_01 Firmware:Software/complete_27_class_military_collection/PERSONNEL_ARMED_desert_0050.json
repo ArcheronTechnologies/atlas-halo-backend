@@ -1,0 +1,22 @@
+{
+  "threat_type": "PERSONNEL_ARMED",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "desert",
+  "generated_at": "2025-09-22T11:11:31.549965",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.18725957188883793,
+  "filename": "PERSONNEL_ARMED_desert_0050.wav",
+  "file_path": "complete_27_class_military_collection/PERSONNEL_ARMED_desert_0050.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.18725958466529846,
+    "dynamic_range_db": 54.24155368984409,
+    "snr_db": 1.7595442075248047,
+    "thd_percent": 217.4527333612891
+  },
+  "sample_index": 50,
+  "threat_category": "PERSONNEL_ACTIVITY",
+  "priority_level": "MEDIUM"
+}

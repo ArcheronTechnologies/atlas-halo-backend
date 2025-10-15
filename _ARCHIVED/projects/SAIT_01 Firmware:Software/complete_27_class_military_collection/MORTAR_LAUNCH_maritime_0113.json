@@ -1,0 +1,22 @@
+{
+  "threat_type": "MORTAR_LAUNCH",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "maritime",
+  "generated_at": "2025-09-22T11:11:16.219492",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.06472906000821986,
+  "filename": "MORTAR_LAUNCH_maritime_0113.wav",
+  "file_path": "complete_27_class_military_collection/MORTAR_LAUNCH_maritime_0113.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.06472905725240707,
+    "dynamic_range_db": 73.747632187019,
+    "snr_db": 12.337233867935534,
+    "thd_percent": 500.1159433842959
+  },
+  "sample_index": 113,
+  "threat_category": "IMMEDIATE_LETHAL",
+  "priority_level": "CRITICAL"
+}

@@ -1,0 +1,6 @@
+{
+  "accuracy": 0.9083333333333333,
+  "meets_95_target": false,
+  "model_file": "focused_spectrographic_best.h5",
+  "parameters": 786300
+}

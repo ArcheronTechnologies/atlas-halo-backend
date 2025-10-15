@@ -1,0 +1,22 @@
+{
+  "threat_type": "INCOMING_MISSILE",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "mountain",
+  "generated_at": "2025-09-22T11:11:09.941214",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.2725273921907132,
+  "filename": "INCOMING_MISSILE_mountain_0054.wav",
+  "file_path": "complete_27_class_military_collection/INCOMING_MISSILE_mountain_0054.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.27252739667892456,
+    "dynamic_range_db": 52.464569823755404,
+    "snr_db": 3.361167421010858,
+    "thd_percent": 30.673218303967452
+  },
+  "sample_index": 54,
+  "threat_category": "IMMEDIATE_LETHAL",
+  "priority_level": "CRITICAL"
+}

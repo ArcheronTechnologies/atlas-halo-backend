@@ -1,0 +1,22 @@
+{
+  "threat_type": "INCOMING_ARTILLERY",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "desert",
+  "generated_at": "2025-09-22T11:11:08.645440",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.19388303919221106,
+  "filename": "INCOMING_ARTILLERY_desert_0090.wav",
+  "file_path": "complete_27_class_military_collection/INCOMING_ARTILLERY_desert_0090.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.1938830465078354,
+    "dynamic_range_db": 50.83637817528605,
+    "snr_db": 0.926793006244771,
+    "thd_percent": 81.94144960841646
+  },
+  "sample_index": 90,
+  "threat_category": "IMMEDIATE_LETHAL",
+  "priority_level": "CRITICAL"
+}

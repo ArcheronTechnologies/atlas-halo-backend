@@ -1,0 +1,22 @@
+{
+  "threat_type": "ATTACK_DRONE",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "mountain",
+  "generated_at": "2025-09-22T11:11:22.992446",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.3449151789123645,
+  "filename": "ATTACK_DRONE_mountain_0019.wav",
+  "file_path": "complete_27_class_military_collection/ATTACK_DRONE_mountain_0019.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.3449151813983917,
+    "dynamic_range_db": 50.36908398975217,
+    "snr_db": 3.329894727886745,
+    "thd_percent": 61.670364210832005
+  },
+  "sample_index": 19,
+  "threat_category": "DIRECT_COMBAT",
+  "priority_level": "HIGH"
+}

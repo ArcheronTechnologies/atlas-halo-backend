@@ -1,0 +1,22 @@
+{
+  "threat_type": "RPG_LAUNCH",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "forest",
+  "generated_at": "2025-09-22T11:11:12.909461",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.17037926685883306,
+  "filename": "RPG_LAUNCH_forest_0062.wav",
+  "file_path": "complete_27_class_military_collection/RPG_LAUNCH_forest_0062.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.17037926614284515,
+    "dynamic_range_db": 51.65933201224671,
+    "snr_db": 2.7565035059868976,
+    "thd_percent": 48.432952759788414
+  },
+  "sample_index": 62,
+  "threat_category": "IMMEDIATE_LETHAL",
+  "priority_level": "CRITICAL"
+}

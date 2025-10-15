@@ -1,0 +1,22 @@
+{
+  "threat_type": "MOTORCYCLE_MILITARY",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "urban",
+  "generated_at": "2025-09-22T11:11:30.656520",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.32937848356515537,
+  "filename": "MOTORCYCLE_MILITARY_urban_0121.wav",
+  "file_path": "complete_27_class_military_collection/MOTORCYCLE_MILITARY_urban_0121.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.32937848567962646,
+    "dynamic_range_db": 50.554372297909595,
+    "snr_db": 0.6642392621086888,
+    "thd_percent": 109.32540676907894
+  },
+  "sample_index": 121,
+  "threat_category": "LOGISTICS_TRANSPORT",
+  "priority_level": "MEDIUM"
+}

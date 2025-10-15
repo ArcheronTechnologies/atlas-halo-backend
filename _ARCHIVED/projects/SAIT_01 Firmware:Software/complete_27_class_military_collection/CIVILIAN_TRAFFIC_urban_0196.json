@@ -1,0 +1,22 @@
+{
+  "threat_type": "CIVILIAN_TRAFFIC",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "urban",
+  "generated_at": "2025-09-22T11:11:06.520920",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.2832963736570042,
+  "filename": "CIVILIAN_TRAFFIC_urban_0196.wav",
+  "file_path": "complete_27_class_military_collection/CIVILIAN_TRAFFIC_urban_0196.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.2832963764667511,
+    "dynamic_range_db": 49.445457649322634,
+    "snr_db": 0.8427272690805592,
+    "thd_percent": 172.40306593675115
+  },
+  "sample_index": 196,
+  "threat_category": "NON_THREAT",
+  "priority_level": "LOW"
+}

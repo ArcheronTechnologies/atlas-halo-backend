@@ -1,0 +1,22 @@
+{
+  "threat_type": "RPG_LAUNCH",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "desert",
+  "generated_at": "2025-09-22T11:11:12.558214",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.19738944722578833,
+  "filename": "RPG_LAUNCH_desert_0010.wav",
+  "file_path": "complete_27_class_military_collection/RPG_LAUNCH_desert_0010.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.19738945364952087,
+    "dynamic_range_db": 50.275208173037726,
+    "snr_db": 2.271566963543303,
+    "thd_percent": 42.460018498938005
+  },
+  "sample_index": 10,
+  "threat_category": "IMMEDIATE_LETHAL",
+  "priority_level": "CRITICAL"
+}

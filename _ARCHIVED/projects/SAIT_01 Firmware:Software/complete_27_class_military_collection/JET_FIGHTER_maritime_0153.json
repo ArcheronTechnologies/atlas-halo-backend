@@ -1,0 +1,22 @@
+{
+  "threat_type": "JET_FIGHTER",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "maritime",
+  "generated_at": "2025-09-22T11:11:22.518522",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.37559071254478416,
+  "filename": "JET_FIGHTER_maritime_0153.wav",
+  "file_path": "complete_27_class_military_collection/JET_FIGHTER_maritime_0153.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.3755907118320465,
+    "dynamic_range_db": 44.63643276078632,
+    "snr_db": 0.07120630970496909,
+    "thd_percent": 166.9376436267123
+  },
+  "sample_index": 153,
+  "threat_category": "DIRECT_COMBAT",
+  "priority_level": "HIGH"
+}

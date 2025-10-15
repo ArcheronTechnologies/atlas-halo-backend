@@ -1,0 +1,22 @@
+{
+  "threat_type": "TRANSPORT_AIRCRAFT",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "mountain",
+  "generated_at": "2025-09-22T11:11:27.411925",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.3621450087889494,
+  "filename": "TRANSPORT_AIRCRAFT_mountain_0074.wav",
+  "file_path": "complete_27_class_military_collection/TRANSPORT_AIRCRAFT_mountain_0074.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.36214497685432434,
+    "dynamic_range_db": 50.64148568418237,
+    "snr_db": 4.5329921040121155,
+    "thd_percent": 2.3840153460658935
+  },
+  "sample_index": 74,
+  "threat_category": "LOGISTICS_TRANSPORT",
+  "priority_level": "MEDIUM"
+}

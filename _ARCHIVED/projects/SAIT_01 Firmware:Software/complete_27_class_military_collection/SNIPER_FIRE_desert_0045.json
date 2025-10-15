@@ -1,0 +1,22 @@
+{
+  "threat_type": "SNIPER_FIRE",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "desert",
+  "generated_at": "2025-09-22T11:11:11.425396",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.05173351853554092,
+  "filename": "SNIPER_FIRE_desert_0045.wav",
+  "file_path": "complete_27_class_military_collection/SNIPER_FIRE_desert_0045.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.05173351988196373,
+    "dynamic_range_db": 76.91060010535558,
+    "snr_db": 15.275278509852455,
+    "thd_percent": 363.7507507909212
+  },
+  "sample_index": 45,
+  "threat_category": "IMMEDIATE_LETHAL",
+  "priority_level": "CRITICAL"
+}

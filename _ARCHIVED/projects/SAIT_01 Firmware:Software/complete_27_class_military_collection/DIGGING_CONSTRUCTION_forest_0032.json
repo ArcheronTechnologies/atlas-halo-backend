@@ -1,0 +1,22 @@
+{
+  "threat_type": "DIGGING_CONSTRUCTION",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "forest",
+  "generated_at": "2025-09-22T11:11:34.005935",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.2164041459106941,
+  "filename": "DIGGING_CONSTRUCTION_forest_0032.wav",
+  "file_path": "complete_27_class_military_collection/DIGGING_CONSTRUCTION_forest_0032.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.21640413999557495,
+    "dynamic_range_db": 53.01286534207541,
+    "snr_db": 0.23614443702854512,
+    "thd_percent": 169.3020863227529
+  },
+  "sample_index": 32,
+  "threat_category": "PERSONNEL_ACTIVITY",
+  "priority_level": "MEDIUM"
+}

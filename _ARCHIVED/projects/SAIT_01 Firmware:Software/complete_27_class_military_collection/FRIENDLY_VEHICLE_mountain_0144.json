@@ -1,0 +1,22 @@
+{
+  "threat_type": "FRIENDLY_VEHICLE",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "mountain",
+  "generated_at": "2025-09-22T11:11:07.559235",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.3907794071653839,
+  "filename": "FRIENDLY_VEHICLE_mountain_0144.wav",
+  "file_path": "complete_27_class_military_collection/FRIENDLY_VEHICLE_mountain_0144.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.39077937602996826,
+    "dynamic_range_db": 48.78561666580115,
+    "snr_db": 0.5152184259498727,
+    "thd_percent": 81.71898348820137
+  },
+  "sample_index": 144,
+  "threat_category": "NON_THREAT",
+  "priority_level": "LOW"
+}

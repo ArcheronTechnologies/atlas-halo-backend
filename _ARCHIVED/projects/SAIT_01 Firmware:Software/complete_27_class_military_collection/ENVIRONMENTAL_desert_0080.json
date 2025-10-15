@@ -1,0 +1,22 @@
+{
+  "threat_type": "ENVIRONMENTAL",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "desert",
+  "generated_at": "2025-09-22T11:11:04.052701",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.22356640459815605,
+  "filename": "ENVIRONMENTAL_desert_0080.wav",
+  "file_path": "complete_27_class_military_collection/ENVIRONMENTAL_desert_0080.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.22356639802455902,
+    "dynamic_range_db": 53.12844830895024,
+    "snr_db": 2.379655532063797,
+    "thd_percent": 235.00203836956337
+  },
+  "sample_index": 80,
+  "threat_category": "NON_THREAT",
+  "priority_level": "LOW"
+}

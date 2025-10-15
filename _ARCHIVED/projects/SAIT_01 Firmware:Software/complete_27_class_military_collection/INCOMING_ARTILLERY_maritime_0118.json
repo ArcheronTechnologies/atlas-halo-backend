@@ -1,0 +1,22 @@
+{
+  "threat_type": "INCOMING_ARTILLERY",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "maritime",
+  "generated_at": "2025-09-22T11:11:08.865695",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.2019037958533663,
+  "filename": "INCOMING_ARTILLERY_maritime_0118.wav",
+  "file_path": "complete_27_class_military_collection/INCOMING_ARTILLERY_maritime_0118.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.2019037902355194,
+    "dynamic_range_db": 49.1468652841165,
+    "snr_db": 0.8273836959818128,
+    "thd_percent": 89.04136130322846
+  },
+  "sample_index": 118,
+  "threat_category": "IMMEDIATE_LETHAL",
+  "priority_level": "CRITICAL"
+}

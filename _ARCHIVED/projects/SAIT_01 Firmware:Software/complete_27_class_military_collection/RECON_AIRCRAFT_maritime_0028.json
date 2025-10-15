@@ -1,0 +1,22 @@
+{
+  "threat_type": "RECON_AIRCRAFT",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "maritime",
+  "generated_at": "2025-09-22T11:11:38.152490",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.32320529461626657,
+  "filename": "RECON_AIRCRAFT_maritime_0028.wav",
+  "file_path": "complete_27_class_military_collection/RECON_AIRCRAFT_maritime_0028.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.32320529222488403,
+    "dynamic_range_db": 47.351164360834034,
+    "snr_db": 0.12964544383708093,
+    "thd_percent": 15.664838685207194
+  },
+  "sample_index": 28,
+  "threat_category": "SURVEILLANCE_RECON",
+  "priority_level": "LOW_MEDIUM"
+}

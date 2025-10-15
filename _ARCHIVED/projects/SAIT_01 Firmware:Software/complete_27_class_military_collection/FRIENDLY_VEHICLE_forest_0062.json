@@ -1,0 +1,22 @@
+{
+  "threat_type": "FRIENDLY_VEHICLE",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "forest",
+  "generated_at": "2025-09-22T11:11:06.984607",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.3837644453173466,
+  "filename": "FRIENDLY_VEHICLE_forest_0062.wav",
+  "file_path": "complete_27_class_military_collection/FRIENDLY_VEHICLE_forest_0062.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.38376444578170776,
+    "dynamic_range_db": 48.55498106414903,
+    "snr_db": 0.49811413436769586,
+    "thd_percent": 83.20954048723806
+  },
+  "sample_index": 62,
+  "threat_category": "NON_THREAT",
+  "priority_level": "LOW"
+}

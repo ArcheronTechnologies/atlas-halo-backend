@@ -1,0 +1,22 @@
+{
+  "threat_type": "COMMUNICATIONS",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "mountain",
+  "generated_at": "2025-09-22T11:11:36.143745",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.21249887212344404,
+  "filename": "COMMUNICATIONS_mountain_0134.wav",
+  "file_path": "complete_27_class_military_collection/COMMUNICATIONS_mountain_0134.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.21249885857105255,
+    "dynamic_range_db": 55.72357445532694,
+    "snr_db": 3.615658933366093,
+    "thd_percent": 172.85858616739688
+  },
+  "sample_index": 134,
+  "threat_category": "PERSONNEL_ACTIVITY",
+  "priority_level": "MEDIUM"
+}

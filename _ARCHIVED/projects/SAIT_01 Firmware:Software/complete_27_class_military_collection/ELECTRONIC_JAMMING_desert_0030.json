@@ -1,0 +1,22 @@
+{
+  "threat_type": "ELECTRONIC_JAMMING",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "desert",
+  "generated_at": "2025-09-22T11:11:39.688335",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.21734323171352563,
+  "filename": "ELECTRONIC_JAMMING_desert_0030.wav",
+  "file_path": "complete_27_class_military_collection/ELECTRONIC_JAMMING_desert_0030.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.21734322607517242,
+    "dynamic_range_db": 53.1402716043905,
+    "snr_db": 0.2199497922275945,
+    "thd_percent": 179.01874364105942
+  },
+  "sample_index": 30,
+  "threat_category": "SURVEILLANCE_RECON",
+  "priority_level": "LOW_MEDIUM"
+}

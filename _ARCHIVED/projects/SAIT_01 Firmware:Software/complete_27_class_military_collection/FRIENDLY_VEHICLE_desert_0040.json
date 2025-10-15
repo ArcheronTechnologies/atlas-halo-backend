@@ -1,0 +1,22 @@
+{
+  "threat_type": "FRIENDLY_VEHICLE",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "desert",
+  "generated_at": "2025-09-22T11:11:06.843894",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.3697466074148583,
+  "filename": "FRIENDLY_VEHICLE_desert_0040.wav",
+  "file_path": "complete_27_class_military_collection/FRIENDLY_VEHICLE_desert_0040.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.369746595621109,
+    "dynamic_range_db": 49.496236364930965,
+    "snr_db": 0.8054166207685796,
+    "thd_percent": 91.5789550815264
+  },
+  "sample_index": 40,
+  "threat_category": "NON_THREAT",
+  "priority_level": "LOW"
+}

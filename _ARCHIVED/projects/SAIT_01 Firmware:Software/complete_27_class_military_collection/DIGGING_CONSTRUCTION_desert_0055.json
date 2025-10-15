@@ -1,0 +1,22 @@
+{
+  "threat_type": "DIGGING_CONSTRUCTION",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "desert",
+  "generated_at": "2025-09-22T11:11:34.153863",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.21880428750112813,
+  "filename": "DIGGING_CONSTRUCTION_desert_0055.wav",
+  "file_path": "complete_27_class_military_collection/DIGGING_CONSTRUCTION_desert_0055.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.2188042849302292,
+    "dynamic_range_db": 53.395267810441794,
+    "snr_db": 0.1877517635968557,
+    "thd_percent": 254.07802102988418
+  },
+  "sample_index": 55,
+  "threat_category": "PERSONNEL_ACTIVITY",
+  "priority_level": "MEDIUM"
+}

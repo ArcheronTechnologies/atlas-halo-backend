@@ -1,0 +1,22 @@
+{
+  "threat_type": "ELECTRONIC_JAMMING",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "maritime",
+  "generated_at": "2025-09-22T11:11:39.971251",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.2249718278612328,
+  "filename": "ELECTRONIC_JAMMING_maritime_0068.wav",
+  "file_path": "complete_27_class_military_collection/ELECTRONIC_JAMMING_maritime_0068.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.22497181594371796,
+    "dynamic_range_db": 53.042026869014656,
+    "snr_db": 0.15594872009475919,
+    "thd_percent": 163.30255142976551
+  },
+  "sample_index": 68,
+  "threat_category": "SURVEILLANCE_RECON",
+  "priority_level": "LOW_MEDIUM"
+}

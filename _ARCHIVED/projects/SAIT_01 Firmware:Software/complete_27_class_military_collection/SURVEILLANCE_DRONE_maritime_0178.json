@@ -1,0 +1,22 @@
+{
+  "threat_type": "SURVEILLANCE_DRONE",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "maritime",
+  "generated_at": "2025-09-22T11:11:37.790779",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.38921513112267125,
+  "filename": "SURVEILLANCE_DRONE_maritime_0178.wav",
+  "file_path": "complete_27_class_military_collection/SURVEILLANCE_DRONE_maritime_0178.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.3892151415348053,
+    "dynamic_range_db": 49.5135689260274,
+    "snr_db": 0.036780485257507975,
+    "thd_percent": 4.621882955847355
+  },
+  "sample_index": 178,
+  "threat_category": "SURVEILLANCE_RECON",
+  "priority_level": "LOW_MEDIUM"
+}

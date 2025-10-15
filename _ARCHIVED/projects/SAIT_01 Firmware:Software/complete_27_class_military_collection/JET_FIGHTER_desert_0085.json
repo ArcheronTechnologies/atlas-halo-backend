@@ -1,0 +1,22 @@
+{
+  "threat_type": "JET_FIGHTER",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "desert",
+  "generated_at": "2025-09-22T11:11:22.028293",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.3206182114616557,
+  "filename": "JET_FIGHTER_desert_0085.wav",
+  "file_path": "complete_27_class_military_collection/JET_FIGHTER_desert_0085.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.320618212223053,
+    "dynamic_range_db": 49.96910389506592,
+    "snr_db": 1.3523741476562054,
+    "thd_percent": 34.35799894900338
+  },
+  "sample_index": 85,
+  "threat_category": "DIRECT_COMBAT",
+  "priority_level": "HIGH"
+}

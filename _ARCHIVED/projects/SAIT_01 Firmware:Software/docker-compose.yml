@@ -1,0 +1,146 @@
+# SAIT_01 Docker Compose Configuration
+version: '3.8'
+
+services:
+  # TimescaleDB for time-series data
+  timescaledb:
+    image: timescale/timescaledb:latest-pg14
+    environment:
+      POSTGRES_DB: sait01
+      POSTGRES_USER: sait01_user
+      POSTGRES_PASSWORD: sait01_secure_password
+      POSTGRES_HOST_AUTH_METHOD: md5
+    volumes:
+      - timescale_data:/var/lib/postgresql/data
+      - ./sait_01_backend/migrations:/docker-entrypoint-initdb.d
+    ports:
+      - "5432:5432"
+    networks:
+      - sait01_network
+    restart: unless-stopped
+
+  # Redis for caching and session management
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - sait01_network
+    restart: unless-stopped
+
+  # MQTT Broker (Eclipse Mosquitto)
+  mqtt:
+    image: eclipse-mosquitto:2
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - ./config/mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - mosquitto_data:/mosquitto/data
+      - mosquitto_logs:/mosquitto/log
+    networks:
+      - sait01_network
+    restart: unless-stopped
+
+  # SAIT_01 Backend API
+  backend:
+    build: 
+      context: ./sait_01_backend
+      dockerfile: Dockerfile
+    environment:
+      - DATABASE_URL=postgresql://sait01_user:sait01_secure_password@timescaledb:5432/sait01
+      - REDIS_URL=redis://redis:6379
+      - MQTT_BROKER=mqtt
+      - MQTT_PORT=1883
+      - LOG_LEVEL=INFO
+    ports:
+      - "8000:8000"
+    depends_on:
+      - timescaledb
+      - redis
+      - mqtt
+    volumes:
+      - ./logs:/app/logs
+    networks:
+      - sait01_network
+    restart: unless-stopped
+
+  # SAIT_01 Operations UI
+  ui:
+    build:
+      context: ./sait_01_ui
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - sait01_network
+    restart: unless-stopped
+
+  # SAIT_01 Gateway Simulator (for testing)
+  gateway-sim:
+    build:
+      context: ./sait_01_gateway
+      dockerfile: Dockerfile.simulator
+    environment:
+      - MQTT_BROKER=mqtt
+      - MQTT_PORT=1883
+      - SIMULATE_NODES=true
+      - NODE_COUNT=5
+      - LOG_LEVEL=INFO
+    depends_on:
+      - mqtt
+      - backend
+    networks:
+      - sait01_network
+    restart: unless-stopped
+
+  # Grafana for monitoring and visualization
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3001:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin123
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./config/grafana/dashboards:/etc/grafana/provisioning/dashboards
+      - ./config/grafana/datasources:/etc/grafana/provisioning/datasources
+    depends_on:
+      - timescaledb
+    networks:
+      - sait01_network
+    restart: unless-stopped
+
+  # Prometheus for metrics collection
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./config/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--web.enable-lifecycle'
+    networks:
+      - sait01_network
+    restart: unless-stopped
+
+volumes:
+  timescale_data:
+  redis_data:
+  mosquitto_data:
+  mosquitto_logs:
+  grafana_data:
+  prometheus_data:
+
+networks:
+  sait01_network:
+    driver: bridge

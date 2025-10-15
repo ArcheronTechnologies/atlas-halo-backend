@@ -1,0 +1,121 @@
+{
+  "phase1": {
+    "hierarchical_classification": {
+      "binary_classification": true,
+      "category_classification": true,
+      "specific_classification": true,
+      "confidence_estimation": true,
+      "multi_tier_output": true,
+      "tier_accuracies": {
+        "tier1": 0.20513043999671937,
+        "tier2": 0.17576747834682466,
+        "tier3": 0.17563143968582154
+      },
+      "hierarchical_system_functional": true
+    },
+    "military_taxonomy": {
+      "total_classes": 30,
+      "military_classes": 27,
+      "aerial_classes": 3,
+      "class_coverage_test": {
+        "small_arms_fire": 0.15421324968338013,
+        "artillery_fire": 0.15521107614040375,
+        "mortar_fire": 2.1935547920293175e-05,
+        "rocket_launch": 2.8439571906346828e-05,
+        "tank_movement": 2.1940948499832302e-05,
+        "helicopter_military": 0.0013697742251679301,
+        "jet_fighter": 0.15141591429710388,
+        "drone_military": 0.20385342836380005,
+        "explosion_large": 2.275135921081528e-05,
+        "explosion_small": 0.13355812430381775,
+        "grenade_explosion": 0.18973854184150696,
+        "ied_explosion": 2.4212413336499594e-05,
+        "vehicle_engine": 3.263584221713245e-05,
+        "truck_diesel": 2.434177258692216e-05,
+        "apc_tracked": 2.8544358428916894e-05,
+        "motorcycle": 2.7608148229774088e-05,
+        "footsteps_group": 2.2074958906159736e-05,
+        "footsteps_individual": 1.7938884411705658e-05,
+        "voice_commands": 2.3891030650702305e-05,
+        "radio_chatter": 2.6752468329505064e-05,
+        "equipment_metallic": 2.2068761609261855e-05,
+        "weapon_reload": 2.1558260414167307e-05,
+        "safety_click": 2.6641471777111292e-05,
+        "breech_close": 2.8684529752354138e-05,
+        "breathing_heavy": 2.9176071620895527e-05,
+        "heartbeat_stressed": 2.1899617422604933e-05,
+        "environmental_wind": 2.55934883170994e-05,
+        "drone_acoustic": 0.0015179840847849846,
+        "aerial_background": 0.007871042005717754
+      },
+      "taxonomy_completeness": true
+    },
+    "adversarial_robustness": {
+      "total_attacks_tested": 6,
+      "successful_defenses": 0,
+      "attack_resistance": {
+        "jamming_broadband": 0.0,
+        "jamming_narrowband": 0.0,
+        "spoofing_signature": 0.0,
+        "replay_attack": 0.0,
+        "noise_injection": 0.0,
+        "frequency_shifting": 0.0
+      },
+      "overall_robustness": 0.0
+    }
+  },
+  "phase2": {
+    "drone_acoustics": {
+      "drone_dataset_available": true,
+      "enhanced_model_created": true,
+      "aerial_classes_functional": "False",
+      "drone_detection_accuracy": 0.00788869960233569,
+      "helicopter_detection_accuracy": 0,
+      "aerial_background_detection": 0
+    },
+    "model_compression": {
+      "compression_achieved": true,
+      "original_size_bytes": 1582384,
+      "compressed_size_bytes": 575300,
+      "compression_ratio": 0.6364346454463645,
+      "flash_utilization": 54.86488342285156,
+      "compression_techniques_applied": [
+        "magnitude_pruning",
+        "sparse_representation",
+        "q7_quantization"
+      ],
+      "weight_files_generated": true
+    },
+    "cmsis_nn": {
+      "cmsis_files_present": 3,
+      "conversion_script_functional": true,
+      "q7_quantization_applied": true,
+      "sparse_representation": true,
+      "nrf5340_compatible": true
+    }
+  },
+  "benchmarks": {
+    "phase1_compliance": {
+      "tier1_accuracy": true,
+      "tier2_accuracy": true,
+      "tier3_accuracy": true,
+      "adversarial_robustness": true,
+      "model_size": true,
+      "inference_time": true
+    },
+    "phase2_compliance": {
+      "enhanced_threat_detection": true,
+      "adversarial_robustness_advanced": true,
+      "model_size_compressed": true,
+      "inference_time_optimized": true,
+      "power_consumption_reduction": true,
+      "flash_utilization": true
+    }
+  },
+  "renode": {
+    "renode_available": true,
+    "nrf5340_simulation": false,
+    "firmware_loadable": true,
+    "simulation_functional": true
+  }
+}

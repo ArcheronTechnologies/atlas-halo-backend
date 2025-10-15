@@ -1,0 +1,22 @@
+{
+  "threat_type": "PERSONNEL_VEHICLE",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "mountain",
+  "generated_at": "2025-09-22T11:11:33.286459",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.3655380223603883,
+  "filename": "PERSONNEL_VEHICLE_mountain_0114.wav",
+  "file_path": "complete_27_class_military_collection/PERSONNEL_VEHICLE_mountain_0114.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.3655380308628082,
+    "dynamic_range_db": 63.160342417954816,
+    "snr_db": 17.804492918859538,
+    "thd_percent": 46.38539448901326
+  },
+  "sample_index": 114,
+  "threat_category": "PERSONNEL_ACTIVITY",
+  "priority_level": "MEDIUM"
+}

@@ -1,0 +1,22 @@
+{
+  "threat_type": "IFV_APC",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "desert",
+  "generated_at": "2025-09-22T11:11:19.799932",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.26060547949551405,
+  "filename": "IFV_APC_desert_0170.wav",
+  "file_path": "complete_27_class_military_collection/IFV_APC_desert_0170.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.26060545444488525,
+    "dynamic_range_db": 52.95636254591006,
+    "snr_db": 0.16409188564067204,
+    "thd_percent": 121.6931153968379
+  },
+  "sample_index": 170,
+  "threat_category": "DIRECT_COMBAT",
+  "priority_level": "HIGH"
+}

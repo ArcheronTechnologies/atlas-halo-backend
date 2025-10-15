@@ -1,4 +1,4 @@
-"""Smart data scheduler for Halo - fetches data from Atlas Intelligence"""
+"""Smart data scheduler for Halo - fetches data from polisen.se and Atlas Intelligence"""
 import logging
 import asyncio
 import httpx
@@ -7,8 +7,10 @@ from typing import Optional, List
 from datetime import datetime
 from dataclasses import dataclass
 from sqlalchemy.dialects.postgresql import insert
+from geoalchemy2 import WKTElement
 
 from backend.database.postgis_database import get_database
+from backend.data_ingestion.polisen_collector import collect_polisen_data
 
 logger = logging.getLogger(__name__)
 
@@ -63,56 +65,63 @@ class SmartDataScheduler:
                 await asyncio.sleep(60)  # Wait 1 minute before retry
 
     async def run_collection_cycle(self) -> List[CollectionStats]:
-        """Run a single collection cycle - fetch from Atlas Intelligence"""
+        """Run a single collection cycle - fetch from polisen.se directly"""
         start_time = datetime.now()
 
         try:
-            # Fetch incidents from Atlas Intelligence
-            async with httpx.AsyncClient(timeout=30.0) as client:
-                response = await client.get(
-                    f"{self.atlas_url}/api/v1/data/incidents/recent",
-                    params={"hours": 24, "page_size": 500}
-                )
-                response.raise_for_status()
-                data = response.json()
-
-            incidents = data.get("incidents", [])
+            # Fetch incidents directly from polisen.se
+            logger.info("🔄 Fetching incidents from polisen.se...")
+            incidents = await collect_polisen_data()
 
             if not incidents:
-                logger.info("No new incidents from Atlas Intelligence")
+                logger.info("No new incidents from polisen.se")
                 return []
+
+            logger.info(f"📥 Collected {len(incidents)} incidents from polisen.se")
 
             # Store incidents in Halo database
             db = await get_database()
             stored_count = 0
+            skipped_count = 0
 
             async with db.async_session() as session:
+                from backend.database.models import Incident
+
                 for inc in incidents:
                     try:
-                        incident_data = {
-                            "external_id": inc["external_id"],
-                            "source": inc["source"],
-                            "incident_type": inc["incident_type"],
-                            "description": inc["summary"],
-                            "latitude": inc["latitude"],
-                            "longitude": inc["longitude"],
-                            "occurred_at": datetime.fromisoformat(inc["occurred_at"].replace("Z", "+00:00")),
-                            "severity": inc["severity"],
-                            "polisen_region": inc.get("location_name", ""),
-                            "polisen_url": inc.get("url", "")
-                        }
-
-                        # Upsert (insert or update on conflict)
-                        stmt = insert(Incident).values(**incident_data)
-                        stmt = stmt.on_conflict_do_update(
-                            index_elements=["external_id", "source"],
-                            set_={"description": stmt.excluded.description}
+                        # Check if incident already exists
+                        from sqlalchemy import select
+                        result = await session.execute(
+                            select(Incident).where(
+                                Incident.external_id == inc["external_id"],
+                                Incident.source == inc["source"]
+                            )
                         )
-                        await session.execute(stmt)
+                        existing = result.scalar_one_or_none()
+
+                        if existing:
+                            skipped_count += 1
+                            continue
+
+                        # Create new incident
+                        incident = Incident(
+                            external_id=inc["external_id"],
+                            source=inc["source"],
+                            incident_type=inc["incident_type"],
+                            description=inc["description"],
+                            location=WKTElement(f'POINT({inc["longitude"]} {inc["latitude"]})', srid=4326),
+                            occurred_at=datetime.fromisoformat(inc["occurred_at"].replace("Z", "+00:00")),
+                            severity=inc["severity"],
+                            status=inc["status"],
+                            polisen_region=inc.get("location_name", ""),
+                            metadata_=inc.get("raw_data", {})
+                        )
+                        session.add(incident)
                         stored_count += 1
 
                     except Exception as e:
-                        logger.error(f"Failed to store incident {inc.get('id')}: {e}")
+                        logger.error(f"Failed to store incident {inc.get('external_id')}: {e}")
+                        skipped_count += 1
                         continue
 
                 await session.commit()
@@ -120,19 +129,19 @@ class SmartDataScheduler:
             duration = (datetime.now() - start_time).total_seconds()
 
             stats = CollectionStats(
-                city="Sweden (via Atlas)",
+                city="Sweden (polisen.se)",
                 incidents_fetched=len(incidents),
                 incidents_stored=stored_count,
-                incidents_skipped=len(incidents) - stored_count,
+                incidents_skipped=skipped_count,
                 success_rate=stored_count / len(incidents) if incidents else 1.0,
                 duration_seconds=duration
             )
 
-            logger.info(f"✅ Collection cycle complete: {stored_count} incidents from Atlas in {duration:.1f}s")
+            logger.info(f"✅ Collection cycle complete: {stored_count} new incidents stored, {skipped_count} skipped (duplicates) in {duration:.1f}s")
             return [stats]
 
         except Exception as e:
-            logger.error(f"Collection cycle failed: {e}")
+            logger.error(f"❌ Collection cycle failed: {e}", exc_info=True)
             return []
 
     async def schedule_ingestion(self, source: str, interval_minutes: int = 15):

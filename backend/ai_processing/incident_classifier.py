@@ -8,6 +8,25 @@ logger = logging.getLogger(__name__)
 class IncidentClassifier:
     """AI-powered incident classification (powered by Atlas Intelligence)"""
 
+    # Polisen.se incident categories (Swedish)
+    POLISEN_CATEGORIES = [
+        "Rån",
+        "Våld mot person",
+        "Mord/dråp",
+        "Sexualbrott",
+        "Narkotikabrott",
+        "Vapenbrott",
+        "Skadegörelse",
+        "Inbrott",
+        "Stöld",
+        "Motorfordon, stöld",
+        "Brand",
+        "Trafikolycka",
+        "Trafikhinder",
+        "Bråk",
+        "Övrigt"
+    ]
+
     def __init__(self):
         self.atlas = get_atlas_client()
         logger.info("IncidentClassifier initialized (Atlas Intelligence)")

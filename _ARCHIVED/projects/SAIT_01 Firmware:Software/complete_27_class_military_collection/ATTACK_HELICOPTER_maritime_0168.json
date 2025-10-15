@@ -1,0 +1,22 @@
+{
+  "threat_type": "ATTACK_HELICOPTER",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "maritime",
+  "generated_at": "2025-09-22T11:11:21.200046",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.35245786888956443,
+  "filename": "ATTACK_HELICOPTER_maritime_0168.wav",
+  "file_path": "complete_27_class_military_collection/ATTACK_HELICOPTER_maritime_0168.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.3524578809738159,
+    "dynamic_range_db": 50.10007873095106,
+    "snr_db": 1.710566073631371,
+    "thd_percent": 260.3650623680163
+  },
+  "sample_index": 168,
+  "threat_category": "DIRECT_COMBAT",
+  "priority_level": "HIGH"
+}

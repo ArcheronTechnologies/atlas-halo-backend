@@ -19,8 +19,9 @@ CREATE TABLE IF NOT EXISTS predictions (
     bounds_east NUMERIC(10, 6) NOT NULL,
     bounds_west NUMERIC(10, 6) NOT NULL,
 
-    -- Neighborhood information
-    neighborhood_name VARCHAR(255) NOT NULL,
+    -- Geographic identification
+    location_name VARCHAR(255) NOT NULL,  -- City name (e.g., "Malmö", "Stockholm")
+    neighborhood_name VARCHAR(255) NOT NULL,  -- Neighborhood (e.g., "Rosengård", "Norrmalm")
 
     -- Prediction metadata (stored as JSON for 24 hours ahead)
     -- Structure: {"0": {"risk": 0.5, "confidence": 0.7, "incidents": 5}, "1": {...}, ...}
@@ -35,8 +36,8 @@ CREATE TABLE IF NOT EXISTS predictions (
     computed_at TIMESTAMP WITH TIME ZONE NOT NULL,
     expires_at TIMESTAMP WITH TIME ZONE NOT NULL,
 
-    -- Constraints
-    UNIQUE(grid_lat, grid_lon, computed_at)
+    -- Constraints (allow multiple neighborhoods per grid cell per city)
+    UNIQUE(grid_lat, grid_lon, location_name, neighborhood_name, computed_at)
 );
 
 -- Geospatial index for fast bounding box queries

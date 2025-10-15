@@ -1,0 +1,22 @@
+{
+  "threat_type": "EXPLOSION_NEAR",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "urban",
+  "generated_at": "2025-09-22T11:11:14.186963",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.10932332484609134,
+  "filename": "EXPLOSION_NEAR_urban_0041.wav",
+  "file_path": "complete_27_class_military_collection/EXPLOSION_NEAR_urban_0041.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.10932332277297974,
+    "dynamic_range_db": 77.51181154692347,
+    "snr_db": 22.595913061685327,
+    "thd_percent": 5.290897839335047
+  },
+  "sample_index": 41,
+  "threat_category": "IMMEDIATE_LETHAL",
+  "priority_level": "CRITICAL"
+}

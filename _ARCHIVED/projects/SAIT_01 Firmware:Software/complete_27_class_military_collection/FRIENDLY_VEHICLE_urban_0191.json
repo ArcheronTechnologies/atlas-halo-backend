@@ -1,0 +1,22 @@
+{
+  "threat_type": "FRIENDLY_VEHICLE",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "urban",
+  "generated_at": "2025-09-22T11:11:07.857057",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.32601864662013424,
+  "filename": "FRIENDLY_VEHICLE_urban_0191.wav",
+  "file_path": "complete_27_class_military_collection/FRIENDLY_VEHICLE_urban_0191.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.32601866126060486,
+    "dynamic_range_db": 51.02889650724044,
+    "snr_db": 1.315919904660505,
+    "thd_percent": 75.30600329718382
+  },
+  "sample_index": 191,
+  "threat_category": "NON_THREAT",
+  "priority_level": "LOW"
+}

@@ -1,0 +1,22 @@
+{
+  "threat_type": "TRANSPORT_HELICOPTER",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "desert",
+  "generated_at": "2025-09-22T11:11:26.308602",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.34907726630561237,
+  "filename": "TRANSPORT_HELICOPTER_desert_0105.wav",
+  "file_path": "complete_27_class_military_collection/TRANSPORT_HELICOPTER_desert_0105.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.3490772545337677,
+    "dynamic_range_db": 50.44731859227936,
+    "snr_db": 2.36509097539973,
+    "thd_percent": 74.3792293223619
+  },
+  "sample_index": 105,
+  "threat_category": "LOGISTICS_TRANSPORT",
+  "priority_level": "MEDIUM"
+}

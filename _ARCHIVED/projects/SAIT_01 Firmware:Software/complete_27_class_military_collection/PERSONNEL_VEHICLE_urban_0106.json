@@ -1,0 +1,22 @@
+{
+  "threat_type": "PERSONNEL_VEHICLE",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "urban",
+  "generated_at": "2025-09-22T11:11:33.242251",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.3871788462839497,
+  "filename": "PERSONNEL_VEHICLE_urban_0106.wav",
+  "file_path": "complete_27_class_military_collection/PERSONNEL_VEHICLE_urban_0106.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.38717883825302124,
+    "dynamic_range_db": 65.0442011693309,
+    "snr_db": 20.66476308113827,
+    "thd_percent": 28.186982551565798
+  },
+  "sample_index": 106,
+  "threat_category": "PERSONNEL_ACTIVITY",
+  "priority_level": "MEDIUM"
+}

@@ -1,0 +1,297 @@
+{
+  "total_tests": 65,
+  "passed": 27,
+  "failed": 38,
+  "errors": [
+    {
+      "test": "Health Check",
+      "error": "Health check system failure (Expected 200, got 500)"
+    },
+    {
+      "test": "Readiness Check",
+      "error": "Unknown error (Expected 200, got 404)"
+    },
+    {
+      "test": "Metrics Endpoint",
+      "error": "Metrics collection failed (Expected 200, got 500)"
+    },
+    {
+      "test": "Auth Protection",
+      "error": "Expected 401, got 307"
+    },
+    {
+      "test": "List Components",
+      "error": "HTTP 307 (Expected 200, got 307)"
+    },
+    {
+      "test": "List Companies",
+      "error": "HTTP 307 (Expected 200, got 307)"
+    },
+    {
+      "test": "List Users",
+      "error": "HTTP 307 (Expected 200, got 307)"
+    },
+    {
+      "test": "List Inventory",
+      "error": "HTTP 307 (Expected 200, got 307)"
+    },
+    {
+      "test": "List RFQs",
+      "error": "HTTP 307 (Expected 200, got 307)"
+    },
+    {
+      "test": "List Purchase Orders",
+      "error": "HTTP 307 (Expected 200, got 307)"
+    },
+    {
+      "test": "Global Search",
+      "error": "Unknown error (Expected 200, got 404)"
+    },
+    {
+      "test": "Supply Risk Analysis",
+      "error": "Unknown error (Expected 200, got 404)"
+    },
+    {
+      "test": "Price Predictions",
+      "error": "Unknown error (Expected 200, got 404)"
+    },
+    {
+      "test": "Graph Relationships",
+      "error": "Unknown error (Expected 200, got 404)"
+    },
+    {
+      "test": "Supplier Graph",
+      "error": "Unknown error (Expected 200, got 404)"
+    },
+    {
+      "test": "Audit Events",
+      "error": "Unknown error (Expected 200, got 404)"
+    },
+    {
+      "test": "Microsoft 365 Status",
+      "error": "Unknown error (Expected 200, got 404)"
+    },
+    {
+      "test": "Visma ERP Status",
+      "error": "Unknown error (Expected 200, got 404)"
+    },
+    {
+      "test": "Business Central Status",
+      "error": "Unknown error (Expected 200, got 404)"
+    },
+    {
+      "test": "C3 Integration Status",
+      "error": "Unknown error (Expected 200, got 404)"
+    },
+    {
+      "test": "HubSpot Integration Status",
+      "error": "Unknown error (Expected 200, got 404)"
+    },
+    {
+      "test": "Email Ingestion: RFQ Response Email",
+      "error": "Unknown error (Expected 200, got 404)"
+    },
+    {
+      "test": "Email Ingestion: Quote Email with PDF",
+      "error": "Unknown error (Expected 200, got 404)"
+    },
+    {
+      "test": "Email Ingestion: Availability Update",
+      "error": "Unknown error (Expected 200, got 404)"
+    },
+    {
+      "test": "BOM Ingestion: Simple BOM",
+      "error": "Unknown error (Expected 200, got 404)"
+    },
+    {
+      "test": "BOM Ingestion: Complex BOM with Alternates",
+      "error": "Unknown error (Expected 200, got 404)"
+    },
+    {
+      "test": "Visma ERP Data Ingestion",
+      "error": "Unknown error (Expected 200, got 404)"
+    },
+    {
+      "test": "Teams Chat Ingestion",
+      "error": "Unknown error (Expected 200, got 404)"
+    },
+    {
+      "test": "Web Intelligence Ingestion",
+      "error": "Unknown error (Expected 200, got 404)"
+    },
+    {
+      "test": "Component NER Model",
+      "error": "Unknown error (Expected 200, got 404)"
+    },
+    {
+      "test": "Sentiment Analysis Model",
+      "error": "Unknown error (Expected 200, got 404)"
+    },
+    {
+      "test": "Price Prediction Model",
+      "error": "Unknown error (Expected 200, got 404)"
+    },
+    {
+      "test": "Supply Risk Analysis Model",
+      "error": "Unknown error (Expected 200, got 404)"
+    },
+    {
+      "test": "Demand Forecasting Model",
+      "error": "Unknown error (Expected 200, got 404)"
+    },
+    {
+      "test": "BOM Optimization Model",
+      "error": "Unknown error (Expected 200, got 404)"
+    },
+    {
+      "test": "Supplier Scoring Model",
+      "error": "Unknown error (Expected 200, got 404)"
+    },
+    {
+      "test": "Anomaly Detection Model",
+      "error": "Unknown error (Expected 200, got 404)"
+    },
+    {
+      "test": "Market Intelligence Synthesis",
+      "error": "Unknown error (Expected 200, got 404)"
+    },
+    {
+      "test": "Geopolitical Risk Assessment",
+      "error": "Unknown error (Expected 200, got 404)"
+    }
+  ],
+  "performance": {
+    "Health Check": 1.028432846069336,
+    "Readiness Check": 1.2053639888763428,
+    "Metrics Endpoint": 0.009244918823242188,
+    "Total Availability: Specific STM32 MCU": 0.9544713497161865,
+    "Total Availability: STM32 family search": 0.7373659610748291,
+    "Total Availability: Op-amp search": 0.8917908668518066,
+    "Total Availability: Logic gate search": 1.0480780601501465,
+    "Total Availability: ESP32 modules": 0.9662618637084961,
+    "Pricing Breaks: Specific STM32 MCU": 1.007483959197998,
+    "Pricing Breaks: STM32 family search": 0.9515762329101562,
+    "Pricing Breaks: Op-amp search": 1.439283847808838,
+    "Pricing Breaks: Logic gate search": 1.9004030227661133,
+    "Pricing Breaks: ESP32 modules": 0.659127950668335,
+    "Detailed Offers: STM32F429ZIT6": 0.5843110084533691,
+    "Detailed Offers: LM358N": 0.6220607757568359,
+    "Detailed Offers: 74HC04D": 0.5919561386108398,
+    "Spec Attributes: SSOP package filter": 0.5608539581298828,
+    "Spec Attributes: TI manufacturer filter": 0.5505800247192383,
+    "Spec Attributes: No filters": 0.5947248935699463,
+    "List Components": 0.02149200439453125,
+    "List Companies": 0.015391826629638672,
+    "List Users": 0.013006210327148438,
+    "List Inventory": 0.014242887496948242,
+    "List RFQs": 0.00991201400756836,
+    "List Purchase Orders": 0.009058713912963867,
+    "Global Search": 0.008678197860717773,
+    "Market Trends": 0.018537044525146484,
+    "Supply Risk Analysis": 0.008646249771118164,
+    "Price Predictions": 0.008283853530883789,
+    "Graph Relationships": 0.008573055267333984,
+    "Supplier Graph": 0.010199785232543945,
+    "Audit Events": 0.008633852005004883,
+    "Microsoft 365 Status": 0.008056879043579102,
+    "Visma ERP Status": 0.008498191833496094,
+    "Business Central Status": 0.010746955871582031,
+    "C3 Integration Status": 0.00843191146850586,
+    "HubSpot Integration Status": 0.008087158203125,
+    "Email Ingestion: RFQ Response Email": 0.008275985717773438,
+    "Email Ingestion: Quote Email with PDF": 0.010405302047729492,
+    "Email Ingestion: Availability Update": 0.008041143417358398,
+    "BOM Ingestion: Simple BOM": 0.008127927780151367,
+    "BOM Ingestion: Complex BOM with Alternates": 0.00808405876159668,
+    "Visma ERP Data Ingestion": 0.018908023834228516,
+    "Teams Chat Ingestion": 0.008163213729858398,
+    "Web Intelligence Ingestion": 0.007848978042602539,
+    "Component NER Model": 0.008063077926635742,
+    "Sentiment Analysis Model": 0.00997304916381836,
+    "Price Prediction Model": 0.008030891418457031,
+    "Supply Risk Analysis Model": 0.008424043655395508,
+    "Demand Forecasting Model": 0.008419036865234375,
+    "BOM Optimization Model": 0.008006811141967773,
+    "Supplier Scoring Model": 0.011504888534545898,
+    "Anomaly Detection Model": 0.00860595703125,
+    "Market Intelligence Synthesis": 0.008678197860717773,
+    "Geopolitical Risk Assessment": 0.008274078369140625,
+    "Concurrent Request 10": 0.6960089206695557,
+    "Concurrent Request 7": 0.7696452140808105,
+    "Concurrent Request 6": 0.7966687679290771,
+    "Concurrent Request 1": 0.861055850982666,
+    "Concurrent Request 8": 0.8211548328399658,
+    "Concurrent Request 2": 0.8560991287231445,
+    "Concurrent Request 9": 0.8615038394927979,
+    "Concurrent Request 3": 0.8999598026275635,
+    "Concurrent Request 4": 0.9255638122558594,
+    "Concurrent Request 5": 0.941795825958252
+  },
+  "endpoints_tested": [
+    "/health",
+    "/ready",
+    "/metrics",
+    "/v1/market/total-availability",
+    "/v1/market/total-availability",
+    "/v1/market/total-availability",
+    "/v1/market/total-availability",
+    "/v1/market/total-availability",
+    "/v1/market/pricing-breaks",
+    "/v1/market/pricing-breaks",
+    "/v1/market/pricing-breaks",
+    "/v1/market/pricing-breaks",
+    "/v1/market/pricing-breaks",
+    "/v1/market/offers",
+    "/v1/market/offers",
+    "/v1/market/offers",
+    "/v1/market/spec-attributes",
+    "/v1/market/spec-attributes",
+    "/v1/market/spec-attributes",
+    "/v1/components",
+    "/v1/companies",
+    "/v1/users",
+    "/v1/inventory",
+    "/v1/rfqs",
+    "/v1/purchase-orders",
+    "/v1/search",
+    "/v1/intelligence/market-trends",
+    "/v1/intelligence/supply-risks",
+    "/v1/intelligence/price-predictions",
+    "/v1/graph/relationships",
+    "/v1/graph/suppliers",
+    "/v1/audit/events",
+    "/v1/integrations/microsoft365/status",
+    "/v1/integrations/visma/status",
+    "/v1/integrations/business-central/status",
+    "/v1/integrations/c3/status",
+    "/v1/integrations/hubspot/status",
+    "/v1/ingestion/email",
+    "/v1/ingestion/email",
+    "/v1/ingestion/email",
+    "/v1/ingestion/bom",
+    "/v1/ingestion/bom",
+    "/v1/ingestion/erp/visma",
+    "/v1/ingestion/microsoft365/teams",
+    "/v1/ingestion/web-intelligence",
+    "/v1/ai/extract-components",
+    "/v1/ai/analyze-sentiment",
+    "/v1/ai/predict-prices",
+    "/v1/ai/analyze-supply-risk",
+    "/v1/ai/forecast-demand",
+    "/v1/ai/optimize-bom",
+    "/v1/ai/score-suppliers",
+    "/v1/ai/detect-anomalies",
+    "/v1/ai/synthesize-intelligence",
+    "/v1/ai/assess-geopolitical-risk",
+    "/v1/market/total-availability",
+    "/v1/market/total-availability",
+    "/v1/market/total-availability",
+    "/v1/market/total-availability",
+    "/v1/market/total-availability",
+    "/v1/market/total-availability",
+    "/v1/market/total-availability",
+    "/v1/market/total-availability",
+    "/v1/market/total-availability",
+    "/v1/market/total-availability"
+  ]
+}

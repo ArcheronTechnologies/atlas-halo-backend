@@ -1,0 +1,22 @@
+{
+  "threat_type": "TRANSPORT_HELICOPTER",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "maritime",
+  "generated_at": "2025-09-22T11:11:26.429460",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.37076540973485456,
+  "filename": "TRANSPORT_HELICOPTER_maritime_0123.wav",
+  "file_path": "complete_27_class_military_collection/TRANSPORT_HELICOPTER_maritime_0123.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.37076541781425476,
+    "dynamic_range_db": 49.65931984254589,
+    "snr_db": 2.677073544832492,
+    "thd_percent": 147.3372421047159
+  },
+  "sample_index": 123,
+  "threat_category": "LOGISTICS_TRANSPORT",
+  "priority_level": "MEDIUM"
+}

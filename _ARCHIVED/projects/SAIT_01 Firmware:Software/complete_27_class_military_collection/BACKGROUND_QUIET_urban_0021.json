@@ -1,0 +1,22 @@
+{
+  "threat_type": "BACKGROUND_QUIET",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "urban",
+  "generated_at": "2025-09-22T11:11:02.012228",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.21934820944463787,
+  "filename": "BACKGROUND_QUIET_urban_0021.wav",
+  "file_path": "complete_27_class_military_collection/BACKGROUND_QUIET_urban_0021.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.21934820711612701,
+    "dynamic_range_db": 52.73782294590757,
+    "snr_db": 0.19667179420343983,
+    "thd_percent": 492.3739681380659
+  },
+  "sample_index": 21,
+  "threat_category": "NON_THREAT",
+  "priority_level": "LOW"
+}

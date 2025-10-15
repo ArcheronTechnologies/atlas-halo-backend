@@ -1,0 +1,22 @@
+{
+  "threat_type": "ELECTRONIC_JAMMING",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "forest",
+  "generated_at": "2025-09-22T11:11:39.469510",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.21192883179561683,
+  "filename": "ELECTRONIC_JAMMING_forest_0002.wav",
+  "file_path": "complete_27_class_military_collection/ELECTRONIC_JAMMING_forest_0002.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.2119288295507431,
+    "dynamic_range_db": 52.27158782693095,
+    "snr_db": 0.19275143222399552,
+    "thd_percent": 291.33458207372837
+  },
+  "sample_index": 2,
+  "threat_category": "SURVEILLANCE_RECON",
+  "priority_level": "LOW_MEDIUM"
+}

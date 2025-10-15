@@ -1,0 +1,22 @@
+{
+  "threat_type": "SURVEILLANCE_DRONE",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "desert",
+  "generated_at": "2025-09-22T11:11:37.441478",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.3584259769845151,
+  "filename": "SURVEILLANCE_DRONE_desert_0120.wav",
+  "file_path": "complete_27_class_military_collection/SURVEILLANCE_DRONE_desert_0120.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.35842597484588623,
+    "dynamic_range_db": 51.80851664946587,
+    "snr_db": 0.1548258520950037,
+    "thd_percent": 6.105127063703905
+  },
+  "sample_index": 120,
+  "threat_category": "SURVEILLANCE_RECON",
+  "priority_level": "LOW_MEDIUM"
+}

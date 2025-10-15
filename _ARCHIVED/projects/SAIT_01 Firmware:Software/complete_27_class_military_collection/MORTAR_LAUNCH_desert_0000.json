@@ -1,0 +1,22 @@
+{
+  "threat_type": "MORTAR_LAUNCH",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "desert",
+  "generated_at": "2025-09-22T11:11:15.461290",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.06665874065509803,
+  "filename": "MORTAR_LAUNCH_desert_0000.wav",
+  "file_path": "complete_27_class_military_collection/MORTAR_LAUNCH_desert_0000.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.06665874272584915,
+    "dynamic_range_db": 73.73935819414616,
+    "snr_db": 12.60523929150839,
+    "thd_percent": 621.8600313658618
+  },
+  "sample_index": 0,
+  "threat_category": "IMMEDIATE_LETHAL",
+  "priority_level": "CRITICAL"
+}

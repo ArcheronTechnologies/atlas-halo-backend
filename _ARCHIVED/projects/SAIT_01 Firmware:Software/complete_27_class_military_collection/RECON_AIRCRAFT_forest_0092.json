@@ -1,0 +1,22 @@
+{
+  "threat_type": "RECON_AIRCRAFT",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "forest",
+  "generated_at": "2025-09-22T11:11:38.661281",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.327308653179001,
+  "filename": "RECON_AIRCRAFT_forest_0092.wav",
+  "file_path": "complete_27_class_military_collection/RECON_AIRCRAFT_forest_0092.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.32730865478515625,
+    "dynamic_range_db": 47.28079073959261,
+    "snr_db": 0.13113897172328637,
+    "thd_percent": 60.18940491929208
+  },
+  "sample_index": 92,
+  "threat_category": "SURVEILLANCE_RECON",
+  "priority_level": "LOW_MEDIUM"
+}

@@ -1,0 +1,242 @@
+{
+  "quiet_rural": {
+    "description": "Rural deployment, low threat environment",
+    "baseline": {
+      "years_of_operation": 0.0777553588167897,
+      "days_of_operation": 28.40014480783244,
+      "daily_energy_mwh": 377.11075321863507,
+      "usable_energy_mwh": 10710.0,
+      "energy_breakdown": {
+        "benign_events": 17762.4216,
+        "false_alarms": 445.01688,
+        "threat_transmissions": 191.88734399999998,
+        "background_listening": 1296000.0,
+        "deep_sleep": 43199.385763086335
+      },
+      "event_counts": {
+        "total_wakes": 48.576,
+        "threat_detections": 0.24288,
+        "high_confidence_threats": 0.072864,
+        "benign_events": 48.33312
+      }
+    },
+    "optimizations": {
+      "higher_threshold": {
+        "strategy": "Higher detection threshold (+5dB)",
+        "years_of_operation": 0.07828583472186576,
+        "daily_energy_mwh": 374.5553973379921,
+        "wake_events_per_day": 24.288,
+        "tradeoff": "May miss some low-level threats"
+      },
+      "adaptive_listening": {
+        "strategy": "Adaptive listening (80% duty cycle)",
+        "years_of_operation": 0.09610405933209797,
+        "daily_energy_mwh": 305.11075321863507,
+        "wake_events_per_day": 48.576,
+        "tradeoff": "Slight delay in threat detection during sleep periods"
+      },
+      "burst_listening": {
+        "strategy": "Burst listening (50% duty cycle)",
+        "years_of_operation": 0.15071482123543656,
+        "daily_energy_mwh": 194.55539733799208,
+        "wake_events_per_day": 24.288,
+        "tradeoff": "30-second gaps in monitoring coverage"
+      },
+      "high_capacity_battery": {
+        "strategy": "High capacity battery (5000mAh Li-SOCI2)",
+        "years_of_operation": 0.11107908402398531,
+        "daily_energy_mwh": 377.11075321863507,
+        "wake_events_per_day": 48.576,
+        "tradeoff": "Larger physical size and higher cost"
+      },
+      "combined_optimizations": {
+        "strategy": "Combined: +5dB threshold + adaptive listening + 5000mAh battery",
+        "years_of_operation": 0.13845106519889905,
+        "daily_energy_mwh": 302.5553973379921,
+        "wake_events_per_day": 24.288,
+        "tradeoff": "Best performance with acceptable compromises"
+      }
+    },
+    "meets_target": false
+  },
+  "suburban": {
+    "description": "Suburban deployment, moderate threat environment",
+    "baseline": {
+      "years_of_operation": 0.07772402257880075,
+      "days_of_operation": 28.388699246906974,
+      "daily_energy_mwh": 377.26279414393684,
+      "usable_energy_mwh": 10710.0,
+      "energy_breakdown": {
+        "benign_events": 17673.1632,
+        "false_alarms": 890.03376,
+        "threat_transmissions": 383.77468799999997,
+        "background_listening": 1296000.0,
+        "deep_sleep": 43199.08727017267
+      },
+      "event_counts": {
+        "total_wakes": 48.576,
+        "threat_detections": 0.48576,
+        "high_confidence_threats": 0.145728,
+        "benign_events": 48.09024
+      }
+    },
+    "optimizations": {
+      "higher_threshold": {
+        "strategy": "Higher detection threshold (+5dB)",
+        "years_of_operation": 0.07826994457618143,
+        "daily_energy_mwh": 374.63143852931756,
+        "wake_events_per_day": 24.288,
+        "tradeoff": "May miss some low-level threats"
+      },
+      "adaptive_listening": {
+        "strategy": "Adaptive listening (80% duty cycle)",
+        "years_of_operation": 0.096056193197127,
+        "daily_energy_mwh": 305.26279414393684,
+        "wake_events_per_day": 48.576,
+        "tradeoff": "Slight delay in threat detection during sleep periods"
+      },
+      "burst_listening": {
+        "strategy": "Burst listening (50% duty cycle)",
+        "years_of_operation": 0.15065593797051416,
+        "daily_energy_mwh": 194.63143852931756,
+        "wake_events_per_day": 24.288,
+        "tradeoff": "30-second gaps in monitoring coverage"
+      },
+      "high_capacity_battery": {
+        "strategy": "High capacity battery (5000mAh Li-SOCI2)",
+        "years_of_operation": 0.11103431796971534,
+        "daily_energy_mwh": 377.26279414393684,
+        "wake_events_per_day": 48.576,
+        "tradeoff": "Larger physical size and higher cost"
+      },
+      "combined_optimizations": {
+        "strategy": "Combined: +5dB threshold + adaptive listening + 5000mAh battery",
+        "years_of_operation": 0.13841627706191906,
+        "daily_energy_mwh": 302.63143852931756,
+        "wake_events_per_day": 24.288,
+        "tradeoff": "Best performance with acceptable compromises"
+      }
+    },
+    "meets_target": false
+  },
+  "urban_residential": {
+    "description": "Urban residential, higher threat environment",
+    "baseline": {
+      "years_of_operation": 0.07452371056465183,
+      "days_of_operation": 27.219785283739082,
+      "daily_energy_mwh": 393.46379438187864,
+      "usable_energy_mwh": 10710.0,
+      "energy_breakdown": {
+        "benign_events": 69710.10479999999,
+        "false_alarms": 5292.710639999998,
+        "threat_transmissions": 2282.170031999999,
+        "background_listening": 1296000.0,
+        "deep_sleep": 43184.67430276301
+      },
+      "event_counts": {
+        "total_wakes": 192.57599999999996,
+        "threat_detections": 2.888639999999999,
+        "high_confidence_threats": 0.8665919999999997,
+        "benign_events": 189.68735999999996
+      }
+    },
+    "optimizations": {
+      "higher_threshold": {
+        "strategy": "Higher detection threshold (+5dB)",
+        "years_of_operation": 0.07825406087982452,
+        "daily_energy_mwh": 374.70747972064294,
+        "wake_events_per_day": 24.288,
+        "tradeoff": "May miss some low-level threats"
+      },
+      "adaptive_listening": {
+        "strategy": "Adaptive listening (80% duty cycle)",
+        "years_of_operation": 0.09121519263644251,
+        "daily_energy_mwh": 321.46379438187864,
+        "wake_events_per_day": 192.57599999999996,
+        "tradeoff": "Slight delay in threat detection during sleep periods"
+      },
+      "burst_listening": {
+        "strategy": "Burst listening (50% duty cycle)",
+        "years_of_operation": 0.1446355555084193,
+        "daily_energy_mwh": 202.732874548803,
+        "wake_events_per_day": 96.28799999999998,
+        "tradeoff": "30-second gaps in monitoring coverage"
+      },
+      "high_capacity_battery": {
+        "strategy": "High capacity battery (5000mAh Li-SOCI2)",
+        "years_of_operation": 0.10646244366378832,
+        "daily_energy_mwh": 393.46379438187864,
+        "wake_events_per_day": 192.57599999999996,
+        "tradeoff": "Larger physical size and higher cost"
+      },
+      "combined_optimizations": {
+        "strategy": "Combined: +5dB threshold + adaptive listening + 5000mAh battery",
+        "years_of_operation": 0.13480748409367976,
+        "daily_energy_mwh": 310.732874548803,
+        "wake_events_per_day": 96.28799999999998,
+        "tradeoff": "Best performance with acceptable compromises"
+      }
+    },
+    "meets_target": false
+  },
+  "urban_busy": {
+    "description": "Urban busy area, high threat environment",
+    "baseline": {
+      "years_of_operation": 0.06451413982952013,
+      "days_of_operation": 23.56378957273223,
+      "daily_energy_mwh": 454.5109336909671,
+      "usable_energy_mwh": 10710.0,
+      "energy_breakdown": {
+        "benign_events": 259515.44640000002,
+        "false_alarms": 26405.507520000003,
+        "threat_transmissions": 11385.821376,
+        "background_listening": 1296000.0,
+        "deep_sleep": 42932.58599148134
+      },
+      "event_counts": {
+        "total_wakes": 720.576,
+        "threat_detections": 14.411520000000001,
+        "high_confidence_threats": 4.323456,
+        "benign_events": 706.16448
+      }
+    },
+    "optimizations": {
+      "higher_threshold": {
+        "strategy": "Higher detection threshold (+5dB)",
+        "years_of_operation": 0.07655292999615454,
+        "daily_energy_mwh": 383.0340906828484,
+        "wake_events_per_day": 96.28799999999998,
+        "tradeoff": "May miss some low-level threats"
+      },
+      "adaptive_listening": {
+        "strategy": "Adaptive listening (80% duty cycle)",
+        "years_of_operation": 0.07665763079565861,
+        "daily_energy_mwh": 382.5109336909671,
+        "wake_events_per_day": 720.576,
+        "tradeoff": "Slight delay in threat detection during sleep periods"
+      },
+      "burst_listening": {
+        "strategy": "Burst listening (50% duty cycle)",
+        "years_of_operation": 0.12569946985642416,
+        "daily_energy_mwh": 233.27371200274172,
+        "wake_events_per_day": 360.288,
+        "tradeoff": "30-second gaps in monitoring coverage"
+      },
+      "high_capacity_battery": {
+        "strategy": "High capacity battery (5000mAh Li-SOCI2)",
+        "years_of_operation": 0.09216305689931448,
+        "daily_energy_mwh": 454.5109336909671,
+        "wake_events_per_day": 720.576,
+        "tradeoff": "Larger physical size and higher cost"
+      },
+      "combined_optimizations": {
+        "strategy": "Combined: +5dB threshold + adaptive listening + 5000mAh battery",
+        "years_of_operation": 0.12274346241700745,
+        "daily_energy_mwh": 341.2737120027417,
+        "wake_events_per_day": 360.288,
+        "tradeoff": "Best performance with acceptable compromises"
+      }
+    },
+    "meets_target": false
+  }
+}

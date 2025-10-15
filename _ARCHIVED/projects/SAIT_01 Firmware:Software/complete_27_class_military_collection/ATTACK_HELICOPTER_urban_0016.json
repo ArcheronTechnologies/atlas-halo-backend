@@ -1,0 +1,22 @@
+{
+  "threat_type": "ATTACK_HELICOPTER",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "urban",
+  "generated_at": "2025-09-22T11:11:20.133543",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.33851276086751136,
+  "filename": "ATTACK_HELICOPTER_urban_0016.wav",
+  "file_path": "complete_27_class_military_collection/ATTACK_HELICOPTER_urban_0016.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.33851274847984314,
+    "dynamic_range_db": 50.61218040387527,
+    "snr_db": 1.36773629151544,
+    "thd_percent": 113.50548541258021
+  },
+  "sample_index": 16,
+  "threat_category": "DIRECT_COMBAT",
+  "priority_level": "HIGH"
+}

@@ -1,0 +1,22 @@
+{
+  "threat_type": "ATTACK_HELICOPTER",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "desert",
+  "generated_at": "2025-09-22T11:11:21.014067",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.34341369399406046,
+  "filename": "ATTACK_HELICOPTER_desert_0140.wav",
+  "file_path": "complete_27_class_military_collection/ATTACK_HELICOPTER_desert_0140.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.34341368079185486,
+    "dynamic_range_db": 49.58773522499513,
+    "snr_db": 1.4817834344773082,
+    "thd_percent": 69.62466610717209
+  },
+  "sample_index": 140,
+  "threat_category": "DIRECT_COMBAT",
+  "priority_level": "HIGH"
+}

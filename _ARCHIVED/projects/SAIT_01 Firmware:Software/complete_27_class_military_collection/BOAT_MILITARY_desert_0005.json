@@ -1,0 +1,22 @@
+{
+  "threat_type": "BOAT_MILITARY",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "desert",
+  "generated_at": "2025-09-22T11:11:28.303594",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.2294247773202759,
+  "filename": "BOAT_MILITARY_desert_0005.wav",
+  "file_path": "complete_27_class_military_collection/BOAT_MILITARY_desert_0005.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.22942478954792023,
+    "dynamic_range_db": 50.87696659317647,
+    "snr_db": 0.49048906332288816,
+    "thd_percent": 5.510625031982298
+  },
+  "sample_index": 5,
+  "threat_category": "LOGISTICS_TRANSPORT",
+  "priority_level": "MEDIUM"
+}

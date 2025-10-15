@@ -1,0 +1,22 @@
+{
+  "threat_type": "COMMUNICATIONS",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "desert",
+  "generated_at": "2025-09-22T11:11:36.423017",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.19343280085811357,
+  "filename": "COMMUNICATIONS_desert_0170.wav",
+  "file_path": "complete_27_class_military_collection/COMMUNICATIONS_desert_0170.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.1934327930212021,
+    "dynamic_range_db": 57.03993517988959,
+    "snr_db": 3.9988588426686777,
+    "thd_percent": 155.11509358442083
+  },
+  "sample_index": 170,
+  "threat_category": "PERSONNEL_ACTIVITY",
+  "priority_level": "MEDIUM"
+}

@@ -1,0 +1,65 @@
+{
+  "validation_results": {
+    "aaa_framework": {
+      "optimizer_functional": false,
+      "error": "module 'numpy' has no attribute 'int'.\n`np.int` was a deprecated alias for the builtin `int`. To avoid this error in existing code, use `int` by itself. Doing this will not modify any behavior and is safe. When replacing `np.int`, you may wish to use e.g. `np.int64` or `np.int32` to specify the precision. If you wish to review your current use, check the release note link for additional information.\nThe aliases was originally deprecated in NumPy 1.20; for more details and guidance see the original release note at:\n    https://numpy.org/devdocs/release/1.20.0-notes.html#deprecations"
+    },
+    "fsl_framework": {
+      "pipeline_functional": true,
+      "episode_accuracy": 0.20000000298023224,
+      "episode_time_ms": 16.060829162597656,
+      "prototypes_generated": 3,
+      "predictions_shape": [
+        30
+      ],
+      "memory_efficient": true,
+      "accuracy_reasonable": true
+    },
+    "defense_framework": {
+      "defense_system_functional": true,
+      "clean_accuracy": 0.625,
+      "overall_robustness": 0.0,
+      "battlefield_attacks_working": false,
+      "defense_time_ms": 35.66789627075195,
+      "performance_acceptable": true,
+      "basic_robustness_achieved": "False"
+    },
+    "integration": {
+      "integrated_system_functional": true,
+      "dataset_creation_time_s": 0.0017688274383544922,
+      "original_dataset_size": 12,
+      "hardened_dataset_size": 36,
+      "augmentation_ratio": 3.0,
+      "adversarial_subset_size": 10,
+      "augmentation_working": true,
+      "adversarial_integration_working": true,
+      "performance_acceptable": true
+    },
+    "phase1_targets": {
+      "validation": {
+        "aaa_functional": false,
+        "fsl_functional": true,
+        "defense_functional": true,
+        "integration_successful": true,
+        "basic_accuracy_improvement": false,
+        "basic_robustness": "False",
+        "performance_acceptable": true
+      },
+      "targets": {
+        "aaa_functional": true,
+        "fsl_functional": true,
+        "defense_functional": true,
+        "integration_successful": true,
+        "basic_accuracy_improvement": 5.0,
+        "basic_robustness": 0.15,
+        "performance_acceptable": true
+      },
+      "phase1_success": false,
+      "estimated_accuracy_improvement": 0,
+      "estimated_robustness": 0.0,
+      "ready_for_phase1_4": false
+    }
+  },
+  "success": false,
+  "ready_for_phase1_4": false
+}

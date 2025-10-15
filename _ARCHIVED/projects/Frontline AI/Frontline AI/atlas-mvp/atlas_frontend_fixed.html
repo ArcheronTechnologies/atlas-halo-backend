@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atlas MVP - Edge AI Perception</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <style>
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; }
+        .tab-button { transition: all 0.2s ease; }
+        .tab-button.active { background-color: #3b82f6; color: white; }
+        .video-container { position: relative; background: #000; min-height: 400px; display: flex; align-items: center; justify-content: center; }
+        .status-indicator { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 8px; }
+        .status-active { background-color: #10b981; }
+        .status-inactive { background-color: #ef4444; }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div id="app" class="min-h-screen">
+        <!-- Header -->
+        <header class="bg-white shadow-sm border-b">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center py-4">
+                    <div class="flex items-center space-x-4">
+                        <h1 class="text-2xl font-bold text-gray-900">Atlas MVP</h1>
+                        <div class="flex items-center">
+                            <span class="status-indicator" id="status-dot"></span>
+                            <span id="status-text" class="text-sm text-gray-600">Disconnected</span>
+                        </div>
+                    </div>
+                    <div class="text-sm text-gray-500">
+                        Edge AI Perception System
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="bg-white border-b">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex space-x-8">
+                    <button class="tab-button px-3 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 active" onclick="showTab('video')">Live Video</button>
+                    <button class="tab-button px-3 py-2 text-sm font-medium text-gray-700 hover:text-gray-900" onclick="showTab('training')">Training</button>
+                    <button class="tab-button px-3 py-2 text-sm font-medium text-gray-700 hover:text-gray-900" onclick="showTab('config')">Config</button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            <!-- Live Video Tab -->
+            <div id="video-tab" class="tab-content">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div class="lg:col-span-2">
+                        <div class="bg-white rounded-lg shadow p-6">
+                            <div class="flex justify-between items-center mb-4">
+                                <h2 class="text-lg font-semibold">Live Video Feed</h2>
+                                <div class="space-x-2">
+                                    <button id="start-btn" onclick="startVideo()" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Start Stream</button>
+                                    <button id="stop-btn" onclick="stopVideo()" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 hidden">Stop Stream</button>
+                                </div>
+                            </div>
+                            <div class="video-container rounded-lg border">
+                                <div id="video-placeholder" class="text-white text-center">
+                                    <div class="text-4xl mb-2">📹</div>
+                                    <div>Click "Start Stream" to begin</div>
+                                </div>
+                                <canvas id="video-canvas" class="max-w-full h-auto hidden" style="border: 1px solid #ccc; background: #000;"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="bg-white rounded-lg shadow p-6 mb-6">
+                            <h3 class="text-lg font-semibold mb-4">Detection Stats</h3>
+                            <div id="stats" class="space-y-2">
+                                <div class="flex justify-between"><span>FPS:</span> <span id="fps">0</span></div>
+                                <div class="flex justify-between"><span>Detections:</span> <span id="detection-count">0</span></div>
+                                <div class="flex justify-between"><span>Status:</span> <span id="stream-status">Inactive</span></div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white rounded-lg shadow p-6">
+                            <h3 class="text-lg font-semibold mb-4">Recent Detections</h3>
+                            <div id="recent-detections" class="space-y-2 max-h-64 overflow-y-auto">
+                                <div class="text-sm text-gray-500">No detections yet</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Training Tab -->
+            <div id="training-tab" class="tab-content hidden">
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h2 class="text-lg font-semibold mb-4">Model Training</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h3 class="font-medium mb-2">Available Models</h3>
+                            <div id="models-list" class="space-y-2">
+                                <div class="text-sm text-gray-500">Loading models...</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="font-medium mb-2">Upload Training Data</h3>
+                            <div class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
+                                <div class="text-4xl mb-2">📁</div>
+                                <div class="text-sm text-gray-600">Drag and drop images here or click to upload</div>
+                                <input type="file" multiple accept="image/*" class="hidden" id="file-input" onchange="handleFileUpload(event)">
+                                <button onclick="document.getElementById('file-input').click()" class="mt-2 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Choose Files</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Config Tab -->
+            <div id="config-tab" class="tab-content hidden">
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h2 class="text-lg font-semibold mb-4">Configuration</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h3 class="font-medium mb-4">Confidence Thresholds</h3>
+                            <div id="confidence-controls" class="space-y-4">
+                                <div class="text-sm text-gray-500">Loading configuration...</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="font-medium mb-4">Alert Settings</h3>
+                            <div class="space-y-4">
+                                <label class="flex items-center">
+                                    <input type="checkbox" id="alerts-enabled" class="mr-2" onchange="updateAlerts()">
+                                    <span>Enable Alerts</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" id="audio-alerts" class="mr-2" onchange="updateAlerts()">
+                                    <span>Audio Alerts</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Global variables
+        let ws = null;
+        let isStreaming = false;
+        let detectionCount = 0;
+        let currentConfig = null;
+
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', function() {
+            connectWebSocket();
+            loadConfiguration();
+            loadModels();
+        });
+
+        // WebSocket connection
+        function connectWebSocket() {
+            try {
+                ws = new WebSocket('ws://localhost:8000/ws');
+                
+                ws.onopen = function() {
+                    updateConnectionStatus(true);
+                };
+                
+                ws.onmessage = function(event) {
+                    if (event.data instanceof ArrayBuffer) {
+                        handleBinaryMessage(event.data);
+                    } else {
+                        const data = JSON.parse(event.data);
+                        handleWebSocketMessage(data);
+                    }
+                };
+                
+                ws.onclose = function() {
+                    updateConnectionStatus(false);
+                    // Retry connection after 3 seconds
+                    setTimeout(connectWebSocket, 3000);
+                };
+                
+                ws.onerror = function(error) {
+                    console.error('WebSocket error:', error);
+                    updateConnectionStatus(false);
+                };
+            } catch (error) {
+                console.error('Failed to connect WebSocket:', error);
+                updateConnectionStatus(false);
+            }
+        }
+
+        function handleBinaryMessage(arrayBuffer) {
+            try {
+                console.log('Received binary message, size:', arrayBuffer.byteLength);
+                
+                // Read header length (first 4 bytes)
+                const headerLengthView = new DataView(arrayBuffer, 0, 4);
+                const headerLength = headerLengthView.getUint32(0, false); // big-endian
+                
+                // Read header (JSON)
+                const headerBytes = new Uint8Array(arrayBuffer, 4, headerLength);
+                const headerText = new TextDecoder().decode(headerBytes);
+                const header = JSON.parse(headerText);
+                
+                // Read binary data
+                const binaryData = new Uint8Array(arrayBuffer, 4 + headerLength);
+                
+                console.log('Binary message type:', header.type, 'data size:', binaryData.length);
+                
+                switch (header.type) {
+                    case 'frame':
+                        displayBinaryFrame(binaryData);
+                        break;
+                    default:
+                        console.log('Unknown binary message type:', header.type);
+                }
+            } catch (error) {
+                console.error('Error processing binary message:', error);
+            }
+        }
+
+        function handleWebSocketMessage(data) {
+            console.log('WebSocket message received:', data.type, data.data ? 'with data' : 'no data');
+            switch(data.type) {
+                case 'frame':
+                    displayFrame(data.data);
+                    break;
+                case 'detection':
+                    console.log('Detection:', data.data);
+                    handleDetection(data.data);
+                    break;
+                case 'alert':
+                    showAlert(data.data);
+                    break;
+                case 'stats':
+                    updateStats(data.data);
+                    break;
+            }
+        }
+
+        function updateConnectionStatus(connected) {
+            const statusDot = document.getElementById('status-dot');
+            const statusText = document.getElementById('status-text');
+            
+            if (connected) {
+                statusDot.className = 'status-indicator status-active';
+                statusText.textContent = 'Connected';
+            } else {
+                statusDot.className = 'status-indicator status-inactive';
+                statusText.textContent = 'Disconnected';
+            }
+        }
+
+        // Tab management
+        function showTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.add('hidden');
+            });
+            
+            // Remove active class from all buttons
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(tabName + '-tab').classList.remove('hidden');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+
+        // Video streaming functions
+        async function startVideo() {
+            try {
+                const response = await axios.post('http://localhost:8000/api/video/start');
+                if (response.data.status === 'streaming_started') {
+                    isStreaming = true;
+                    document.getElementById('start-btn').classList.add('hidden');
+                    document.getElementById('stop-btn').classList.remove('hidden');
+                    document.getElementById('video-placeholder').classList.add('hidden');
+                    document.getElementById('video-canvas').classList.remove('hidden');
+                    document.getElementById('stream-status').textContent = 'Active';
+                }
+            } catch (error) {
+                console.error('Failed to start video:', error);
+                alert('Failed to start video stream. Make sure the backend is running.');
+            }
+        }
+
+        async function stopVideo() {
+            try {
+                const response = await axios.post('http://localhost:8000/api/video/stop');
+                if (response.data.status === 'streaming_stopped') {
+                    isStreaming = false;
+                    document.getElementById('start-btn').classList.remove('hidden');
+                    document.getElementById('stop-btn').classList.add('hidden');
+                    document.getElementById('video-placeholder').classList.remove('hidden');
+                    document.getElementById('video-canvas').classList.add('hidden');
+                    document.getElementById('stream-status').textContent = 'Inactive';
+                    document.getElementById('fps').textContent = '0';
+                }
+            } catch (error) {
+                console.error('Failed to stop video:', error);
+            }
+        }
+
+        function displayFrame(frameData) {
+            try {
+                console.log('Received frame data:', frameData ? frameData.substring(0, 50) + '...' : 'null');
+                const canvas = document.getElementById('video-canvas');
+                const ctx = canvas.getContext('2d');
+                
+                if (!frameData || !frameData.startsWith('data:image/')) {
+                    console.error('Invalid frame data format:', frameData);
+                    return;
+                }
+                
+                // Create an image from the base64 data
+                const img = new Image();
+                img.onload = function() {
+                    console.log('Image loaded successfully, size:', img.width, 'x', img.height);
+                    // Set canvas size to match video
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    
+                    // Clear and draw the frame
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    ctx.drawImage(img, 0, 0);
+                };
+                
+                img.onerror = function() {
+                    console.error('Failed to load image from frame data');
+                };
+                
+                // Set the base64 image data (should be in format "data:image/jpeg;base64,...")
+                img.src = frameData;
+                
+            } catch (error) {
+                console.error('Error displaying frame:', error);
+            }
+        }
+
+        function displayBinaryFrame(binaryData) {
+            try {
+                console.log('Displaying binary frame, size:', binaryData.length);
+                const canvas = document.getElementById('video-canvas');
+                const ctx = canvas.getContext('2d');
+                
+                // Create blob from binary data
+                const blob = new Blob([binaryData], { type: 'image/jpeg' });
+                const url = URL.createObjectURL(blob);
+                
+                const img = new Image();
+                img.onload = function() {
+                    console.log('Binary image loaded successfully, size:', img.width, 'x', img.height);
+                    // Set canvas size to match video
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    
+                    // Clear and draw the frame
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    ctx.drawImage(img, 0, 0);
+                    
+                    // Clean up object URL
+                    URL.revokeObjectURL(url);
+                };
+                
+                img.onerror = function() {
+                    console.error('Failed to load binary image data');
+                    URL.revokeObjectURL(url);
+                };
+                
+                img.src = url;
+                
+            } catch (error) {
+                console.error('Error displaying binary frame:', error);
+            }
+        }
+
+        function handleDetection(detection) {
+            detectionCount++;
+            document.getElementById('detection-count').textContent = detectionCount;
+            
+            // Add to recent detections
+            const recentDetections = document.getElementById('recent-detections');
+            const detectionElement = document.createElement('div');
+            detectionElement.className = 'text-sm p-2 bg-gray-50 rounded';
+            detectionElement.innerHTML = `
+                <div class="font-medium">${detection.class_name}</div>
+                <div class="text-gray-600">${(detection.confidence * 100).toFixed(1)}% confidence</div>
+                <div class="text-xs text-gray-500">${new Date().toLocaleTimeString()}</div>
+            `;
+            
+            if (recentDetections.children.length > 10) {
+                recentDetections.removeChild(recentDetections.lastChild);
+            }
+            
+            recentDetections.insertBefore(detectionElement, recentDetections.firstChild);
+        }
+
+        function updateStats(stats) {
+            document.getElementById('fps').textContent = stats.fps || '0';
+        }
+
+        function showAlert(alertData) {
+            // Simple alert for demo
+            if (alertData.message) {
+                const alertElement = document.createElement('div');
+                alertElement.className = 'fixed top-4 right-4 bg-red-600 text-white px-4 py-2 rounded shadow-lg z-50';
+                alertElement.textContent = alertData.message;
+                document.body.appendChild(alertElement);
+                
+                setTimeout(() => {
+                    document.body.removeChild(alertElement);
+                }, 5000);
+            }
+        }
+
+        // Configuration functions
+        async function loadConfiguration() {
+            try {
+                const response = await axios.get('http://localhost:8000/api/config/');
+                currentConfig = response.data;
+                renderConfiguration();
+            } catch (error) {
+                console.error('Failed to load configuration:', error);
+            }
+        }
+
+        function renderConfiguration() {
+            const confidenceControls = document.getElementById('confidence-controls');
+            confidenceControls.innerHTML = '';
+            
+            Object.entries(currentConfig.confidence_thresholds).forEach(([className, threshold]) => {
+                const controlElement = document.createElement('div');
+                controlElement.className = 'flex items-center justify-between';
+                controlElement.innerHTML = `
+                    <label class="text-sm font-medium">${className.charAt(0).toUpperCase() + className.slice(1)}</label>
+                    <input type="range" min="0" max="1" step="0.1" value="${threshold}" 
+                           class="ml-4" onchange="updateThreshold('${className}', this.value)">
+                    <span class="ml-2 text-sm text-gray-600">${(threshold * 100).toFixed(0)}%</span>
+                `;
+                confidenceControls.appendChild(controlElement);
+            });
+            
+            document.getElementById('alerts-enabled').checked = currentConfig.alerts_enabled;
+            document.getElementById('audio-alerts').checked = currentConfig.audio_alerts;
+        }
+
+        async function updateThreshold(className, value) {
+            try {
+                const newThresholds = { ...currentConfig.confidence_thresholds };
+                newThresholds[className] = parseFloat(value);
+                
+                await axios.put('http://localhost:8000/api/config/confidence-thresholds', {
+                    confidence_thresholds: newThresholds
+                });
+                
+                currentConfig.confidence_thresholds = newThresholds;
+                renderConfiguration();
+            } catch (error) {
+                console.error('Failed to update threshold:', error);
+            }
+        }
+
+        async function updateAlerts() {
+            try {
+                const alertsEnabled = document.getElementById('alerts-enabled').checked;
+                const audioAlerts = document.getElementById('audio-alerts').checked;
+                
+                if (alertsEnabled) {
+                    await axios.post('http://localhost:8000/api/config/alerts/enable');
+                } else {
+                    await axios.post('http://localhost:8000/api/config/alerts/disable');
+                }
+                
+                currentConfig.alerts_enabled = alertsEnabled;
+                currentConfig.audio_alerts = audioAlerts;
+            } catch (error) {
+                console.error('Failed to update alerts:', error);
+            }
+        }
+
+        // Training functions
+        async function loadModels() {
+            try {
+                const response = await axios.get('http://localhost:8000/api/training/models');
+                renderModels(response.data.models);
+            } catch (error) {
+                console.error('Failed to load models:', error);
+                document.getElementById('models-list').innerHTML = '<div class="text-sm text-red-500">Failed to load models</div>';
+            }
+        }
+
+        function renderModels(models) {
+            const modelsList = document.getElementById('models-list');
+            modelsList.innerHTML = '';
+            
+            models.forEach(model => {
+                const modelElement = document.createElement('div');
+                modelElement.className = 'flex items-center justify-between p-3 border rounded';
+                modelElement.innerHTML = `
+                    <div>
+                        <div class="font-medium">${model.name}</div>
+                        <div class="text-sm text-gray-600">Accuracy: ${(model.accuracy * 100).toFixed(1)}%</div>
+                    </div>
+                    <button onclick="activateModel(${model.id})" 
+                            class="px-3 py-1 text-sm ${model.is_active ? 'bg-green-600 text-white' : 'bg-gray-200 text-gray-700'} rounded hover:bg-opacity-80">
+                        ${model.is_active ? 'Active' : 'Activate'}
+                    </button>
+                `;
+                modelsList.appendChild(modelElement);
+            });
+        }
+
+        async function activateModel(modelId) {
+            try {
+                await axios.post(`http://localhost:8000/api/training/models/${modelId}/activate`);
+                loadModels(); // Refresh models list
+            } catch (error) {
+                console.error('Failed to activate model:', error);
+            }
+        }
+
+        function handleFileUpload(event) {
+            const files = event.target.files;
+            if (files.length > 0) {
+                alert(`Selected ${files.length} files for training. Training functionality is not implemented in this demo.`);
+            }
+        }
+    </script>
+</body>
+</html>

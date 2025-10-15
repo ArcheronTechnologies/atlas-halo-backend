@@ -1,0 +1,1 @@
+id,model_name,model_version,model_type,model_path,accuracy_halo,accuracy_frontline,accuracy_sait,overall_accuracy,training_data_sources,training_samples_count,training_duration_seconds,hyperparameters,active,deployed_at,deprecated_at,trained_at,created_at

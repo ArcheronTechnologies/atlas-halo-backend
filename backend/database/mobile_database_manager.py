@@ -4,7 +4,6 @@ Handles all database operations for the mobile_app schema
 """
 
 import asyncio
-import asyncpg
 import logging
 from typing import Optional, List, Dict, Any, Tuple
 from datetime import datetime, timezone

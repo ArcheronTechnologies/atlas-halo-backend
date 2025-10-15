@@ -6,8 +6,16 @@ Provides real-time system metrics and status via REST API
 from fastapi import APIRouter, HTTPException
 from datetime import datetime, timedelta
 from typing import Dict, List, Optional
-import psutil
 import asyncio
+
+# Optional psutil for system metrics
+try:
+    import psutil
+    PSUTIL_AVAILABLE = True
+except ImportError:
+    PSUTIL_AVAILABLE = False
+    import logging
+    logging.warning("⚠️ psutil not available - system metrics disabled in admin dashboard")
 
 from ..database.postgis_database import get_database
 
@@ -37,27 +45,14 @@ async def get_system_status():
     # Redis status (for WebSocket)
     redis_healthy = True  # Would check actual Redis connection
 
-    # System resources
-    cpu_percent = psutil.cpu_percent(interval=0.1)
-    memory = psutil.virtual_memory()
-    disk = psutil.disk_usage('/')
+    # System resources (if psutil available)
+    resources = {}
+    if PSUTIL_AVAILABLE:
+        cpu_percent = psutil.cpu_percent(interval=0.1)
+        memory = psutil.virtual_memory()
+        disk = psutil.disk_usage('/')
 
-    return {
-        "timestamp": datetime.now().isoformat(),
-        "overall_status": "healthy" if (database_healthy and redis_healthy) else "degraded",
-        "components": {
-            "database": {
-                "healthy": database_healthy,
-                "latency_ms": database_latency_ms
-            },
-            "redis": {
-                "healthy": redis_healthy
-            },
-            "websocket": {
-                "healthy": redis_healthy  # WebSocket depends on Redis
-            }
-        },
-        "resources": {
+        resources = {
             "cpu": {
                 "usage_percent": cpu_percent,
                 "status": "healthy" if cpu_percent < 80 else "warning"
@@ -75,6 +70,23 @@ async def get_system_status():
                 "status": "healthy" if disk.percent < 80 else "warning"
             }
         }
+
+    return {
+        "timestamp": datetime.now().isoformat(),
+        "overall_status": "healthy" if (database_healthy and redis_healthy) else "degraded",
+        "components": {
+            "database": {
+                "healthy": database_healthy,
+                "latency_ms": database_latency_ms
+            },
+            "redis": {
+                "healthy": redis_healthy
+            },
+            "websocket": {
+                "healthy": redis_healthy  # WebSocket depends on Redis
+            }
+        },
+        "resources": resources
     }
 
 
@@ -366,6 +378,12 @@ async def get_performance_summary():
     """
     Get system performance summary
     """
+    if not PSUTIL_AVAILABLE:
+        return {
+            "timestamp": datetime.now().isoformat(),
+            "error": "psutil not available - system metrics disabled"
+        }
+
     # This would aggregate metrics from Prometheus
     # For now, return basic system metrics
 

@@ -1,0 +1,22 @@
+{
+  "threat_type": "COMMUNICATIONS",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "urban",
+  "generated_at": "2025-09-22T11:11:36.006509",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.19937077754777857,
+  "filename": "COMMUNICATIONS_urban_0116.wav",
+  "file_path": "complete_27_class_military_collection/COMMUNICATIONS_urban_0116.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.19937077164649963,
+    "dynamic_range_db": 57.45195540275081,
+    "snr_db": 3.712095630972568,
+    "thd_percent": 287.826325289852
+  },
+  "sample_index": 116,
+  "threat_category": "PERSONNEL_ACTIVITY",
+  "priority_level": "MEDIUM"
+}

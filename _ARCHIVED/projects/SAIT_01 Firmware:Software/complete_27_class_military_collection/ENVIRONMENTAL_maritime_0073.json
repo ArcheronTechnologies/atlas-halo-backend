@@ -1,0 +1,22 @@
+{
+  "threat_type": "ENVIRONMENTAL",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "maritime",
+  "generated_at": "2025-09-22T11:11:03.960225",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.2152665270959571,
+  "filename": "ENVIRONMENTAL_maritime_0073.wav",
+  "file_path": "complete_27_class_military_collection/ENVIRONMENTAL_maritime_0073.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.21526652574539185,
+    "dynamic_range_db": 52.284013456239585,
+    "snr_db": 1.5079095899214912,
+    "thd_percent": 236.3594259095486
+  },
+  "sample_index": 73,
+  "threat_category": "NON_THREAT",
+  "priority_level": "LOW"
+}

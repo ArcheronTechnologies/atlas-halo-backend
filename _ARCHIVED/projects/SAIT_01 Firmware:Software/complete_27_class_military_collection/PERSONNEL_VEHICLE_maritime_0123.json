@@ -1,0 +1,22 @@
+{
+  "threat_type": "PERSONNEL_VEHICLE",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "maritime",
+  "generated_at": "2025-09-22T11:11:33.337026",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.36948649931418415,
+  "filename": "PERSONNEL_VEHICLE_maritime_0123.wav",
+  "file_path": "complete_27_class_military_collection/PERSONNEL_VEHICLE_maritime_0123.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.3694864809513092,
+    "dynamic_range_db": 63.28257345342031,
+    "snr_db": 17.666519762681958,
+    "thd_percent": 76.44613904367564
+  },
+  "sample_index": 123,
+  "threat_category": "PERSONNEL_ACTIVITY",
+  "priority_level": "MEDIUM"
+}

@@ -1,0 +1,21 @@
+{
+  "architecture": "unified_ensemble_model",
+  "components": [
+    "Shared physics-aware feature extraction",
+    "Lightweight prediction branch",
+    "Transfer learning prediction branch",
+    "Confidence-weighted ensemble fusion"
+  ],
+  "training_techniques": [
+    "Focal loss for hard example mining",
+    "Curriculum learning progression",
+    "Cosine annealing LR schedule",
+    "Branch consistency regularization",
+    "Confidence calibration loss"
+  ],
+  "final_accuracy": 0.041163556531284305,
+  "parameters": 42097,
+  "model_size_kb": 41.1103515625,
+  "inference_time_ms": 2.772092819213867,
+  "hardware_compatible": true
+}

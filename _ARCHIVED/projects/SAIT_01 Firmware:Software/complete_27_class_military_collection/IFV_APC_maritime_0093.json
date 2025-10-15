@@ -1,0 +1,22 @@
+{
+  "threat_type": "IFV_APC",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "maritime",
+  "generated_at": "2025-09-22T11:11:19.202293",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.23118014941256398,
+  "filename": "IFV_APC_maritime_0093.wav",
+  "file_path": "complete_27_class_military_collection/IFV_APC_maritime_0093.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.2311801314353943,
+    "dynamic_range_db": 51.78139386861698,
+    "snr_db": 0.09978599963074973,
+    "thd_percent": 12629.150253298612
+  },
+  "sample_index": 93,
+  "threat_category": "DIRECT_COMBAT",
+  "priority_level": "HIGH"
+}

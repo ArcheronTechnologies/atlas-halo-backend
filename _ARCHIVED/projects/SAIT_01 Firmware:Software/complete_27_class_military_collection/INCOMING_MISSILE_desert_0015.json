@@ -1,0 +1,22 @@
+{
+  "threat_type": "INCOMING_MISSILE",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "desert",
+  "generated_at": "2025-09-22T11:11:09.625433",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.27169243496389134,
+  "filename": "INCOMING_MISSILE_desert_0015.wav",
+  "file_path": "complete_27_class_military_collection/INCOMING_MISSILE_desert_0015.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.2716924250125885,
+    "dynamic_range_db": 52.41549675143623,
+    "snr_db": 3.189630968763757,
+    "thd_percent": 36.97915794623234
+  },
+  "sample_index": 15,
+  "threat_category": "IMMEDIATE_LETHAL",
+  "priority_level": "CRITICAL"
+}

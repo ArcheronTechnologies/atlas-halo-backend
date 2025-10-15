@@ -1,0 +1,22 @@
+{
+  "threat_type": "ATTACK_DRONE",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "maritime",
+  "generated_at": "2025-09-22T11:11:23.097058",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.3467110300311996,
+  "filename": "ATTACK_DRONE_maritime_0033.wav",
+  "file_path": "complete_27_class_military_collection/ATTACK_DRONE_maritime_0033.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.34671103954315186,
+    "dynamic_range_db": 50.47114719069682,
+    "snr_db": 3.3286942288712345,
+    "thd_percent": 64.24905320497274
+  },
+  "sample_index": 33,
+  "threat_category": "DIRECT_COMBAT",
+  "priority_level": "HIGH"
+}

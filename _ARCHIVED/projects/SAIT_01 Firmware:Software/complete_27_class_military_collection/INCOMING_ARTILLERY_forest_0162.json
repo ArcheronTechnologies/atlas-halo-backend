@@ -1,0 +1,22 @@
+{
+  "threat_type": "INCOMING_ARTILLERY",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "forest",
+  "generated_at": "2025-09-22T11:11:09.210892",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.19733141815695207,
+  "filename": "INCOMING_ARTILLERY_forest_0162.wav",
+  "file_path": "complete_27_class_military_collection/INCOMING_ARTILLERY_forest_0162.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.19733141362667084,
+    "dynamic_range_db": 48.905054101889306,
+    "snr_db": 0.780430754043624,
+    "thd_percent": 99.47843846668412
+  },
+  "sample_index": 162,
+  "threat_category": "IMMEDIATE_LETHAL",
+  "priority_level": "CRITICAL"
+}

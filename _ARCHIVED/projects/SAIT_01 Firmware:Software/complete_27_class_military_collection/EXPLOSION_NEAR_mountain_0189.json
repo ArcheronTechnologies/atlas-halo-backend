@@ -1,0 +1,22 @@
+{
+  "threat_type": "EXPLOSION_NEAR",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "mountain",
+  "generated_at": "2025-09-22T11:11:15.378198",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.08876502062236571,
+  "filename": "EXPLOSION_NEAR_mountain_0189.wav",
+  "file_path": "complete_27_class_military_collection/EXPLOSION_NEAR_mountain_0189.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.08876501768827438,
+    "dynamic_range_db": 77.20646745497567,
+    "snr_db": 20.50659159610502,
+    "thd_percent": 2.9701780489210177
+  },
+  "sample_index": 189,
+  "threat_category": "IMMEDIATE_LETHAL",
+  "priority_level": "CRITICAL"
+}

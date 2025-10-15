@@ -1,0 +1,22 @@
+{
+  "threat_type": "BACKGROUND_QUIET",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "desert",
+  "generated_at": "2025-09-22T11:11:01.966773",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.22385450006524535,
+  "filename": "BACKGROUND_QUIET_desert_0015.wav",
+  "file_path": "complete_27_class_military_collection/BACKGROUND_QUIET_desert_0015.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.22385449707508087,
+    "dynamic_range_db": 53.634033971126584,
+    "snr_db": 0.37827368574499376,
+    "thd_percent": 177.26605528542785
+  },
+  "sample_index": 15,
+  "threat_category": "NON_THREAT",
+  "priority_level": "LOW"
+}

@@ -1,0 +1,61 @@
+# SAIT_01 Development Requirements
+# Complete development environment dependencies
+
+# Zephyr and nRF Connect SDK tools
+west>=1.0.0
+pyelftools>=0.29
+pykwalify>=1.8.0
+canopen>=2.0.0
+packaging>=20.3
+progress>=1.5
+psutil>=5.6.6
+anytree>=2.8.0
+intelhex>=2.3.0
+cryptography>=3.4.8
+click>=8.0.0
+colorama>=0.4.4
+
+# Protocol buffer support
+protobuf>=3.20.0
+grpcio>=1.46.0
+grpcio-tools>=1.46.0
+
+# Testing framework
+pytest>=7.0.0
+pytest-mock>=3.6.0
+pytest-asyncio>=0.20.0
+pytest-cov>=4.0.0
+
+# Code quality
+black>=22.0.0
+pylint>=2.15.0
+mypy>=0.991
+flake8>=5.0.0
+pre-commit>=2.20.0
+
+# Documentation
+sphinx>=5.0.0
+breathe>=4.34.0
+sphinx-rtd-theme>=1.0.0
+
+# Hardware debugging and analysis
+pyocd>=0.34.0
+pynrfjprog>=10.17.0
+
+# Serial communication
+pyserial>=3.5
+pyserial-asyncio>=0.6
+
+# Networking and protocols
+aiohttp>=3.8.0
+aiofiles>=22.0.0
+websockets>=10.4
+
+# Data analysis and visualization (for testing)
+numpy>=1.21.0
+matplotlib>=3.5.0
+scipy>=1.9.0
+
+# Build system support
+cmake>=3.20.0
+ninja>=1.10.0

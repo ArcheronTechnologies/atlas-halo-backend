@@ -1,0 +1,1215 @@
+{
+  "temperature": {
+    "extreme_cold": {
+      "tests_run": 10,
+      "successful_inferences": 10,
+      "avg_accuracy": 0.20646659582853316,
+      "avg_inference_time": 0.03887872695922852,
+      "max_degradation": 0.6403608401988166,
+      "temperature_effects": [
+        {
+          "temperature": -32.955580309682546,
+          "stress_factor": 1.5795558030968255,
+          "confidence": 0.20618274807929993,
+          "inference_time": 0.35921311378479004
+        },
+        {
+          "temperature": -37.6492368729578,
+          "stress_factor": 1.626492368729578,
+          "confidence": 0.20687992870807648,
+          "inference_time": 0.0043621063232421875
+        },
+        {
+          "temperature": -38.57342842447809,
+          "stress_factor": 1.6357342842447808,
+          "confidence": 0.20692142844200134,
+          "inference_time": 0.0037360191345214844
+        },
+        {
+          "temperature": -26.375321251516908,
+          "stress_factor": 1.513753212515169,
+          "confidence": 0.20456518232822418,
+          "inference_time": 0.0032091140747070312
+        },
+        {
+          "temperature": -39.03608401988164,
+          "stress_factor": 1.6403608401988166,
+          "confidence": 0.2073700875043869,
+          "inference_time": 0.002741098403930664
+        },
+        {
+          "temperature": -30.49043628983875,
+          "stress_factor": 1.5549043628983874,
+          "confidence": 0.2062036544084549,
+          "inference_time": 0.002833843231201172
+        },
+        {
+          "temperature": -25.315964369026055,
+          "stress_factor": 1.5031596436902606,
+          "confidence": 0.20680873095989227,
+          "inference_time": 0.0029201507568359375
+        },
+        {
+          "temperature": -36.91327797795785,
+          "stress_factor": 1.6191327797795785,
+          "confidence": 0.2064087837934494,
+          "inference_time": 0.0035479068756103516
+        },
+        {
+          "temperature": -22.963471295010244,
+          "stress_factor": 1.4796347129501024,
+          "confidence": 0.20632903277873993,
+          "inference_time": 0.003482818603515625
+        },
+        {
+          "temperature": -34.74025592944144,
+          "stress_factor": 1.5974025592944145,
+          "confidence": 0.2069963812828064,
+          "inference_time": 0.002741098403930664
+        }
+      ],
+      "pass": "False"
+    },
+    "cold": {
+      "tests_run": 10,
+      "successful_inferences": 10,
+      "avg_accuracy": 0.20531386137008667,
+      "avg_inference_time": 0.0029793977737426758,
+      "max_degradation": 0.43046146055112255,
+      "temperature_effects": [
+        {
+          "temperature": -12.387373859832728,
+          "stress_factor": 1.3738737385983273,
+          "confidence": 0.2057715654373169,
+          "inference_time": 0.0029840469360351562
+        },
+        {
+          "temperature": -18.046146055112256,
+          "stress_factor": 1.4304614605511226,
+          "confidence": 0.20584197342395782,
+          "inference_time": 0.0032339096069335938
+        },
+        {
+          "temperature": -7.819933801441055,
+          "stress_factor": 1.3281993380144106,
+          "confidence": 0.20451848208904266,
+          "inference_time": 0.003130197525024414
+        },
+        {
+          "temperature": -12.441200332258104,
+          "stress_factor": 1.374412003322581,
+          "confidence": 0.20628778636455536,
+          "inference_time": 0.002759218215942383
+        },
+        {
+          "temperature": -15.882698726364165,
+          "stress_factor": 1.4088269872636416,
+          "confidence": 0.2042321413755417,
+          "inference_time": 0.003871917724609375
+        },
+        {
+          "temperature": -10.67765501079429,
+          "stress_factor": 1.356776550107943,
+          "confidence": 0.20669440925121307,
+          "inference_time": 0.0025849342346191406
+        },
+        {
+          "temperature": -10.395051304044532,
+          "stress_factor": 1.3539505130404452,
+          "confidence": 0.20398391783237457,
+          "inference_time": 0.0028040409088134766
+        },
+        {
+          "temperature": -14.013592759620984,
+          "stress_factor": 1.39013592759621,
+          "confidence": 0.2058773934841156,
+          "inference_time": 0.0027608871459960938
+        },
+        {
+          "temperature": -8.156335925419512,
+          "stress_factor": 1.3315633592541951,
+          "confidence": 0.20480979979038239,
+          "inference_time": 0.0029010772705078125
+        },
+        {
+          "temperature": -6.934671984644851,
+          "stress_factor": 1.3193467198464486,
+          "confidence": 0.20512114465236664,
+          "inference_time": 0.0027637481689453125
+        }
+      ],
+      "pass": "False"
+    },
+    "moderate": {
+      "tests_run": 10,
+      "successful_inferences": 10,
+      "avg_accuracy": 0.20481190830469131,
+      "avg_inference_time": 0.002739262580871582,
+      "max_degradation": 0.23223839722963247,
+      "temperature_effects": [
+        {
+          "temperature": 9.209709480455277,
+          "stress_factor": 1.1579029051954473,
+          "confidence": 0.20438142120838165,
+          "inference_time": 0.0030226707458496094
+        },
+        {
+          "temperature": 23.961644817541128,
+          "stress_factor": 1.0103835518245887,
+          "confidence": 0.20468734204769135,
+          "inference_time": 0.0026569366455078125
+        },
+        {
+          "temperature": 14.886670219357006,
+          "stress_factor": 1.1011332978064299,
+          "confidence": 0.20439639687538147,
+          "inference_time": 0.003242969512939453
+        },
+        {
+          "temperature": 12.322412457159498,
+          "stress_factor": 1.126775875428405,
+          "confidence": 0.2048349678516388,
+          "inference_time": 0.002760171890258789
+        },
+        {
+          "temperature": 5.858989802321099,
+          "stress_factor": 1.191410101976789,
+          "confidence": 0.2047235071659088,
+          "inference_time": 0.0026350021362304688
+        },
+        {
+          "temperature": 15.76096623457222,
+          "stress_factor": 1.0923903376542778,
+          "confidence": 0.2046058177947998,
+          "inference_time": 0.0026040077209472656
+        },
+        {
+          "temperature": 1.7761602770367562,
+          "stress_factor": 1.2322383972296325,
+          "confidence": 0.205015629529953,
+          "inference_time": 0.002537965774536133
+        },
+        {
+          "temperature": 5.23635108010847,
+          "stress_factor": 1.1976364891989153,
+          "confidence": 0.20510059595108032,
+          "inference_time": 0.002557992935180664
+        },
+        {
+          "temperature": 5.9459069012225365,
+          "stress_factor": 1.1905409309877746,
+          "confidence": 0.20499670505523682,
+          "inference_time": 0.0027120113372802734
+        },
+        {
+          "temperature": 14.222608316547175,
+          "stress_factor": 1.1077739168345282,
+          "confidence": 0.20537669956684113,
+          "inference_time": 0.0026628971099853516
+        }
+      ],
+      "pass": "False"
+    },
+    "hot": {
+      "tests_run": 10,
+      "successful_inferences": 10,
+      "avg_accuracy": 0.20521241724491118,
+      "avg_inference_time": 0.0030619621276855467,
+      "max_degradation": 0.24867456200566718,
+      "temperature_effects": [
+        {
+          "temperature": 48.46611169848147,
+          "stress_factor": 1.2346611169848147,
+          "confidence": 0.2051801085472107,
+          "inference_time": 0.0035390853881835938
+        },
+        {
+          "temperature": 49.86745620056671,
+          "stress_factor": 1.2486745620056672,
+          "confidence": 0.206153005361557,
+          "inference_time": 0.0030040740966796875
+        },
+        {
+          "temperature": 37.86393963065217,
+          "stress_factor": 1.1286393963065218,
+          "confidence": 0.20537923276424408,
+          "inference_time": 0.0026030540466308594
+        },
+        {
+          "temperature": 40.33739010416133,
+          "stress_factor": 1.1533739010416133,
+          "confidence": 0.2055547684431076,
+          "inference_time": 0.002955913543701172
+        },
+        {
+          "temperature": 42.982892872931956,
+          "stress_factor": 1.1798289287293195,
+          "confidence": 0.20497041940689087,
+          "inference_time": 0.0027768611907958984
+        },
+        {
+          "temperature": 43.42315249768965,
+          "stress_factor": 1.1842315249768964,
+          "confidence": 0.2050023227930069,
+          "inference_time": 0.003381013870239258
+        },
+        {
+          "temperature": 36.38941026382423,
+          "stress_factor": 1.1138941026382423,
+          "confidence": 0.20444011688232422,
+          "inference_time": 0.0032989978790283203
+        },
+        {
+          "temperature": 46.57149332983593,
+          "stress_factor": 1.2157149332983592,
+          "confidence": 0.20593032240867615,
+          "inference_time": 0.0026378631591796875
+        },
+        {
+          "temperature": 25.442779069672188,
+          "stress_factor": 1.0044277906967218,
+          "confidence": 0.20430611073970795,
+          "inference_time": 0.003181934356689453
+        },
+        {
+          "temperature": 46.65195977078562,
+          "stress_factor": 1.2165195977078562,
+          "confidence": 0.20520776510238647,
+          "inference_time": 0.003240823745727539
+        }
+      ],
+      "pass": "False"
+    },
+    "extreme_hot": {
+      "tests_run": 10,
+      "successful_inferences": 10,
+      "avg_accuracy": 0.20540031492710115,
+      "avg_inference_time": 0.003194761276245117,
+      "max_degradation": 0.5505153988075904,
+      "temperature_effects": [
+        {
+          "temperature": 54.14290531853484,
+          "stress_factor": 1.2914290531853483,
+          "confidence": 0.20457392930984497,
+          "inference_time": 0.0030231475830078125
+        },
+        {
+          "temperature": 59.23393821937141,
+          "stress_factor": 1.3423393821937142,
+          "confidence": 0.20409682393074036,
+          "inference_time": 0.0029120445251464844
+        },
+        {
+          "temperature": 55.029964672250294,
+          "stress_factor": 1.300299646722503,
+          "confidence": 0.20555159449577332,
+          "inference_time": 0.0028972625732421875
+        },
+        {
+          "temperature": 76.06823943517401,
+          "stress_factor": 1.5106823943517402,
+          "confidence": 0.2066890299320221,
+          "inference_time": 0.0026922225952148438
+        },
+        {
+          "temperature": 53.25485301029252,
+          "stress_factor": 1.2825485301029251,
+          "confidence": 0.20371048152446747,
+          "inference_time": 0.0060002803802490234
+        },
+        {
+          "temperature": 80.05153988075904,
+          "stress_factor": 1.5505153988075904,
+          "confidence": 0.20602886378765106,
+          "inference_time": 0.002949953079223633
+        },
+        {
+          "temperature": 66.05315594147336,
+          "stress_factor": 1.4105315594147336,
+          "confidence": 0.20553787052631378,
+          "inference_time": 0.0031270980834960938
+        },
+        {
+          "temperature": 52.388185499314005,
+          "stress_factor": 1.27388185499314,
+          "confidence": 0.2044152468442917,
+          "inference_time": 0.0031490325927734375
+        },
+        {
+          "temperature": 79.73480357329952,
+          "stress_factor": 1.5473480357329952,
+          "confidence": 0.206417053937912,
+          "inference_time": 0.0026307106018066406
+        },
+        {
+          "temperature": 76.06523467275602,
+          "stress_factor": 1.5106523467275603,
+          "confidence": 0.20698225498199463,
+          "inference_time": 0.0025658607482910156
+        }
+      ],
+      "pass": "False"
+    }
+  },
+  "emi": {
+    "radio_transmitter": {
+      "tests_run": 15,
+      "successful_inferences": 15,
+      "avg_accuracy": 0.21741062700748442,
+      "avg_emi_stress": 0.09356033520676857,
+      "max_emi_stress": 0.12553522077047827,
+      "interference_effects": [
+        {
+          "emi_source": "radio_transmitter",
+          "emi_stress": 0.12368553350008211,
+          "confidence": 0.2071882039308548,
+          "inference_time": 0.0032739639282226562
+        },
+        {
+          "emi_source": "radio_transmitter",
+          "emi_stress": 0.030867836445659127,
+          "confidence": 0.23811644315719604,
+          "inference_time": 0.003387928009033203
+        },
+        {
+          "emi_source": "radio_transmitter",
+          "emi_stress": 0.12553522077047827,
+          "confidence": 0.2064795345067978,
+          "inference_time": 0.0032777786254882812
+        },
+        {
+          "emi_source": "radio_transmitter",
+          "emi_stress": 0.03086265155988267,
+          "confidence": 0.23739804327487946,
+          "inference_time": 0.002598285675048828
+        },
+        {
+          "emi_source": "radio_transmitter",
+          "emi_stress": 0.12515841110758266,
+          "confidence": 0.20715267956256866,
+          "inference_time": 0.0024518966674804688
+        },
+        {
+          "emi_source": "radio_transmitter",
+          "emi_stress": 0.12465885837100962,
+          "confidence": 0.207547128200531,
+          "inference_time": 0.002889871597290039
+        },
+        {
+          "emi_source": "radio_transmitter",
+          "emi_stress": 0.12484326238199256,
+          "confidence": 0.20776589214801788,
+          "inference_time": 0.0031261444091796875
+        },
+        {
+          "emi_source": "radio_transmitter",
+          "emi_stress": 0.12511421669892672,
+          "confidence": 0.20799793303012848,
+          "inference_time": 0.002737760543823242
+        },
+        {
+          "emi_source": "radio_transmitter",
+          "emi_stress": 0.1249086858573074,
+          "confidence": 0.20522885024547577,
+          "inference_time": 0.0026018619537353516
+        },
+        {
+          "emi_source": "radio_transmitter",
+          "emi_stress": 0.12469182079037913,
+          "confidence": 0.20766179263591766,
+          "inference_time": 0.003246784210205078
+        },
+        {
+          "emi_source": "radio_transmitter",
+          "emi_stress": 0.030993338106167584,
+          "confidence": 0.23716911673545837,
+          "inference_time": 0.003072023391723633
+        },
+        {
+          "emi_source": "radio_transmitter",
+          "emi_stress": 0.031272732263358936,
+          "confidence": 0.23771409690380096,
+          "inference_time": 0.0027370452880859375
+        },
+        {
+          "emi_source": "radio_transmitter",
+          "emi_stress": 0.030998855728767347,
+          "confidence": 0.23919060826301575,
+          "inference_time": 0.0029349327087402344
+        },
+        {
+          "emi_source": "radio_transmitter",
+          "emi_stress": 0.1244525514410631,
+          "confidence": 0.20722010731697083,
+          "inference_time": 0.003785848617553711
+        },
+        {
+          "emi_source": "radio_transmitter",
+          "emi_stress": 0.12536105307887144,
+          "confidence": 0.20732897520065308,
+          "inference_time": 0.0028450489044189453
+        }
+      ],
+      "pass": true
+    },
+    "radar_pulse": {
+      "tests_run": 15,
+      "successful_inferences": 15,
+      "avg_accuracy": 0.2261442353328069,
+      "avg_emi_stress": 0.33399987699198236,
+      "max_emi_stress": 0.8093877618297882,
+      "interference_effects": [
+        {
+          "emi_source": "radar_pulse",
+          "emi_stress": 0.7269599273354368,
+          "confidence": 0.2175210565328598,
+          "inference_time": 0.003580331802368164
+        },
+        {
+          "emi_source": "radar_pulse",
+          "emi_stress": 0.4056889841336572,
+          "confidence": 0.21248586475849152,
+          "inference_time": 0.0033500194549560547
+        },
+        {
+          "emi_source": "radar_pulse",
+          "emi_stress": 0.10710175746633863,
+          "confidence": 0.2387068122625351,
+          "inference_time": 0.00345611572265625
+        },
+        {
+          "emi_source": "radar_pulse",
+          "emi_stress": 0.18377977871967477,
+          "confidence": 0.2100580632686615,
+          "inference_time": 0.003223896026611328
+        },
+        {
+          "emi_source": "radar_pulse",
+          "emi_stress": 0.11639303348181626,
+          "confidence": 0.24002987146377563,
+          "inference_time": 0.003231048583984375
+        },
+        {
+          "emi_source": "radar_pulse",
+          "emi_stress": 0.7904800158719825,
+          "confidence": 0.21774150431156158,
+          "inference_time": 0.0034799575805664062
+        },
+        {
+          "emi_source": "radar_pulse",
+          "emi_stress": 0.20933407403304685,
+          "confidence": 0.2412063330411911,
+          "inference_time": 0.0034720897674560547
+        },
+        {
+          "emi_source": "radar_pulse",
+          "emi_stress": 0.09612562603467241,
+          "confidence": 0.23971527814865112,
+          "inference_time": 0.0034477710723876953
+        },
+        {
+          "emi_source": "radar_pulse",
+          "emi_stress": 0.6529488537812457,
+          "confidence": 0.2161002904176712,
+          "inference_time": 0.003310680389404297
+        },
+        {
+          "emi_source": "radar_pulse",
+          "emi_stress": 0.19716400529810574,
+          "confidence": 0.24052678048610687,
+          "inference_time": 0.0034220218658447266
+        },
+        {
+          "emi_source": "radar_pulse",
+          "emi_stress": 0.8093877618297882,
+          "confidence": 0.21797189116477966,
+          "inference_time": 0.003469228744506836
+        },
+        {
+          "emi_source": "radar_pulse",
+          "emi_stress": 0.1217496374576169,
+          "confidence": 0.20743483304977417,
+          "inference_time": 0.002791166305541992
+        },
+        {
+          "emi_source": "radar_pulse",
+          "emi_stress": 0.17788317702789644,
+          "confidence": 0.20885451138019562,
+          "inference_time": 0.0029611587524414062
+        },
+        {
+          "emi_source": "radar_pulse",
+          "emi_stress": 0.18614829134481203,
+          "confidence": 0.24163994193077087,
+          "inference_time": 0.0038022994995117188
+        },
+        {
+          "emi_source": "radar_pulse",
+          "emi_stress": 0.22885323106364377,
+          "confidence": 0.24217049777507782,
+          "inference_time": 0.003404855728149414
+        }
+      ],
+      "pass": true
+    },
+    "electrical_motor": {
+      "tests_run": 15,
+      "successful_inferences": 15,
+      "avg_accuracy": 0.21979387899239858,
+      "avg_emi_stress": 0.0,
+      "max_emi_stress": 0.0,
+      "interference_effects": [
+        {
+          "emi_source": "electrical_motor",
+          "emi_stress": 0.0,
+          "confidence": 0.2044670283794403,
+          "inference_time": 0.0025429725646972656
+        },
+        {
+          "emi_source": "electrical_motor",
+          "emi_stress": 0.0,
+          "confidence": 0.20524317026138306,
+          "inference_time": 0.002382040023803711
+        },
+        {
+          "emi_source": "electrical_motor",
+          "emi_stress": 0.0,
+          "confidence": 0.23784373700618744,
+          "inference_time": 0.0029790401458740234
+        },
+        {
+          "emi_source": "electrical_motor",
+          "emi_stress": 0.0,
+          "confidence": 0.20504337549209595,
+          "inference_time": 0.00251007080078125
+        },
+        {
+          "emi_source": "electrical_motor",
+          "emi_stress": 0.0,
+          "confidence": 0.20548368990421295,
+          "inference_time": 0.0023946762084960938
+        },
+        {
+          "emi_source": "electrical_motor",
+          "emi_stress": 0.0,
+          "confidence": 0.23698735237121582,
+          "inference_time": 0.0026302337646484375
+        },
+        {
+          "emi_source": "electrical_motor",
+          "emi_stress": 0.0,
+          "confidence": 0.23725193738937378,
+          "inference_time": 0.002446889877319336
+        },
+        {
+          "emi_source": "electrical_motor",
+          "emi_stress": 0.0,
+          "confidence": 0.20463107526302338,
+          "inference_time": 0.002526998519897461
+        },
+        {
+          "emi_source": "electrical_motor",
+          "emi_stress": 0.0,
+          "confidence": 0.20475752651691437,
+          "inference_time": 0.0030138492584228516
+        },
+        {
+          "emi_source": "electrical_motor",
+          "emi_stress": 0.0,
+          "confidence": 0.20425185561180115,
+          "inference_time": 0.002540111541748047
+        },
+        {
+          "emi_source": "electrical_motor",
+          "emi_stress": 0.0,
+          "confidence": 0.23613932728767395,
+          "inference_time": 0.0024809837341308594
+        },
+        {
+          "emi_source": "electrical_motor",
+          "emi_stress": 0.0,
+          "confidence": 0.23742443323135376,
+          "inference_time": 0.002502918243408203
+        },
+        {
+          "emi_source": "electrical_motor",
+          "emi_stress": 0.0,
+          "confidence": 0.2040213644504547,
+          "inference_time": 0.0029878616333007812
+        },
+        {
+          "emi_source": "electrical_motor",
+          "emi_stress": 0.0,
+          "confidence": 0.2372618168592453,
+          "inference_time": 0.0024890899658203125
+        },
+        {
+          "emi_source": "electrical_motor",
+          "emi_stress": 0.0,
+          "confidence": 0.23610049486160278,
+          "inference_time": 0.002916097640991211
+        }
+      ],
+      "pass": true
+    },
+    "switching_power_supply": {
+      "tests_run": 15,
+      "successful_inferences": 15,
+      "avg_accuracy": 0.2136469135681788,
+      "avg_emi_stress": 0.016015275837312437,
+      "max_emi_stress": 0.020182484512638862,
+      "interference_effects": [
+        {
+          "emi_source": "switching_power_supply",
+          "emi_stress": 0.01986651794019184,
+          "confidence": 0.20482993125915527,
+          "inference_time": 0.0030481815338134766
+        },
+        {
+          "emi_source": "switching_power_supply",
+          "emi_stress": 0.019936085730641796,
+          "confidence": 0.20588457584381104,
+          "inference_time": 0.0026509761810302734
+        },
+        {
+          "emi_source": "switching_power_supply",
+          "emi_stress": 0.019996105375195812,
+          "confidence": 0.20471109449863434,
+          "inference_time": 0.002580881118774414
+        },
+        {
+          "emi_source": "switching_power_supply",
+          "emi_stress": 0.019977713058343845,
+          "confidence": 0.2046549767255783,
+          "inference_time": 0.002531290054321289
+        },
+        {
+          "emi_source": "switching_power_supply",
+          "emi_stress": 0.02003594781614759,
+          "confidence": 0.2045571357011795,
+          "inference_time": 0.002489805221557617
+        },
+        {
+          "emi_source": "switching_power_supply",
+          "emi_stress": 0.005000640032344875,
+          "confidence": 0.23755759000778198,
+          "inference_time": 0.0031652450561523438
+        },
+        {
+          "emi_source": "switching_power_supply",
+          "emi_stress": 0.01984407283588283,
+          "confidence": 0.20597028732299805,
+          "inference_time": 0.003087759017944336
+        },
+        {
+          "emi_source": "switching_power_supply",
+          "emi_stress": 0.0050472607060399015,
+          "confidence": 0.2374051958322525,
+          "inference_time": 0.003083944320678711
+        },
+        {
+          "emi_source": "switching_power_supply",
+          "emi_stress": 0.020098009472119174,
+          "confidence": 0.20452193915843964,
+          "inference_time": 0.003300905227661133
+        },
+        {
+          "emi_source": "switching_power_supply",
+          "emi_stress": 0.02003871004248158,
+          "confidence": 0.2059573382139206,
+          "inference_time": 0.002681732177734375
+        },
+        {
+          "emi_source": "switching_power_supply",
+          "emi_stress": 0.004921737258642437,
+          "confidence": 0.23730821907520294,
+          "inference_time": 0.003081798553466797
+        },
+        {
+          "emi_source": "switching_power_supply",
+          "emi_stress": 0.0050226745263855024,
+          "confidence": 0.23718863725662231,
+          "inference_time": 0.0033829212188720703
+        },
+        {
+          "emi_source": "switching_power_supply",
+          "emi_stress": 0.02008884973156373,
+          "confidence": 0.20485545694828033,
+          "inference_time": 0.0027730464935302734
+        },
+        {
+          "emi_source": "switching_power_supply",
+          "emi_stress": 0.020182484512638862,
+          "confidence": 0.20505832135677338,
+          "inference_time": 0.0032317638397216797
+        },
+        {
+          "emi_source": "switching_power_supply",
+          "emi_stress": 0.020172328521066766,
+          "confidence": 0.204243004322052,
+          "inference_time": 0.0029408931732177734
+        }
+      ],
+      "pass": true
+    },
+    "led_lighting": {
+      "tests_run": 15,
+      "successful_inferences": 15,
+      "avg_accuracy": 0.2196200797955195,
+      "avg_emi_stress": 0.0,
+      "max_emi_stress": 0.0,
+      "interference_effects": [
+        {
+          "emi_source": "led_lighting",
+          "emi_stress": 0.0,
+          "confidence": 0.2372850924730301,
+          "inference_time": 0.0031960010528564453
+        },
+        {
+          "emi_source": "led_lighting",
+          "emi_stress": 0.0,
+          "confidence": 0.23688137531280518,
+          "inference_time": 0.003072023391723633
+        },
+        {
+          "emi_source": "led_lighting",
+          "emi_stress": 0.0,
+          "confidence": 0.23695920407772064,
+          "inference_time": 0.003451108932495117
+        },
+        {
+          "emi_source": "led_lighting",
+          "emi_stress": 0.0,
+          "confidence": 0.2048959881067276,
+          "inference_time": 0.002557992935180664
+        },
+        {
+          "emi_source": "led_lighting",
+          "emi_stress": 0.0,
+          "confidence": 0.20420289039611816,
+          "inference_time": 0.002670764923095703
+        },
+        {
+          "emi_source": "led_lighting",
+          "emi_stress": 0.0,
+          "confidence": 0.20477649569511414,
+          "inference_time": 0.002496957778930664
+        },
+        {
+          "emi_source": "led_lighting",
+          "emi_stress": 0.0,
+          "confidence": 0.20463304221630096,
+          "inference_time": 0.002482175827026367
+        },
+        {
+          "emi_source": "led_lighting",
+          "emi_stress": 0.0,
+          "confidence": 0.20468975603580475,
+          "inference_time": 0.0024650096893310547
+        },
+        {
+          "emi_source": "led_lighting",
+          "emi_stress": 0.0,
+          "confidence": 0.20397229492664337,
+          "inference_time": 0.002868175506591797
+        },
+        {
+          "emi_source": "led_lighting",
+          "emi_stress": 0.0,
+          "confidence": 0.23662416636943817,
+          "inference_time": 0.002465963363647461
+        },
+        {
+          "emi_source": "led_lighting",
+          "emi_stress": 0.0,
+          "confidence": 0.23676353693008423,
+          "inference_time": 0.0032079219818115234
+        },
+        {
+          "emi_source": "led_lighting",
+          "emi_stress": 0.0,
+          "confidence": 0.23626886308193207,
+          "inference_time": 0.0034170150756835938
+        },
+        {
+          "emi_source": "led_lighting",
+          "emi_stress": 0.0,
+          "confidence": 0.23744428157806396,
+          "inference_time": 0.002604961395263672
+        },
+        {
+          "emi_source": "led_lighting",
+          "emi_stress": 0.0,
+          "confidence": 0.20409809052944183,
+          "inference_time": 0.002524852752685547
+        },
+        {
+          "emi_source": "led_lighting",
+          "emi_stress": 0.0,
+          "confidence": 0.2048061192035675,
+          "inference_time": 0.0024781227111816406
+        }
+      ],
+      "pass": true
+    },
+    "cellular_network": {
+      "tests_run": 15,
+      "successful_inferences": 15,
+      "avg_accuracy": 0.22254104216893514,
+      "avg_emi_stress": 0.02687541970655991,
+      "max_emi_stress": 0.045318447510260394,
+      "interference_effects": [
+        {
+          "emi_source": "cellular_network",
+          "emi_stress": 0.044865731461356674,
+          "confidence": 0.20624083280563354,
+          "inference_time": 0.002501249313354492
+        },
+        {
+          "emi_source": "cellular_network",
+          "emi_stress": 0.011143698128854582,
+          "confidence": 0.2376946061849594,
+          "inference_time": 0.0031290054321289062
+        },
+        {
+          "emi_source": "cellular_network",
+          "emi_stress": 0.04460815449094288,
+          "confidence": 0.2057228833436966,
+          "inference_time": 0.0036039352416992188
+        },
+        {
+          "emi_source": "cellular_network",
+          "emi_stress": 0.011310093200000091,
+          "confidence": 0.23816776275634766,
+          "inference_time": 0.0034301280975341797
+        },
+        {
+          "emi_source": "cellular_network",
+          "emi_stress": 0.011050152194061478,
+          "confidence": 0.2366904616355896,
+          "inference_time": 0.0031931400299072266
+        },
+        {
+          "emi_source": "cellular_network",
+          "emi_stress": 0.044633028804340454,
+          "confidence": 0.2054285705089569,
+          "inference_time": 0.0024268627166748047
+        },
+        {
+          "emi_source": "cellular_network",
+          "emi_stress": 0.0447571269229174,
+          "confidence": 0.20552405714988708,
+          "inference_time": 0.002527952194213867
+        },
+        {
+          "emi_source": "cellular_network",
+          "emi_stress": 0.011183518461470664,
+          "confidence": 0.2373851239681244,
+          "inference_time": 0.0028858184814453125
+        },
+        {
+          "emi_source": "cellular_network",
+          "emi_stress": 0.04505843958955427,
+          "confidence": 0.20599456131458282,
+          "inference_time": 0.002490997314453125
+        },
+        {
+          "emi_source": "cellular_network",
+          "emi_stress": 0.01141802902440272,
+          "confidence": 0.23637840151786804,
+          "inference_time": 0.0029277801513671875
+        },
+        {
+          "emi_source": "cellular_network",
+          "emi_stress": 0.04400394561357252,
+          "confidence": 0.2058650255203247,
+          "inference_time": 0.002781391143798828
+        },
+        {
+          "emi_source": "cellular_network",
+          "emi_stress": 0.011254559677822061,
+          "confidence": 0.237285315990448,
+          "inference_time": 0.0024361610412597656
+        },
+        {
+          "emi_source": "cellular_network",
+          "emi_stress": 0.045318447510260394,
+          "confidence": 0.20591388642787933,
+          "inference_time": 0.0026531219482421875
+        },
+        {
+          "emi_source": "cellular_network",
+          "emi_stress": 0.01128268197173992,
+          "confidence": 0.2367394119501114,
+          "inference_time": 0.0027937889099121094
+        },
+        {
+          "emi_source": "cellular_network",
+          "emi_stress": 0.011243688547102488,
+          "confidence": 0.23708473145961761,
+          "inference_time": 0.0027649402618408203
+        }
+      ],
+      "pass": true
+    }
+  },
+  "combined": {
+    "tests_run": 25,
+    "successful_inferences": 25,
+    "avg_accuracy": 0.21188176512718201,
+    "extreme_conditions_survived": 22,
+    "stress_combinations": [
+      {
+        "temperature": 61.02879277918457,
+        "humidity": 53.34519612315971,
+        "vibration": 2.0623791846004895,
+        "voltage_variation": -0.4684770990561731,
+        "emi_source": "cellular_network",
+        "combined_stress": 0.7564239478338566,
+        "confidence": 0.1812889128923416,
+        "extreme_conditions": true
+      },
+      {
+        "temperature": -19.722515040294603,
+        "humidity": 40.04826847564008,
+        "vibration": 6.207499426012017,
+        "voltage_variation": -11.95207700875527,
+        "emi_source": "cellular_network",
+        "combined_stress": 1.6785823475834345,
+        "confidence": 0.20879225432872772,
+        "extreme_conditions": true
+      },
+      {
+        "temperature": 19.714549374455217,
+        "humidity": 78.48110665376745,
+        "vibration": 5.2313272024216015,
+        "voltage_variation": -12.84560328146796,
+        "emi_source": "radar_pulse",
+        "combined_stress": 2.1874280368230252,
+        "confidence": 0.20671424269676208,
+        "extreme_conditions": true
+      },
+      {
+        "temperature": 68.06372878859123,
+        "humidity": 77.06245316354868,
+        "vibration": 6.279976860478485,
+        "voltage_variation": -3.087608912406324,
+        "emi_source": "switching_power_supply",
+        "combined_stress": 1.7160849491848722,
+        "confidence": 0.18459047377109528,
+        "extreme_conditions": true
+      },
+      {
+        "temperature": 2.4946469645272416,
+        "humidity": 19.03044576184857,
+        "vibration": 6.721221978902834,
+        "voltage_variation": -17.95323257686627,
+        "emi_source": "cellular_network",
+        "combined_stress": 1.8749110867755996,
+        "confidence": 0.23852640390396118,
+        "extreme_conditions": true
+      },
+      {
+        "temperature": 15.402958047699414,
+        "humidity": 75.54175038163064,
+        "vibration": 7.816976018762015,
+        "voltage_variation": 6.964865374859016,
+        "emi_source": "radio_transmitter",
+        "combined_stress": 1.9992855023135179,
+        "confidence": 0.20816974341869354,
+        "extreme_conditions": true
+      },
+      {
+        "temperature": -18.249023420991314,
+        "humidity": 74.24244042872581,
+        "vibration": 6.918051271774208,
+        "voltage_variation": -12.216212178473587,
+        "emi_source": "switching_power_supply",
+        "combined_stress": 1.9102247209445082,
+        "confidence": 0.2386394739151001,
+        "extreme_conditions": true
+      },
+      {
+        "temperature": -10.152966417217876,
+        "humidity": 67.18457468492127,
+        "vibration": 5.030687775519958,
+        "voltage_variation": -8.389652922990635,
+        "emi_source": "led_lighting",
+        "combined_stress": 1.4490783159080187,
+        "confidence": 0.20615960657596588,
+        "extreme_conditions": true
+      },
+      {
+        "temperature": 35.98924803961522,
+        "humidity": 10.013055222970033,
+        "vibration": 6.815231811189494,
+        "voltage_variation": 7.277697472051923,
+        "emi_source": "led_lighting",
+        "combined_stress": 1.7977496121457683,
+        "confidence": 0.23818984627723694,
+        "extreme_conditions": true
+      },
+      {
+        "temperature": 59.489239910661695,
+        "humidity": 31.677965994674963,
+        "vibration": 3.2211006583098847,
+        "voltage_variation": -6.6445272084683875,
+        "emi_source": "cellular_network",
+        "combined_stress": 1.0687681870038368,
+        "confidence": 0.18007366359233856,
+        "extreme_conditions": false
+      },
+      {
+        "temperature": 19.60167032148162,
+        "humidity": 35.93212154139225,
+        "vibration": 0.0015307103233412889,
+        "voltage_variation": -10.898702249051704,
+        "emi_source": "electrical_motor",
+        "combined_stress": 0.3563613377466531,
+        "confidence": 0.23711057007312775,
+        "extreme_conditions": true
+      },
+      {
+        "temperature": 55.47940606019857,
+        "humidity": 20.687814026266047,
+        "vibration": 5.607376982702553,
+        "voltage_variation": 11.224697854945845,
+        "emi_source": "cellular_network",
+        "combined_stress": 1.5941327773746952,
+        "confidence": 0.23875896632671356,
+        "extreme_conditions": true
+      },
+      {
+        "temperature": 0.05289896522581472,
+        "humidity": 47.91833455107544,
+        "vibration": 2.0405322842562432,
+        "voltage_variation": -12.209867457459035,
+        "emi_source": "electrical_motor",
+        "combined_stress": 0.7917726716996892,
+        "confidence": 0.17500703036785126,
+        "extreme_conditions": true
+      },
+      {
+        "temperature": 3.3358557294365596,
+        "humidity": 13.91989758321845,
+        "vibration": 3.26658435116627,
+        "voltage_variation": 10.923237719848846,
+        "emi_source": "cellular_network",
+        "combined_stress": 1.132467708193345,
+        "confidence": 0.23778802156448364,
+        "extreme_conditions": true
+      },
+      {
+        "temperature": 21.334875182126318,
+        "humidity": 81.67412054906977,
+        "vibration": 6.260677914734149,
+        "voltage_variation": -3.2920949839895712,
+        "emi_source": "led_lighting",
+        "combined_stress": 1.6390832646187519,
+        "confidence": 0.20625364780426025,
+        "extreme_conditions": true
+      },
+      {
+        "temperature": -16.690107336967504,
+        "humidity": 66.0995147691814,
+        "vibration": 6.857254769954262,
+        "voltage_variation": -1.5089862977821902,
+        "emi_source": "cellular_network",
+        "combined_stress": 1.756515582812359,
+        "confidence": 0.23936858773231506,
+        "extreme_conditions": true
+      },
+      {
+        "temperature": 3.4499787832325666,
+        "humidity": 34.382256603549735,
+        "vibration": 0.29634202912892693,
+        "voltage_variation": 2.7352956522638223,
+        "emi_source": "switching_power_supply",
+        "combined_stress": 0.3762446134804526,
+        "confidence": 0.20551015436649323,
+        "extreme_conditions": false
+      },
+      {
+        "temperature": 44.168076915339554,
+        "humidity": 11.638228378644682,
+        "vibration": 3.752839876122046,
+        "voltage_variation": -17.397451807826066,
+        "emi_source": "radio_transmitter",
+        "combined_stress": 1.3932146064805175,
+        "confidence": 0.18214978277683258,
+        "extreme_conditions": true
+      },
+      {
+        "temperature": 20.64983313373883,
+        "humidity": 19.27563455458432,
+        "vibration": 0.11972603249108626,
+        "voltage_variation": -10.806806046441453,
+        "emi_source": "electrical_motor",
+        "combined_stress": 0.4436110624768168,
+        "confidence": 0.20470045506954193,
+        "extreme_conditions": true
+      },
+      {
+        "temperature": 34.23695753418531,
+        "humidity": 31.441561102569775,
+        "vibration": 3.7966004111636664,
+        "voltage_variation": 11.000008669998078,
+        "emi_source": "radio_transmitter",
+        "combined_stress": 1.1482107524063958,
+        "confidence": 0.23881015181541443,
+        "extreme_conditions": true
+      },
+      {
+        "temperature": 61.952091781171035,
+        "humidity": 43.380691366875595,
+        "vibration": 6.260144301731146,
+        "voltage_variation": 7.410574277243072,
+        "emi_source": "electrical_motor",
+        "combined_stress": 1.6065160212135,
+        "confidence": 0.2376982718706131,
+        "extreme_conditions": true
+      },
+      {
+        "temperature": 67.52580591546017,
+        "humidity": 50.44542924896681,
+        "vibration": 6.5011955219140285,
+        "voltage_variation": -7.194478049577624,
+        "emi_source": "switching_power_supply",
+        "combined_stress": 1.693732257628454,
+        "confidence": 0.18039770424365997,
+        "extreme_conditions": true
+      },
+      {
+        "temperature": -7.589889144203539,
+        "humidity": 33.56861885977017,
+        "vibration": 5.184468738358964,
+        "voltage_variation": 13.817088063737032,
+        "emi_source": "cellular_network",
+        "combined_stress": 1.4949397971594762,
+        "confidence": 0.20664221048355103,
+        "extreme_conditions": true
+      },
+      {
+        "temperature": 36.348684098320135,
+        "humidity": 69.97243616217933,
+        "vibration": 3.105999578169456,
+        "voltage_variation": -4.028197753431289,
+        "emi_source": "electrical_motor",
+        "combined_stress": 0.9840690060135617,
+        "confidence": 0.17811420559883118,
+        "extreme_conditions": false
+      },
+      {
+        "temperature": -13.911999217987898,
+        "humidity": 78.45146230192329,
+        "vibration": 5.360256652115245,
+        "voltage_variation": -3.112907621141808,
+        "emi_source": "led_lighting",
+        "combined_stress": 1.514810254278136,
+        "confidence": 0.2375897467136383,
+        "extreme_conditions": true
+      }
+    ],
+    "pass": true
+  }
+}

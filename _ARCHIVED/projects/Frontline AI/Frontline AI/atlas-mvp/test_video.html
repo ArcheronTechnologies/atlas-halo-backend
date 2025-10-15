@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atlas Video Feed Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .video-container {
+            border: 2px solid #333;
+            display: inline-block;
+            background: #000;
+        }
+        .controls {
+            margin: 20px 0;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+        }
+        .start { background: #4CAF50; color: white; }
+        .stop { background: #f44336; color: white; }
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        .connected { background: #d4edda; color: #155724; }
+        .disconnected { background: #f8d7da; color: #721c24; }
+        .logs {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 10px;
+            height: 200px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Atlas Video Feed Test</h1>
+    
+    <div class="status" id="status">Disconnected</div>
+    
+    <div class="controls">
+        <button class="start" onclick="startVideo()">Start Video</button>
+        <button class="stop" onclick="stopVideo()">Stop Video</button>
+        <button onclick="connectWebSocket()">Connect WebSocket</button>
+        <button onclick="clearLogs()">Clear Logs</button>
+    </div>
+    
+    <div class="video-container">
+        <canvas id="videoCanvas" width="640" height="360"></canvas>
+    </div>
+    
+    <h3>Logs:</h3>
+    <div class="logs" id="logs"></div>
+
+    <script>
+        let ws = null;
+        let canvas = document.getElementById('videoCanvas');
+        let ctx = canvas.getContext('2d');
+        let frameCount = 0;
+
+        function log(message) {
+            const logs = document.getElementById('logs');
+            const timestamp = new Date().toLocaleTimeString();
+            logs.innerHTML += `[${timestamp}] ${message}\n`;
+            logs.scrollTop = logs.scrollHeight;
+        }
+
+        function updateStatus(message, connected = false) {
+            const status = document.getElementById('status');
+            status.textContent = message;
+            status.className = `status ${connected ? 'connected' : 'disconnected'}`;
+        }
+
+        function connectWebSocket() {
+            if (ws) {
+                ws.close();
+            }
+
+            ws = new WebSocket('ws://localhost:8000/ws');
+            
+            ws.onopen = function() {
+                log('WebSocket connected');
+                updateStatus('WebSocket Connected', true);
+            };
+            
+            ws.onmessage = function(event) {
+                try {
+                    if (event.data instanceof Blob) {
+                        // Handle binary data (frame data)
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            const arrayBuffer = e.target.result;
+                            handleBinaryMessage(arrayBuffer);
+                        };
+                        reader.readAsArrayBuffer(event.data);
+                    } else {
+                        // Handle text data (JSON messages)
+                        const data = JSON.parse(event.data);
+                        handleTextMessage(data);
+                    }
+                } catch (error) {
+                    log(`Error processing message: ${error.message}`);
+                }
+            };
+            
+            ws.onclose = function() {
+                log('WebSocket disconnected');
+                updateStatus('WebSocket Disconnected');
+            };
+            
+            ws.onerror = function(error) {
+                log(`WebSocket error: ${error}`);
+                updateStatus('WebSocket Error');
+            };
+        }
+
+        function handleBinaryMessage(arrayBuffer) {
+            try {
+                // Read header (4 bytes for header length)
+                const headerLengthBytes = new Uint8Array(arrayBuffer, 0, 4);
+                const headerLength = new DataView(headerLengthBytes.buffer).getUint32(0, false);
+                
+                // Read header JSON
+                const headerBytes = new Uint8Array(arrayBuffer, 4, headerLength);
+                const headerStr = new TextDecoder().decode(headerBytes);
+                const header = JSON.parse(headerStr);
+                
+                if (header.type === 'frame') {
+                    // Read image data
+                    const imageData = new Uint8Array(arrayBuffer, 4 + headerLength);
+                    displayFrame(imageData);
+                    frameCount++;
+                    log(`Received frame #${frameCount} (${imageData.length} bytes)`);
+                } else {
+                    log(`Received binary message: ${header.type}`);
+                }
+            } catch (error) {
+                log(`Error handling binary message: ${error.message}`);
+            }
+        }
+
+        function handleTextMessage(data) {
+            if (data.type === 'frame') {
+                // Handle base64 frame data
+                displayBase64Frame(data.data);
+                frameCount++;
+                log(`Received base64 frame #${frameCount}`);
+            } else if (data.type === 'detection') {
+                log(`Detection: ${data.data.class_name} (${data.data.confidence.toFixed(2)})`);
+            } else if (data.type === 'pong') {
+                log('Received pong');
+            } else {
+                log(`Received message: ${data.type}`);
+            }
+        }
+
+        function displayFrame(imageBytes) {
+            const blob = new Blob([imageBytes], { type: 'image/jpeg' });
+            const url = URL.createObjectURL(blob);
+            const img = new Image();
+            
+            img.onload = function() {
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                URL.revokeObjectURL(url);
+            };
+            
+            img.onerror = function() {
+                log('Error loading frame image');
+                URL.revokeObjectURL(url);
+            };
+            
+            img.src = url;
+        }
+
+        function displayBase64Frame(base64Data) {
+            if (!base64Data) return;
+            
+            const img = new Image();
+            img.onload = function() {
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            };
+            img.onerror = function() {
+                log('Error loading base64 frame');
+            };
+            img.src = base64Data;
+        }
+
+        async function startVideo() {
+            try {
+                log('Starting video...');
+                const response = await fetch('http://localhost:8000/api/video/start', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                const result = await response.json();
+                log(`Video start response: ${result.message}`);
+                updateStatus(`Video Started: ${result.message}`, true);
+            } catch (error) {
+                log(`Error starting video: ${error.message}`);
+                updateStatus(`Error: ${error.message}`);
+            }
+        }
+
+        async function stopVideo() {
+            try {
+                log('Stopping video...');
+                const response = await fetch('http://localhost:8000/api/video/stop', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                const result = await response.json();
+                log(`Video stop response: ${result.message}`);
+                updateStatus(`Video Stopped: ${result.message}`);
+            } catch (error) {
+                log(`Error stopping video: ${error.message}`);
+                updateStatus(`Error: ${error.message}`);
+            }
+        }
+
+        function clearLogs() {
+            document.getElementById('logs').innerHTML = '';
+            frameCount = 0;
+        }
+
+        // Auto-connect on page load
+        window.onload = function() {
+            log('Page loaded');
+            connectWebSocket();
+        };
+    </script>
+</body>
+</html>

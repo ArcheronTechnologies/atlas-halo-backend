@@ -1,0 +1,22 @@
+{
+  "threat_type": "BOAT_MILITARY",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "maritime",
+  "generated_at": "2025-09-22T11:11:29.093996",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.2406445665954968,
+  "filename": "BOAT_MILITARY_maritime_0108.wav",
+  "file_path": "complete_27_class_military_collection/BOAT_MILITARY_maritime_0108.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.24064455926418304,
+    "dynamic_range_db": 50.168849728107745,
+    "snr_db": 0.2801547825269047,
+    "thd_percent": 8.626347817429407
+  },
+  "sample_index": 108,
+  "threat_category": "LOGISTICS_TRANSPORT",
+  "priority_level": "MEDIUM"
+}

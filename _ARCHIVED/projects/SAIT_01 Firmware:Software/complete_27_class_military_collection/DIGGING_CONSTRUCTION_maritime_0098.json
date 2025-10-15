@@ -1,0 +1,22 @@
+{
+  "threat_type": "DIGGING_CONSTRUCTION",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "maritime",
+  "generated_at": "2025-09-22T11:11:34.429678",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.1910626235881926,
+  "filename": "DIGGING_CONSTRUCTION_maritime_0098.wav",
+  "file_path": "complete_27_class_military_collection/DIGGING_CONSTRUCTION_maritime_0098.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.19106261432170868,
+    "dynamic_range_db": 53.00199000209866,
+    "snr_db": 0.2165237451820043,
+    "thd_percent": 338.9473073500177
+  },
+  "sample_index": 98,
+  "threat_category": "PERSONNEL_ACTIVITY",
+  "priority_level": "MEDIUM"
+}

@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "scip-core-api"
+version = "0.1.0"
+description = "SCIP Core API service (FastAPI)"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{ name = "SCIP Team" }]
+dependencies = [
+  "fastapi>=0.110",
+  "uvicorn[standard]>=0.23",
+  "pydantic>=2.5",
+  "python-dotenv>=1.0",
+  "sqlalchemy>=2.0",
+  "psycopg[binary]>=3.1",
+  "python-jose[cryptography]>=3.3",
+  "motor>=3.3",
+  "elasticsearch>=8.12",
+  "httpx>=0.25",
+  "redis>=5"
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest",
+  "httpx",
+  "requests",
+  "ruff",
+  "mypy",
+  "alembic"
+]
+
+[tool.setuptools.packages.find]
+where = ["app"]

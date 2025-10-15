@@ -1,14 +1,23 @@
 """
 Prometheus Metrics Exporter
 Exposes system metrics for Prometheus scraping
+Updated for graceful degradation without psutil
 """
 
 from prometheus_client import Counter, Histogram, Gauge, Info, generate_latest, REGISTRY
 from prometheus_client.core import CollectorRegistry
 from fastapi import APIRouter, Response
 from datetime import datetime
-import psutil
 import time
+
+# Optional psutil for system metrics
+try:
+    import psutil
+    PSUTIL_AVAILABLE = True
+except ImportError:
+    PSUTIL_AVAILABLE = False
+    import logging
+    logging.warning("⚠️ psutil not available - system metrics disabled")
 
 # Create metrics router
 router = APIRouter(prefix="/metrics", tags=["monitoring"])
@@ -252,6 +261,12 @@ _app_start_time = time.time()
 
 def update_system_metrics():
     """Update system-level metrics"""
+    if not PSUTIL_AVAILABLE:
+        # Only update uptime when psutil unavailable
+        uptime = time.time() - _app_start_time
+        app_uptime_seconds.set(uptime)
+        return
+
     # CPU usage
     cpu_percent = psutil.cpu_percent(interval=0.1)
     system_cpu_usage_percent.set(cpu_percent)

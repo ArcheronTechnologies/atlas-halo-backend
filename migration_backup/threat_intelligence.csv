@@ -1,0 +1,1 @@
+id,threat_category,threat_subcategory,severity,confidence_score,halo_incident_type,frontline_object_class,sait_threat_code,source_product,source_event_id,latitude,longitude,occurred_at,validated,validation_source,validation_timestamp,correlated_events,multi_modal_confidence,created_at,updated_at

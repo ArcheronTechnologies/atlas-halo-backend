@@ -1,0 +1,27 @@
+{
+  "accuracy": 0.9327777624130249,
+  "breakthrough": false,
+  "gap": 0.017222237586975053,
+  "confusion_matrix": [
+    [
+      575,
+      12,
+      13
+    ],
+    [
+      49,
+      546,
+      5
+    ],
+    [
+      32,
+      10,
+      558
+    ]
+  ],
+  "bg_confusion": {
+    "bg_to_vh": 12,
+    "bg_to_ac": 13,
+    "total_bg": 600
+  }
+}

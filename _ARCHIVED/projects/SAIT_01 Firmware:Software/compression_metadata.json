@@ -1,0 +1,837 @@
+{
+  "pruning": {
+    "target_ratio": 0.95,
+    "actual_ratio": 0.9495021040789967,
+    "original_weights": 24001,
+    "remaining_weights": 1212,
+    "layer_stats": {
+      "encoder.0.depthwise.weight": {
+        "total_weights": 9,
+        "remaining_weights": 1,
+        "pruned_ratio": 0.8888888888888888,
+        "sparsity": 0.11111111111111116
+      },
+      "encoder.0.pointwise.weight": {
+        "total_weights": 16,
+        "remaining_weights": 1,
+        "pruned_ratio": 0.9375,
+        "sparsity": 0.0625
+      },
+      "encoder.0.se.fc.1.weight": {
+        "total_weights": 64,
+        "remaining_weights": 4,
+        "pruned_ratio": 0.9375,
+        "sparsity": 0.0625
+      },
+      "encoder.0.se.fc.3.weight": {
+        "total_weights": 64,
+        "remaining_weights": 4,
+        "pruned_ratio": 0.9375,
+        "sparsity": 0.0625
+      },
+      "encoder.1.depthwise.weight": {
+        "total_weights": 144,
+        "remaining_weights": 8,
+        "pruned_ratio": 0.9444444444444444,
+        "sparsity": 0.05555555555555558
+      },
+      "encoder.1.pointwise.weight": {
+        "total_weights": 384,
+        "remaining_weights": 20,
+        "pruned_ratio": 0.9479166666666666,
+        "sparsity": 0.05208333333333337
+      },
+      "encoder.1.se.fc.1.weight": {
+        "total_weights": 144,
+        "remaining_weights": 8,
+        "pruned_ratio": 0.9444444444444444,
+        "sparsity": 0.05555555555555558
+      },
+      "encoder.1.se.fc.3.weight": {
+        "total_weights": 144,
+        "remaining_weights": 8,
+        "pruned_ratio": 0.9444444444444444,
+        "sparsity": 0.05555555555555558
+      },
+      "encoder.2.depthwise.weight": {
+        "total_weights": 216,
+        "remaining_weights": 11,
+        "pruned_ratio": 0.9490740740740741,
+        "sparsity": 0.05092592592592593
+      },
+      "encoder.2.pointwise.weight": {
+        "total_weights": 768,
+        "remaining_weights": 39,
+        "pruned_ratio": 0.94921875,
+        "sparsity": 0.05078125
+      },
+      "encoder.2.se.fc.1.weight": {
+        "total_weights": 256,
+        "remaining_weights": 13,
+        "pruned_ratio": 0.94921875,
+        "sparsity": 0.05078125
+      },
+      "encoder.2.se.fc.3.weight": {
+        "total_weights": 256,
+        "remaining_weights": 13,
+        "pruned_ratio": 0.94921875,
+        "sparsity": 0.05078125
+      },
+      "encoder.3.depthwise.weight": {
+        "total_weights": 288,
+        "remaining_weights": 15,
+        "pruned_ratio": 0.9479166666666666,
+        "sparsity": 0.05208333333333337
+      },
+      "encoder.3.pointwise.weight": {
+        "total_weights": 1536,
+        "remaining_weights": 77,
+        "pruned_ratio": 0.9498697916666666,
+        "sparsity": 0.05013020833333337
+      },
+      "encoder.3.se.fc.1.weight": {
+        "total_weights": 576,
+        "remaining_weights": 29,
+        "pruned_ratio": 0.9496527777777778,
+        "sparsity": 0.05034722222222221
+      },
+      "encoder.3.se.fc.3.weight": {
+        "total_weights": 576,
+        "remaining_weights": 29,
+        "pruned_ratio": 0.9496527777777778,
+        "sparsity": 0.05034722222222221
+      },
+      "temporal_attention.proj.weight": {
+        "total_weights": 1152,
+        "remaining_weights": 58,
+        "pruned_ratio": 0.9496527777777778,
+        "sparsity": 0.05034722222222221
+      },
+      "temporal_attention.score.weight": {
+        "total_weights": 1152,
+        "remaining_weights": 58,
+        "pruned_ratio": 0.9496527777777778,
+        "sparsity": 0.05034722222222221
+      },
+      "final_conv.weight": {
+        "total_weights": 3072,
+        "remaining_weights": 154,
+        "pruned_ratio": 0.9498697916666666,
+        "sparsity": 0.05013020833333337
+      },
+      "embedding.weight": {
+        "total_weights": 8192,
+        "remaining_weights": 410,
+        "pruned_ratio": 0.949951171875,
+        "sparsity": 0.050048828125
+      },
+      "binary_head.weight": {
+        "total_weights": 256,
+        "remaining_weights": 13,
+        "pruned_ratio": 0.94921875,
+        "sparsity": 0.05078125
+      },
+      "category_head.weight": {
+        "total_weights": 768,
+        "remaining_weights": 39,
+        "pruned_ratio": 0.94921875,
+        "sparsity": 0.05078125
+      },
+      "specific_head.weight": {
+        "total_weights": 3456,
+        "remaining_weights": 173,
+        "pruned_ratio": 0.9499421296296297,
+        "sparsity": 0.05005787037037035
+      },
+      "escalation_head.weight": {
+        "total_weights": 384,
+        "remaining_weights": 20,
+        "pruned_ratio": 0.9479166666666666,
+        "sparsity": 0.05208333333333337
+      },
+      "uncertainty_head.weight": {
+        "total_weights": 128,
+        "remaining_weights": 7,
+        "pruned_ratio": 0.9453125,
+        "sparsity": 0.0546875
+      }
+    }
+  },
+  "quantization": {
+    "target_bits": 4,
+    "average_error": 0.007543440727997531,
+    "layer_stats": {
+      "encoder.0.depthwise.weight": {
+        "scale": 0.06890860199928284,
+        "zero_point": 0,
+        "quantization_error": 0.0,
+        "original_range": 0.48236021399497986,
+        "quantized_range": "[-8, 7]"
+      },
+      "encoder.0.pointwise.weight": {
+        "scale": 0.08285266906023026,
+        "zero_point": 0,
+        "quantization_error": 0.0,
+        "original_range": 0.5799686908721924,
+        "quantized_range": "[-8, 7]"
+      },
+      "encoder.0.bn.weight": {
+        "scale": 0.16097618639469147,
+        "zero_point": 0,
+        "quantization_error": 0.032584577798843384,
+        "original_range": 0.2550421357154846,
+        "quantized_range": "[-8, 7]"
+      },
+      "encoder.0.bn.bias": {
+        "scale": 0.030882418155670166,
+        "zero_point": 0,
+        "quantization_error": 0.009122047573328018,
+        "original_range": 0.3796525001525879,
+        "quantized_range": "[-8, 7]"
+      },
+      "encoder.0.bn.running_mean": {
+        "scale": 0.04046789929270744,
+        "zero_point": 0,
+        "quantization_error": 0.008796380832791328,
+        "original_range": 0.5264837741851807,
+        "quantized_range": "[-8, 7]"
+      },
+      "encoder.0.bn.running_var": {
+        "scale": 0.038871850818395615,
+        "zero_point": 0,
+        "quantization_error": 0.008063656277954578,
+        "original_range": 0.2709544599056244,
+        "quantized_range": "[-8, 7]"
+      },
+      "encoder.0.se.fc.1.weight": {
+        "scale": 0.20447604358196259,
+        "zero_point": 0,
+        "quantization_error": 0.0009259004145860672,
+        "original_range": 2.6877503395080566,
+        "quantized_range": "[-8, 7]"
+      },
+      "encoder.0.se.fc.3.weight": {
+        "scale": 0.11563918739557266,
+        "zero_point": 0,
+        "quantization_error": 0.0010345997288823128,
+        "original_range": 1.53666353225708,
+        "quantized_range": "[-8, 7]"
+      },
+      "encoder.1.depthwise.weight": {
+        "scale": 0.044720638543367386,
+        "zero_point": 0,
+        "quantization_error": 0.0006230075377970934,
+        "original_range": 0.6254465579986572,
+        "quantized_range": "[-8, 7]"
+      },
+      "encoder.1.pointwise.weight": {
+        "scale": 0.13604941964149475,
+        "zero_point": 0,
+        "quantization_error": 0.001424036337994039,
+        "original_range": 1.8227765560150146,
+        "quantized_range": "[-8, 7]"
+      },
+      "encoder.1.bn.weight": {
+        "scale": 0.15132345259189606,
+        "zero_point": 0,
+        "quantization_error": 0.04350452497601509,
+        "original_range": 0.16306817531585693,
+        "quantized_range": "[-8, 7]"
+      },
+      "encoder.1.bn.bias": {
+        "scale": 0.014135291799902916,
+        "zero_point": 0,
+        "quantization_error": 0.0032979610841721296,
+        "original_range": 0.1858527958393097,
+        "quantized_range": "[-8, 7]"
+      },
+      "encoder.1.bn.running_mean": {
+        "scale": 0.06230073422193527,
+        "zero_point": 0,
+        "quantization_error": 0.013414115644991398,
+        "original_range": 0.7580581903457642,
+        "quantized_range": "[-8, 7]"
+      },
+      "encoder.1.bn.running_var": {
+        "scale": 0.04621078446507454,
+        "zero_point": 0,
+        "quantization_error": 0.012619700282812119,
+        "original_range": 0.3017079532146454,
+        "quantized_range": "[-8, 7]"
+      },
+      "encoder.1.se.fc.1.weight": {
+        "scale": 0.26465412974357605,
+        "zero_point": 0,
+        "quantization_error": 0.003414890728890896,
+        "original_range": 3.180907726287842,
+        "quantized_range": "[-8, 7]"
+      },
+      "encoder.1.se.fc.3.weight": {
+        "scale": 0.13353480398654938,
+        "zero_point": 0,
+        "quantization_error": 0.001877365866675973,
+        "original_range": 1.7704830169677734,
+        "quantized_range": "[-8, 7]"
+      },
+      "encoder.2.depthwise.weight": {
+        "scale": 0.03963237255811691,
+        "zero_point": 0,
+        "quantization_error": 0.000387598731322214,
+        "original_range": 0.5175566673278809,
+        "quantized_range": "[-8, 7]"
+      },
+      "encoder.2.pointwise.weight": {
+        "scale": 0.12017101794481277,
+        "zero_point": 0,
+        "quantization_error": 0.0016588805010542274,
+        "original_range": 1.552907943725586,
+        "quantized_range": "[-8, 7]"
+      },
+      "encoder.2.bn.weight": {
+        "scale": 0.1577722281217575,
+        "zero_point": 0,
+        "quantization_error": 0.043296005576848984,
+        "original_range": 0.24260634183883667,
+        "quantized_range": "[-8, 7]"
+      },
+      "encoder.2.bn.bias": {
+        "scale": 0.020022818818688393,
+        "zero_point": 0,
+        "quantization_error": 0.0037900242023169994,
+        "original_range": 0.256369411945343,
+        "quantized_range": "[-8, 7]"
+      },
+      "encoder.2.bn.running_mean": {
+        "scale": 0.04831806942820549,
+        "zero_point": 0,
+        "quantization_error": 0.010698175057768822,
+        "original_range": 0.604186475276947,
+        "quantized_range": "[-8, 7]"
+      },
+      "encoder.2.bn.running_var": {
+        "scale": 0.022794803604483604,
+        "zero_point": 0,
+        "quantization_error": 0.005257400684058666,
+        "original_range": 0.15282964706420898,
+        "quantized_range": "[-8, 7]"
+      },
+      "encoder.2.se.fc.1.weight": {
+        "scale": 0.24881373345851898,
+        "zero_point": 0,
+        "quantization_error": 0.002361040562391281,
+        "original_range": 2.8992862701416016,
+        "quantized_range": "[-8, 7]"
+      },
+      "encoder.2.se.fc.3.weight": {
+        "scale": 0.10473005473613739,
+        "zero_point": 0,
+        "quantization_error": 0.0007906215032562613,
+        "original_range": 1.461559534072876,
+        "quantized_range": "[-8, 7]"
+      },
+      "encoder.3.depthwise.weight": {
+        "scale": 0.03709389641880989,
+        "zero_point": 0,
+        "quantization_error": 0.0005048776511102915,
+        "original_range": 0.5139838457107544,
+        "quantized_range": "[-8, 7]"
+      },
+      "encoder.3.pointwise.weight": {
+        "scale": 0.1153872087597847,
+        "zero_point": 0,
+        "quantization_error": 0.0011767508694902062,
+        "original_range": 1.4546592235565186,
+        "quantized_range": "[-8, 7]"
+      },
+      "encoder.3.bn.weight": {
+        "scale": 0.16153426468372345,
+        "zero_point": 0,
+        "quantization_error": 0.03276291862130165,
+        "original_range": 0.2707666754722595,
+        "quantized_range": "[-8, 7]"
+      },
+      "encoder.3.bn.bias": {
+        "scale": 0.027696071192622185,
+        "zero_point": 0,
+        "quantization_error": 0.007379155606031418,
+        "original_range": 0.312031626701355,
+        "quantized_range": "[-8, 7]"
+      },
+      "encoder.3.bn.running_mean": {
+        "scale": 0.0452500618994236,
+        "zero_point": 0,
+        "quantization_error": 0.009788073599338531,
+        "original_range": 0.5304579734802246,
+        "quantized_range": "[-8, 7]"
+      },
+      "encoder.3.bn.running_var": {
+        "scale": 0.01418544352054596,
+        "zero_point": 0,
+        "quantization_error": 0.003501240164041519,
+        "original_range": 0.09207794070243835,
+        "quantized_range": "[-8, 7]"
+      },
+      "encoder.3.se.fc.1.weight": {
+        "scale": 0.20325158536434174,
+        "zero_point": 0,
+        "quantization_error": 0.0020085335709154606,
+        "original_range": 2.572279691696167,
+        "quantized_range": "[-8, 7]"
+      },
+      "encoder.3.se.fc.3.weight": {
+        "scale": 0.08832035213708878,
+        "zero_point": 0,
+        "quantization_error": 0.001115000108256936,
+        "original_range": 1.213803768157959,
+        "quantized_range": "[-8, 7]"
+      },
+      "temporal_attention.proj.weight": {
+        "scale": 0.05248715355992317,
+        "zero_point": 0,
+        "quantization_error": 0.0005928229074925184,
+        "original_range": 0.7292025089263916,
+        "quantized_range": "[-8, 7]"
+      },
+      "temporal_attention.score.weight": {
+        "scale": 0.0977913960814476,
+        "zero_point": 0,
+        "quantization_error": 0.0010380870662629604,
+        "original_range": 1.2738662958145142,
+        "quantized_range": "[-8, 7]"
+      },
+      "final_conv.weight": {
+        "scale": 0.11722787469625473,
+        "zero_point": 0,
+        "quantization_error": 0.001455949037335813,
+        "original_range": 1.4974651336669922,
+        "quantized_range": "[-8, 7]"
+      },
+      "final_bn.weight": {
+        "scale": 0.1920522302389145,
+        "zero_point": 0,
+        "quantization_error": 0.04571465030312538,
+        "original_range": 0.4533578157424927,
+        "quantized_range": "[-8, 7]"
+      },
+      "final_bn.bias": {
+        "scale": 0.033685870468616486,
+        "zero_point": 0,
+        "quantization_error": 0.007686484605073929,
+        "original_range": 0.331314355134964,
+        "quantized_range": "[-8, 7]"
+      },
+      "final_bn.running_mean": {
+        "scale": 0.04634503275156021,
+        "zero_point": 0,
+        "quantization_error": 0.009659651666879654,
+        "original_range": 0.5194313526153564,
+        "quantized_range": "[-8, 7]"
+      },
+      "final_bn.running_var": {
+        "scale": 0.021095266565680504,
+        "zero_point": 0,
+        "quantization_error": 0.00532086007297039,
+        "original_range": 0.13002467155456543,
+        "quantized_range": "[-8, 7]"
+      },
+      "embedding.weight": {
+        "scale": 0.13247020542621613,
+        "zero_point": 0,
+        "quantization_error": 0.0014630791265517473,
+        "original_range": 1.7399044036865234,
+        "quantized_range": "[-8, 7]"
+      },
+      "embedding.bias": {
+        "scale": 0.027002384886145592,
+        "zero_point": 0,
+        "quantization_error": 0.006044433452188969,
+        "original_range": 0.2794867157936096,
+        "quantized_range": "[-8, 7]"
+      },
+      "binary_head.weight": {
+        "scale": 0.07635296881198883,
+        "zero_point": 0,
+        "quantization_error": 0.0008784519741311669,
+        "original_range": 0.839073657989502,
+        "quantized_range": "[-8, 7]"
+      },
+      "binary_head.bias": {
+        "note": "zero_tensor"
+      },
+      "category_head.weight": {
+        "scale": 0.06429477781057358,
+        "zero_point": 0,
+        "quantization_error": 0.0007357161375693977,
+        "original_range": 0.8273396492004395,
+        "quantized_range": "[-8, 7]"
+      },
+      "category_head.bias": {
+        "note": "zero_tensor"
+      },
+      "specific_head.weight": {
+        "scale": 0.2024170309305191,
+        "zero_point": 0,
+        "quantization_error": 0.002846373012289405,
+        "original_range": 1.416919231414795,
+        "quantized_range": "[-8, 7]"
+      },
+      "specific_head.bias": {
+        "scale": 0.010294576175510883,
+        "zero_point": 0,
+        "quantization_error": 0.0026504716370254755,
+        "original_range": 0.09831302613019943,
+        "quantized_range": "[-8, 7]"
+      },
+      "escalation_head.weight": {
+        "scale": 0.05907006189227104,
+        "zero_point": 0,
+        "quantization_error": 0.0008308228570967913,
+        "original_range": 0.7965539693832397,
+        "quantized_range": "[-8, 7]"
+      },
+      "escalation_head.bias": {
+        "note": "zero_tensor"
+      },
+      "uncertainty_head.weight": {
+        "scale": 0.04225752875208855,
+        "zero_point": 0,
+        "quantization_error": 0.0004447982646524906,
+        "original_range": 0.5828386545181274,
+        "quantized_range": "[-8, 7]"
+      },
+      "uncertainty_head.bias": {
+        "note": "zero_tensor"
+      }
+    }
+  },
+  "clustering": {
+    "num_clusters": 8,
+    "layers_clustered": 3,
+    "average_error": 0.43052607774734497,
+    "layer_stats": {
+      "encoder.0.depthwise.weight": {
+        "note": "insufficient_unique_weights"
+      },
+      "encoder.0.pointwise.weight": {
+        "note": "insufficient_unique_weights"
+      },
+      "encoder.0.se.fc.1.weight": {
+        "note": "insufficient_unique_weights"
+      },
+      "encoder.0.se.fc.3.weight": {
+        "note": "insufficient_unique_weights"
+      },
+      "encoder.1.depthwise.weight": {
+        "note": "insufficient_unique_weights"
+      },
+      "encoder.1.pointwise.weight": {
+        "note": "insufficient_unique_weights"
+      },
+      "encoder.1.se.fc.1.weight": {
+        "note": "insufficient_unique_weights"
+      },
+      "encoder.1.se.fc.3.weight": {
+        "note": "insufficient_unique_weights"
+      },
+      "encoder.2.depthwise.weight": {
+        "note": "insufficient_unique_weights"
+      },
+      "encoder.2.pointwise.weight": {
+        "note": "insufficient_unique_weights"
+      },
+      "encoder.2.se.fc.1.weight": {
+        "note": "insufficient_unique_weights"
+      },
+      "encoder.2.se.fc.3.weight": {
+        "note": "insufficient_unique_weights"
+      },
+      "encoder.3.depthwise.weight": {
+        "note": "insufficient_unique_weights"
+      },
+      "encoder.3.pointwise.weight": {
+        "note": "insufficient_unique_weights"
+      },
+      "encoder.3.se.fc.1.weight": {
+        "note": "insufficient_unique_weights"
+      },
+      "encoder.3.se.fc.3.weight": {
+        "note": "insufficient_unique_weights"
+      },
+      "temporal_attention.proj.weight": {
+        "note": "insufficient_unique_weights"
+      },
+      "temporal_attention.score.weight": {
+        "num_clusters": 8,
+        "original_unique_weights": 9,
+        "compression_ratio": 0.006944444444444444,
+        "clustering_error": 0.4299357533454895
+      },
+      "final_conv.weight": {
+        "num_clusters": 8,
+        "original_unique_weights": 10,
+        "compression_ratio": 0.0026041666666666665,
+        "clustering_error": 0.4313618242740631
+      },
+      "embedding.weight": {
+        "num_clusters": 8,
+        "original_unique_weights": 10,
+        "compression_ratio": 0.0009765625,
+        "clustering_error": 0.4302806556224823
+      },
+      "binary_head.weight": {
+        "note": "insufficient_unique_weights"
+      },
+      "category_head.weight": {
+        "note": "insufficient_unique_weights"
+      },
+      "specific_head.weight": {
+        "note": "insufficient_unique_weights"
+      },
+      "escalation_head.weight": {
+        "note": "insufficient_unique_weights"
+      },
+      "uncertainty_head.weight": {
+        "note": "insufficient_unique_weights"
+      }
+    }
+  },
+  "mixed_precision": {
+    "critical_layers": 8,
+    "standard_layers": 48,
+    "precision_stats": {
+      "encoder.0.depthwise.weight": {
+        "precision": "int8",
+        "critical": false
+      },
+      "encoder.0.pointwise.weight": {
+        "precision": "int8",
+        "critical": false
+      },
+      "encoder.0.bn.weight": {
+        "precision": "int8",
+        "critical": false
+      },
+      "encoder.0.bn.bias": {
+        "precision": "int8",
+        "critical": false
+      },
+      "encoder.0.bn.running_mean": {
+        "precision": "int8",
+        "critical": false
+      },
+      "encoder.0.bn.running_var": {
+        "precision": "int8",
+        "critical": false
+      },
+      "encoder.0.bn.num_batches_tracked": {
+        "precision": "int8",
+        "critical": false
+      },
+      "encoder.0.se.fc.1.weight": {
+        "precision": "int8",
+        "critical": false
+      },
+      "encoder.0.se.fc.3.weight": {
+        "precision": "int8",
+        "critical": false
+      },
+      "encoder.1.depthwise.weight": {
+        "precision": "int8",
+        "critical": false
+      },
+      "encoder.1.pointwise.weight": {
+        "precision": "int8",
+        "critical": false
+      },
+      "encoder.1.bn.weight": {
+        "precision": "int8",
+        "critical": false
+      },
+      "encoder.1.bn.bias": {
+        "precision": "int8",
+        "critical": false
+      },
+      "encoder.1.bn.running_mean": {
+        "precision": "int8",
+        "critical": false
+      },
+      "encoder.1.bn.running_var": {
+        "precision": "int8",
+        "critical": false
+      },
+      "encoder.1.bn.num_batches_tracked": {
+        "precision": "int8",
+        "critical": false
+      },
+      "encoder.1.se.fc.1.weight": {
+        "precision": "int8",
+        "critical": false
+      },
+      "encoder.1.se.fc.3.weight": {
+        "precision": "int8",
+        "critical": false
+      },
+      "encoder.2.depthwise.weight": {
+        "precision": "int8",
+        "critical": false
+      },
+      "encoder.2.pointwise.weight": {
+        "precision": "int8",
+        "critical": false
+      },
+      "encoder.2.bn.weight": {
+        "precision": "int8",
+        "critical": false
+      },
+      "encoder.2.bn.bias": {
+        "precision": "int8",
+        "critical": false
+      },
+      "encoder.2.bn.running_mean": {
+        "precision": "int8",
+        "critical": false
+      },
+      "encoder.2.bn.running_var": {
+        "precision": "int8",
+        "critical": false
+      },
+      "encoder.2.bn.num_batches_tracked": {
+        "precision": "int8",
+        "critical": false
+      },
+      "encoder.2.se.fc.1.weight": {
+        "precision": "int8",
+        "critical": false
+      },
+      "encoder.2.se.fc.3.weight": {
+        "precision": "int8",
+        "critical": false
+      },
+      "encoder.3.depthwise.weight": {
+        "precision": "int8",
+        "critical": false
+      },
+      "encoder.3.pointwise.weight": {
+        "precision": "int8",
+        "critical": false
+      },
+      "encoder.3.bn.weight": {
+        "precision": "int8",
+        "critical": false
+      },
+      "encoder.3.bn.bias": {
+        "precision": "int8",
+        "critical": false
+      },
+      "encoder.3.bn.running_mean": {
+        "precision": "int8",
+        "critical": false
+      },
+      "encoder.3.bn.running_var": {
+        "precision": "int8",
+        "critical": false
+      },
+      "encoder.3.bn.num_batches_tracked": {
+        "precision": "int8",
+        "critical": false
+      },
+      "encoder.3.se.fc.1.weight": {
+        "precision": "int8",
+        "critical": false
+      },
+      "encoder.3.se.fc.3.weight": {
+        "precision": "int8",
+        "critical": false
+      },
+      "temporal_attention.proj.weight": {
+        "precision": "int8",
+        "critical": false
+      },
+      "temporal_attention.score.weight": {
+        "precision": "int8",
+        "critical": false
+      },
+      "final_conv.weight": {
+        "precision": "int8",
+        "critical": false
+      },
+      "final_bn.weight": {
+        "precision": "int8",
+        "critical": false
+      },
+      "final_bn.bias": {
+        "precision": "int8",
+        "critical": false
+      },
+      "final_bn.running_mean": {
+        "precision": "int8",
+        "critical": false
+      },
+      "final_bn.running_var": {
+        "precision": "int8",
+        "critical": false
+      },
+      "final_bn.num_batches_tracked": {
+        "precision": "int8",
+        "critical": false
+      },
+      "embedding.weight": {
+        "precision": "float16",
+        "critical": true
+      },
+      "embedding.bias": {
+        "precision": "float16",
+        "critical": true
+      },
+      "binary_head.weight": {
+        "precision": "float16",
+        "critical": true
+      },
+      "binary_head.bias": {
+        "precision": "float16",
+        "critical": true
+      },
+      "category_head.weight": {
+        "precision": "float16",
+        "critical": true
+      },
+      "category_head.bias": {
+        "precision": "float16",
+        "critical": true
+      },
+      "specific_head.weight": {
+        "precision": "float16",
+        "critical": true
+      },
+      "specific_head.bias": {
+        "precision": "float16",
+        "critical": true
+      },
+      "escalation_head.weight": {
+        "precision": "int8",
+        "critical": false
+      },
+      "escalation_head.bias": {
+        "precision": "int8",
+        "critical": false
+      },
+      "uncertainty_head.weight": {
+        "precision": "int8",
+        "critical": false
+      },
+      "uncertainty_head.bias": {
+        "precision": "int8",
+        "critical": false
+      }
+    }
+  },
+  "final": {
+    "original_parameters": 24909,
+    "compressed_parameters": 24909,
+    "original_size_kb": 97.30078125,
+    "compressed_size_kb": 36.8740234375,
+    "size_reduction": 0.6210305512063913,
+    "compression_ratio": 2.6387351359940676,
+    "target_met": false
+  }
+}

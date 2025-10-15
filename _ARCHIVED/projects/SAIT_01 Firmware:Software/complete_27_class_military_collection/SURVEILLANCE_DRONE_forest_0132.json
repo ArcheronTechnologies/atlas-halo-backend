@@ -1,0 +1,22 @@
+{
+  "threat_type": "SURVEILLANCE_DRONE",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "forest",
+  "generated_at": "2025-09-22T11:11:37.516538",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.3757173865611051,
+  "filename": "SURVEILLANCE_DRONE_forest_0132.wav",
+  "file_path": "complete_27_class_military_collection/SURVEILLANCE_DRONE_forest_0132.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.3757174015045166,
+    "dynamic_range_db": 50.16198707889393,
+    "snr_db": 0.03435185362000125,
+    "thd_percent": 12.05880339684102
+  },
+  "sample_index": 132,
+  "threat_category": "SURVEILLANCE_RECON",
+  "priority_level": "LOW_MEDIUM"
+}

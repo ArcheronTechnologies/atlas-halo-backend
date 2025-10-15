@@ -1,0 +1,22 @@
+{
+  "threat_type": "PERSONNEL_ARMED",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "mountain",
+  "generated_at": "2025-09-22T11:11:31.746260",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.1812514151773967,
+  "filename": "PERSONNEL_ARMED_mountain_0079.wav",
+  "file_path": "complete_27_class_military_collection/PERSONNEL_ARMED_mountain_0079.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.1812514215707779,
+    "dynamic_range_db": 56.05995780660188,
+    "snr_db": 1.8174241143369494,
+    "thd_percent": 479.6813675588645
+  },
+  "sample_index": 79,
+  "threat_category": "PERSONNEL_ACTIVITY",
+  "priority_level": "MEDIUM"
+}

@@ -1,0 +1,118 @@
+{
+  "individual_models": {
+    "sait01_final_95_model.h5": {
+      "accuracy": 0.9353333333333333,
+      "confusion_matrix": [
+        [
+          976,
+          10,
+          14
+        ],
+        [
+          84,
+          906,
+          10
+        ],
+        [
+          67,
+          9,
+          924
+        ]
+      ],
+      "misclassification_patterns": {
+        "combat_sounds": 5,
+        "original_samples": 15,
+        "synthetic_generated": 0,
+        "mixed_combat": 0
+      }
+    },
+    "sait01_elite_95_model.h5": {
+      "accuracy": 0.9256666666666666,
+      "confusion_matrix": [
+        [
+          967,
+          11,
+          22
+        ],
+        [
+          100,
+          894,
+          6
+        ],
+        [
+          76,
+          8,
+          916
+        ]
+      ],
+      "misclassification_patterns": {
+        "combat_sounds": 0,
+        "original_samples": 20,
+        "synthetic_generated": 0,
+        "mixed_combat": 0
+      }
+    },
+    "sait01_battlefield_model.h5": {
+      "accuracy": 0.8723333333333333,
+      "confusion_matrix": [
+        [
+          842,
+          138,
+          20
+        ],
+        [
+          31,
+          951,
+          18
+        ],
+        [
+          54,
+          122,
+          824
+        ]
+      ],
+      "misclassification_patterns": {
+        "combat_sounds": 12,
+        "original_samples": 8,
+        "synthetic_generated": 0,
+        "mixed_combat": 0
+      }
+    },
+    "best_sait01_model.h5": {
+      "accuracy": 0.853,
+      "confusion_matrix": [
+        [
+          920,
+          53,
+          27
+        ],
+        [
+          144,
+          813,
+          43
+        ],
+        [
+          106,
+          68,
+          826
+        ]
+      ],
+      "misclassification_patterns": {
+        "combat_sounds": 9,
+        "original_samples": 11,
+        "synthetic_generated": 0,
+        "mixed_combat": 0
+      }
+    }
+  },
+  "consensus_system": {
+    "consensus_results": {
+      "majority_voting": 0.9343333333333333,
+      "weighted_voting": 0.9323333333333333,
+      "confidence_based": 0.9283333333333333,
+      "adaptive_threshold": 0.9363333333333334
+    },
+    "best_method": "adaptive_threshold",
+    "best_accuracy": 0.9363333333333334,
+    "best_predictions": [
+      

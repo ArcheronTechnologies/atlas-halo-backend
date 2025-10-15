@@ -1,0 +1,22 @@
+{
+  "threat_type": "RPG_LAUNCH",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "maritime",
+  "generated_at": "2025-09-22T11:11:13.056777",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.1759752776643283,
+  "filename": "RPG_LAUNCH_maritime_0083.wav",
+  "file_path": "complete_27_class_military_collection/RPG_LAUNCH_maritime_0083.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.1759752780199051,
+    "dynamic_range_db": 52.25593057327068,
+    "snr_db": 2.7657216424209663,
+    "thd_percent": 63.84945317338312
+  },
+  "sample_index": 83,
+  "threat_category": "IMMEDIATE_LETHAL",
+  "priority_level": "CRITICAL"
+}

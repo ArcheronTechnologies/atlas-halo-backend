@@ -1,0 +1,22 @@
+{
+  "threat_type": "CIVILIAN_TRAFFIC",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "forest",
+  "generated_at": "2025-09-22T11:11:05.539530",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.25273319771718894,
+  "filename": "CIVILIAN_TRAFFIC_forest_0067.wav",
+  "file_path": "complete_27_class_military_collection/CIVILIAN_TRAFFIC_forest_0067.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.2527332007884979,
+    "dynamic_range_db": 48.20770239851857,
+    "snr_db": 0.7548510317304844,
+    "thd_percent": 423.2593910133744
+  },
+  "sample_index": 67,
+  "threat_category": "NON_THREAT",
+  "priority_level": "LOW"
+}

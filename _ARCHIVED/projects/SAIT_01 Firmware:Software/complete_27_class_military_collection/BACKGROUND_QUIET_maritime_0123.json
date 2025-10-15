@@ -1,0 +1,22 @@
+{
+  "threat_type": "BACKGROUND_QUIET",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "maritime",
+  "generated_at": "2025-09-22T11:11:02.863783",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.21571244998920433,
+  "filename": "BACKGROUND_QUIET_maritime_0123.wav",
+  "file_path": "complete_27_class_military_collection/BACKGROUND_QUIET_maritime_0123.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.21571244299411774,
+    "dynamic_range_db": 54.68637478889518,
+    "snr_db": 0.2360937159802354,
+    "thd_percent": 213.1706948886324
+  },
+  "sample_index": 123,
+  "threat_category": "NON_THREAT",
+  "priority_level": "LOW"
+}

@@ -1,0 +1,11 @@
+{
+  "cycle": "Cycle 2",
+  "overall_accuracy": 0.89,
+  "class_accuracies": {
+    "background": 0.89,
+    "vehicle": 0.88,
+    "aircraft": 0.9
+  },
+  "meets_95_target": false,
+  "model_path": "sait01_balanced_multiclass.h5"
+}

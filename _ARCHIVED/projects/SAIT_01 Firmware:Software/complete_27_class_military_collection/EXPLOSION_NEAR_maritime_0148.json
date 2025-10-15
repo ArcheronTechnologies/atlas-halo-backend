@@ -1,0 +1,22 @@
+{
+  "threat_type": "EXPLOSION_NEAR",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "maritime",
+  "generated_at": "2025-09-22T11:11:15.058370",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.09351181501184619,
+  "filename": "EXPLOSION_NEAR_maritime_0148.wav",
+  "file_path": "complete_27_class_military_collection/EXPLOSION_NEAR_maritime_0148.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.09351181238889694,
+    "dynamic_range_db": 76.91059384765623,
+    "snr_db": 20.524097703782477,
+    "thd_percent": 6.067852141386278
+  },
+  "sample_index": 148,
+  "threat_category": "IMMEDIATE_LETHAL",
+  "priority_level": "CRITICAL"
+}

@@ -1,0 +1,41 @@
+# Pre-commit hooks for SAIT_01 project
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-added-large-files
+      - id: check-case-conflict
+      - id: check-merge-conflict
+
+  - repo: https://github.com/psf/black
+    rev: 23.9.1
+    hooks:
+      - id: black
+        language_version: python3
+        files: \.(py)$
+
+  - repo: https://github.com/pycqa/flake8
+    rev: 6.1.0
+    hooks:
+      - id: flake8
+        files: \.(py)$
+        args: [--max-line-length=88, --ignore=E203,W503]
+
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.6.1
+    hooks:
+      - id: mypy
+        files: \.(py)$
+        args: [--ignore-missing-imports]
+
+  - repo: local
+    hooks:
+      - id: zephyr-build-check
+        name: Zephyr Build Check
+        entry: bash -c 'cd sait_01_firmware && west build -b sait_01 --cmake-only'
+        language: system
+        files: '(sait_01_firmware/.*\.(c|h|dts|conf|yaml|yml)|CMakeLists\.txt)$'
+        pass_filenames: false

@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/api/v1", tags=["proxy"])
 
-ATLAS_INTELLIGENCE_URL = os.getenv("ATLAS_INTELLIGENCE_URL", "https://loving-purpose-production.up.railway.app").replace("ttps://", "https://")
+ATLAS_INTELLIGENCE_URL = os.getenv("ATLAS_API_URL", os.getenv("ATLAS_INTELLIGENCE_URL", "https://atlas-intelligence.fly.dev"))
 
 @router.get("/incidents")
 async def get_incidents(
@@ -22,70 +22,101 @@ async def get_incidents(
     latitude: Optional[float] = Query(None),
     longitude: Optional[float] = Query(None),
     radius_km: Optional[float] = Query(None),
-    rolling_days: Optional[int] = Query(7, ge=1, le=365)
+    rolling_days: Optional[int] = Query(None)
 ):
     """
-    Proxy to Atlas Intelligence incidents endpoint
+    Fetch incidents directly from shared Atlas Intelligence database
     """
+    from datetime import datetime, timezone, timedelta
+    import asyncpg
+    import os
+
     try:
-        async with httpx.AsyncClient(timeout=30.0) as client:
-            params = {
-                "page": page,
-                "page_size": page_size
-            }
+        now_utc = datetime.now(timezone.utc)
 
-            if latitude is not None and longitude is not None:
-                params["lat"] = latitude
-                params["lon"] = longitude
+        # Direct database connection
+        conn = await asyncpg.connect(
+            host=os.getenv('POSTGRES_HOST', 'localhost'),
+            port=int(os.getenv('POSTGRES_PORT', '5432')),
+            user=os.getenv('POSTGRES_USER', 'postgres'),
+            password=os.getenv('POSTGRES_PASSWORD', ''),
+            database=os.getenv('POSTGRES_DB', 'postgres')
+        )
 
-            if radius_km:
-                params["radius_km"] = radius_km
+        # Build query with proper asyncpg placeholders
+        query = "SELECT * FROM incidents WHERE 1=1"
+        params = []
 
-            url = f"{ATLAS_INTELLIGENCE_URL}/api/v1/data/incidents"
-            logger.info(f"Proxying request to {url} with params: {params}")
+        # Add time filter
+        if rolling_days:
+            cutoff = now_utc - timedelta(days=rolling_days)
+            query += f" AND occurred_at >= ${len(params)+1}"
+            params.append(cutoff)
 
-            response = await client.get(url, params=params)
-            response.raise_for_status()
+        # Add ordering and pagination
+        offset = (page - 1) * page_size
+        query += f" ORDER BY occurred_at DESC LIMIT ${len(params)+1} OFFSET ${len(params)+2}"
+        params.extend([page_size, offset])
 
-            data = response.json()
+        # Get total count
+        count_query = "SELECT COUNT(*) as total FROM incidents WHERE 1=1"
+        count_params = []
+        if rolling_days:
+            count_query += " AND occurred_at >= $1"
+            count_params.append(cutoff)
 
-            # Transform to match mobile app expectations
-            incidents = []
-            for inc in data.get("incidents", []):
-                incidents.append({
-                    "id": inc["id"],
-                    "incident_type": inc["incident_type"],
-                    "latitude": inc["latitude"],
-                    "longitude": inc["longitude"],
-                    "description": inc.get("summary", ""),
-                    "severity": inc.get("severity", 2),
-                    "status": "active",
-                    "verification_status": "verified",
-                    "occurred_at": inc["occurred_at"],
-                    "created_at": inc.get("created_at", inc["occurred_at"]),
-                    "updated_at": inc.get("updated_at", inc["occurred_at"]),
-                    "source": inc.get("source", "polisen"),
-                    "source_id": inc.get("external_id"),
-                    "location_name": inc.get("location_name"),
-                    "confidence_score": 1.0,
-                    "user_id": None,
-                    "is_anonymous": False,
-                    "media_count": 0,
-                    "comment_count": 0,
-                    "metadata": {},
-                    "hours_ago": 0.0
-                })
+        # Execute queries
+        results = await conn.fetch(query, *params)
+        count_result = await conn.fetchrow(count_query, *count_params)
+        total = count_result['total'] if count_result else 0
 
-            return {
-                "total": data.get("total", len(incidents)),
-                "page": page,
-                "page_size": page_size,
-                "total_pages": (data.get("total", len(incidents)) + page_size - 1) // page_size,
-                "incidents": incidents
-            }
+        # Transform to mobile app format
+        incidents = []
+        for row in results:
+            # Calculate hours_ago
+            occurred_at = row['occurred_at']
+            if occurred_at.tzinfo is not None:
+                hours_ago = (now_utc - occurred_at).total_seconds() / 3600
+            else:
+                occurred_at_utc = occurred_at.replace(tzinfo=timezone.utc)
+                hours_ago = (now_utc - occurred_at_utc).total_seconds() / 3600
+
+            incidents.append({
+                "id": str(row['id']),
+                "incident_type": row.get('incident_type', 'Unknown'),
+                "latitude": float(row['latitude']) if row.get('latitude') else 0.0,
+                "longitude": float(row['longitude']) if row.get('longitude') else 0.0,
+                "description": row.get('summary', ''),
+                "severity": int(row.get('severity', 2)) if str(row.get('severity', '2')).isdigit() else 2,
+                "status": "active",
+                "verification_status": "verified",
+                "occurred_at": row['occurred_at'].isoformat() if row.get('occurred_at') else None,
+                "created_at": row['created_at'].isoformat() if row.get('created_at') else None,
+                "updated_at": row['updated_at'].isoformat() if row.get('updated_at') else None,
+                "source": row.get('source', 'polisen'),
+                "source_id": row.get('external_id'),
+                "location_name": row.get('location_name'),
+                "confidence_score": 1.0,
+                "user_id": None,
+                "is_anonymous": False,
+                "media_count": 0,
+                "comment_count": 0,
+                "metadata": {},
+                "hours_ago": hours_ago
+            })
+
+        await conn.close()
+
+        return {
+            "total": total,
+            "page": page,
+            "page_size": page_size,
+            "total_pages": (total + page_size - 1) // page_size,
+            "incidents": incidents
+        }
 
     except Exception as e:
-        logger.error(f"Error proxying to Atlas Intelligence: {e}")
+        logger.error(f"Error fetching incidents from database: {e}", exc_info=True)
         return {
             "total": 0,
             "page": page,

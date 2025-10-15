@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  backend:
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend/models:/app/models
+      - ./backend/uploads:/app/uploads
+      - ./backend/atlas.db:/app/atlas.db
+    environment:
+      - PYTHONPATH=/app
+      - LOG_LEVEL=INFO
+    devices:
+      - /dev/video0:/dev/video0  # Camera access
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_API_URL=http://localhost:8000
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  models_data:
+  upload_data:

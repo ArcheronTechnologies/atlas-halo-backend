@@ -1,0 +1,22 @@
+{
+  "threat_type": "RPG_LAUNCH",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "mountain",
+  "generated_at": "2025-09-22T11:11:13.379275",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.17330172693428605,
+  "filename": "RPG_LAUNCH_mountain_0129.wav",
+  "file_path": "complete_27_class_military_collection/RPG_LAUNCH_mountain_0129.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.17330172657966614,
+    "dynamic_range_db": 52.124748576074595,
+    "snr_db": 2.775070870384586,
+    "thd_percent": 57.1408216031467
+  },
+  "sample_index": 129,
+  "threat_category": "IMMEDIATE_LETHAL",
+  "priority_level": "CRITICAL"
+}

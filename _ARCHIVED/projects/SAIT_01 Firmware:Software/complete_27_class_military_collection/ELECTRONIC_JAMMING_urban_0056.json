@@ -1,0 +1,22 @@
+{
+  "threat_type": "ELECTRONIC_JAMMING",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "urban",
+  "generated_at": "2025-09-22T11:11:39.881419",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.18884798647643047,
+  "filename": "ELECTRONIC_JAMMING_urban_0056.wav",
+  "file_path": "complete_27_class_military_collection/ELECTRONIC_JAMMING_urban_0056.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.18884798884391785,
+    "dynamic_range_db": 53.454393944427096,
+    "snr_db": 0.18536503724966874,
+    "thd_percent": 204.82867489691117
+  },
+  "sample_index": 56,
+  "threat_category": "SURVEILLANCE_RECON",
+  "priority_level": "LOW_MEDIUM"
+}

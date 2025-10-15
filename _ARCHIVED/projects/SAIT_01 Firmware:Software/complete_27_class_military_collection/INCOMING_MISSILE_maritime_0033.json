@@ -1,0 +1,22 @@
+{
+  "threat_type": "INCOMING_MISSILE",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "maritime",
+  "generated_at": "2025-09-22T11:11:09.770600",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.26837793703410445,
+  "filename": "INCOMING_MISSILE_maritime_0033.wav",
+  "file_path": "complete_27_class_military_collection/INCOMING_MISSILE_maritime_0033.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.2683779299259186,
+    "dynamic_range_db": 52.647076341784256,
+    "snr_db": 3.546620290047861,
+    "thd_percent": 14.6465463985918
+  },
+  "sample_index": 33,
+  "threat_category": "IMMEDIATE_LETHAL",
+  "priority_level": "CRITICAL"
+}

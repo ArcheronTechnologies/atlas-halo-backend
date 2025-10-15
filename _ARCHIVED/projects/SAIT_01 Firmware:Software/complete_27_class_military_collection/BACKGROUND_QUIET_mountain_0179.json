@@ -1,0 +1,22 @@
+{
+  "threat_type": "BACKGROUND_QUIET",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "mountain",
+  "generated_at": "2025-09-22T11:11:03.259934",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.21379233451520718,
+  "filename": "BACKGROUND_QUIET_mountain_0179.wav",
+  "file_path": "complete_27_class_military_collection/BACKGROUND_QUIET_mountain_0179.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.2137923389673233,
+    "dynamic_range_db": 52.344495788493326,
+    "snr_db": 0.2161782943704117,
+    "thd_percent": 65.01633460712708
+  },
+  "sample_index": 179,
+  "threat_category": "NON_THREAT",
+  "priority_level": "LOW"
+}

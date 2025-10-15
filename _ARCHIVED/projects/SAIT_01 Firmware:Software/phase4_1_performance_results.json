@@ -1,0 +1,19 @@
+{
+  "military_ready": true,
+  "performance_score": 87.14285714285714,
+  "total_tests": 35,
+  "excellent_tests": 18,
+  "good_tests": 4,
+  "acceptable_tests": 13,
+  "poor_tests": 0,
+  "component_results": {
+    "Enhanced QADT-R": true,
+    "CMSIS-NN Optimization": true,
+    "Byzantine Consensus": true,
+    "Dual-Core Coordination": true,
+    "Secure Boot": true,
+    "Integrated System": true,
+    "Military Scenarios": true
+  },
+  "total_time_ms": 0.14710426330566406
+}

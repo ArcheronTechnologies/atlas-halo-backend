@@ -1,0 +1,22 @@
+{
+  "threat_type": "BACKGROUND_QUIET",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "forest",
+  "generated_at": "2025-09-22T11:11:03.213135",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.22770586197188727,
+  "filename": "BACKGROUND_QUIET_forest_0172.wav",
+  "file_path": "complete_27_class_military_collection/BACKGROUND_QUIET_forest_0172.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.22770586609840393,
+    "dynamic_range_db": 53.38465407857747,
+    "snr_db": 0.22250317486857862,
+    "thd_percent": 838.94489493838
+  },
+  "sample_index": 172,
+  "threat_category": "NON_THREAT",
+  "priority_level": "LOW"
+}

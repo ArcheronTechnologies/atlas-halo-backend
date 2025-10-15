@@ -1,0 +1,22 @@
+{
+  "threat_type": "FRIENDLY_VEHICLE",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "maritime",
+  "generated_at": "2025-09-22T11:11:06.960083",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.3872701004702846,
+  "filename": "FRIENDLY_VEHICLE_maritime_0058.wav",
+  "file_path": "complete_27_class_military_collection/FRIENDLY_VEHICLE_maritime_0058.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.38727012276649475,
+    "dynamic_range_db": 48.73242452377683,
+    "snr_db": 0.5102750823736232,
+    "thd_percent": 83.79226169085908
+  },
+  "sample_index": 58,
+  "threat_category": "NON_THREAT",
+  "priority_level": "LOW"
+}

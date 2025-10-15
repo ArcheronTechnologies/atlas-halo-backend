@@ -1,0 +1,22 @@
+{
+  "threat_type": "TANK_TRACKED",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "forest",
+  "generated_at": "2025-09-22T11:11:18.184407",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.2333518084131522,
+  "filename": "TANK_TRACKED_forest_0162.wav",
+  "file_path": "complete_27_class_military_collection/TANK_TRACKED_forest_0162.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.23335181176662445,
+    "dynamic_range_db": 53.523410509114115,
+    "snr_db": 0.28114427283374815,
+    "thd_percent": 131.13508554355602
+  },
+  "sample_index": 162,
+  "threat_category": "DIRECT_COMBAT",
+  "priority_level": "HIGH"
+}

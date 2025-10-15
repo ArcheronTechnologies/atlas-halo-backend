@@ -5,7 +5,6 @@ Critical infrastructure for Atlas AI production deployment
 """
 
 import asyncio
-import asyncpg
 import logging
 from datetime import datetime, timedelta
 from typing import Dict, List, Optional, Any, Tuple, Sequence
@@ -15,14 +14,27 @@ from dataclasses import dataclass, asdict
 from contextlib import asynccontextmanager
 import os
 from pathlib import Path
+from urllib.parse import quote_plus
+
+# asyncpg imports (replacing psycopg_pool for Scaleway compatibility)
+import asyncpg
 
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sessionmaker
 from sqlalchemy.orm import declarative_base, relationship
 from sqlalchemy import Column, Integer, String, DateTime, Date, Float, Boolean, Text, ForeignKey, Index, UniqueConstraint, text
-from geoalchemy2 import Geometry, Geography
-from geoalchemy2.functions import ST_Distance, ST_DWithin, ST_Point, ST_AsGeoJSON
-import geoalchemy2.functions as func
 from sqlalchemy.dialects.postgresql import JSONB
+
+# Optional geospatial dependencies
+try:
+    from geoalchemy2 import Geometry, Geography
+    from geoalchemy2.functions import ST_Distance, ST_DWithin, ST_Point, ST_AsGeoJSON
+    import geoalchemy2.functions as geofunc
+    GEOSPATIAL_AVAILABLE = True
+except ImportError:
+    GEOSPATIAL_AVAILABLE = False
+    Geometry = Geography = ST_Distance = ST_DWithin = ST_Point = ST_AsGeoJSON = None
+    geofunc = None
+    logging.warning("⚠️ geoalchemy2 not available - geospatial features disabled")
 
 from ..analytics import h3_utils
 from ..common.performance import performance_tracked
@@ -44,6 +56,15 @@ def _maybe_float(value: Any, default: Optional[float] = 0.0) -> Optional[float]:
     except (TypeError, ValueError):
         return default
 
+
+def _location_column(nullable: bool = False):
+    """Create a location column - Geography if available, otherwise Text placeholder"""
+    if GEOSPATIAL_AVAILABLE:
+        return Column(Geography('POINT', srid=4326), nullable=nullable)
+    else:
+        # Fallback: Store as text "lat,lon" when PostGIS unavailable
+        return Column(Text, nullable=nullable)
+
 class CrimeIncident(Base):
     """Crime incident with geospatial indexing"""
     __tablename__ = 'crime_incidents'
@@ -54,7 +75,7 @@ class CrimeIncident(Base):
     description = Column(Text)
     
     # PostGIS geometry column for efficient spatial queries
-    location = Column(Geography('POINT', srid=4326), nullable=False)
+    location = _location_column(nullable=False)
     latitude = Column(Float, nullable=False)  # Redundant for easy access
     longitude = Column(Float, nullable=False)
     
@@ -77,15 +98,20 @@ class CrimeIncident(Base):
     incident_metadata = Column(JSONB, default=dict, name='metadata')
 
     # Spatial and temporal indexes
-    __table_args__ = (
-        Index('idx_crime_location_gist', location, postgresql_using='gist'),
-        Index('idx_crime_occurred_at', occurred_at),
-        Index('idx_crime_type_severity', incident_type, severity),
-        Index('idx_crime_source', source),
-        Index('idx_crime_status', status),
-        # Unique constraint to prevent duplicate incidents from same source
-        UniqueConstraint('source', 'source_id', name='uq_crime_source_id'),
-    )
+    def __table_args__(cls):
+        args = [
+            Index('idx_crime_occurred_at', 'occurred_at'),
+            Index('idx_crime_type_severity', 'incident_type', 'severity'),
+            Index('idx_crime_source', 'source'),
+            Index('idx_crime_status', 'status'),
+            UniqueConstraint('source', 'source_id', name='uq_crime_source_id'),
+        ]
+        # Only add GIST index if PostGIS is available
+        if GEOSPATIAL_AVAILABLE:
+            args.insert(0, Index('idx_crime_location_gist', 'location', postgresql_using='gist'))
+        return tuple(args)
+
+    __table_args__ = __table_args__(None)
 
 class User(Base):
     """User accounts with authentication data"""
@@ -108,7 +134,7 @@ class User(Base):
     last_login = Column(DateTime)
     
     # User preferences and location
-    home_location = Column(Geography('POINT', srid=4326))
+    home_location = _location_column(nullable=True)
     notification_radius = Column(Float, default=5000)  # meters
     
     # Relationships
@@ -129,7 +155,7 @@ class UserAlert(Base):
     is_dismissed = Column(Boolean, default=False)
     
     # Geospatial alert data
-    trigger_location = Column(Geography('POINT', srid=4326))
+    trigger_location = _location_column(nullable=True)
     distance_from_user = Column(Float)  # meters
     
     created_at = Column(DateTime, default=datetime.utcnow)
@@ -151,7 +177,7 @@ class IncidentReport(Base):
     severity = Column(Integer, nullable=False)
     
     # Location data
-    location = Column(Geography('POINT', srid=4326), nullable=False)
+    location = _location_column(nullable=False)
     location_accuracy = Column(Float)  # GPS accuracy in meters
     
     # Media attachments
@@ -175,7 +201,7 @@ class PredictionCache(Base):
     id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
     
     # Prediction area (could be point or polygon)
-    location = Column(Geography('POINT', srid=4326), nullable=False)
+    location = _location_column(nullable=False)
     grid_cell_id = Column(String)  # For grid-based predictions
     
     # Prediction data
@@ -194,13 +220,18 @@ class PredictionCache(Base):
     
     created_at = Column(DateTime, default=datetime.utcnow)
     expires_at = Column(DateTime, nullable=False)
-    
+
     # Spatial index for fast location queries
-    __table_args__ = (
-        Index('idx_prediction_location_gist', location, postgresql_using='gist'),
-        Index('idx_prediction_temporal', prediction_start, prediction_end),
-        Index('idx_prediction_expires', expires_at),
-    )
+    def __table_args__(cls):
+        args = [
+            Index('idx_prediction_temporal', 'prediction_start', 'prediction_end'),
+            Index('idx_prediction_expires', 'expires_at'),
+        ]
+        if GEOSPATIAL_AVAILABLE:
+            args.insert(0, Index('idx_prediction_location_gist', 'location', postgresql_using='gist'))
+        return tuple(args)
+
+    __table_args__ = __table_args__(None)
 
 class BraStatistic(Base):
     """Brå PxWeb aggregate statistics (stored in public schema).
@@ -251,7 +282,7 @@ class RegionDimension(Base):
     county_code = Column(String)
     county_name = Column(String)
     polisen_region = Column(String)
-    centroid = Column(Geography('POINT', srid=4326))
+    centroid = _location_column(nullable=True)
     area_sq_km = Column(Float)
     attributes = Column(JSONB, default=dict)
     created_at = Column(DateTime, default=datetime.utcnow)
@@ -396,18 +427,43 @@ class BraFeatures(Base):
 @dataclass
 class DatabaseConfig:
     """Database connection configuration - supports Railway DATABASE_URL or individual vars"""
-    host: str = os.getenv('POSTGRES_HOST', 'localhost')
-    port: int = int(os.getenv('POSTGRES_PORT', '5432'))
-    database: str = os.getenv('POSTGRES_DB', 'atlas_ai')
-    username: str = os.getenv('POSTGRES_USER', 'atlas_user')
-    password: str = os.getenv('POSTGRES_PASSWORD', 'secure_password')
-    pool_size: int = int(os.getenv('POSTGRES_POOL_SIZE', '10'))
-    max_overflow: int = int(os.getenv('POSTGRES_MAX_OVERFLOW', '20'))
+    host: str = None
+    port: int = None
+    database: str = None
+    username: str = None
+    password: str = None
+    pool_size: int = None
+    max_overflow: int = None
+
+    def __post_init__(self):
+        """Read environment variables at initialization time, not at class definition time"""
+        if self.host is None:
+            self.host = os.getenv('POSTGRES_HOST', 'localhost')
+            logger.info(f"DatabaseConfig: POSTGRES_HOST = {self.host}")
+        if self.port is None:
+            self.port = int(os.getenv('POSTGRES_PORT', '5432'))
+            logger.info(f"DatabaseConfig: POSTGRES_PORT = {self.port}")
+        if self.database is None:
+            self.database = os.getenv('POSTGRES_DB', 'atlas_ai')
+            logger.info(f"DatabaseConfig: POSTGRES_DB = {self.database}")
+        if self.username is None:
+            self.username = os.getenv('POSTGRES_USER', 'atlas_user')
+        if self.password is None:
+            self.password = os.getenv('POSTGRES_PASSWORD', 'secure_password')
+            logger.info(f"DatabaseConfig: password length = {len(self.password)}")
+        if self.pool_size is None:
+            self.pool_size = int(os.getenv('POSTGRES_POOL_SIZE', '10'))
+        if self.max_overflow is None:
+            self.max_overflow = int(os.getenv('POSTGRES_MAX_OVERFLOW', '20'))
 
     @classmethod
     def from_url(cls, database_url: str):
         """Parse Railway's DATABASE_URL format: postgres://user:pass@host:port/db or postgresql://..."""
         import re
+        # Strip SSL/query parameters for parsing (psycopg3 handles SSL in conninfo)
+        if '?' in database_url:
+            database_url = database_url.split('?')[0]
+
         # Support both postgres:// and postgresql:// schemes
         match = re.match(r'postgres(?:ql)?://([^:]+):([^@]+)@([^:]+):(\d+)/(.+)', database_url)
         if match:
@@ -433,14 +489,19 @@ class PostGISDatabase:
     async def initialize(self):
         """Initialize database connection and setup"""
         try:
-            # Create SQLAlchemy async engine
+            # Create SQLAlchemy async engine with psycopg
+            # URL-encode password to handle special characters like @ : [ ] / etc.
+            encoded_password = quote_plus(self.config.password)
             database_url = (
-                f"postgresql+asyncpg://{self.config.username}:{self.config.password}"
+                f"postgresql+psycopg://{self.config.username}:{encoded_password}"
                 f"@{self.config.host}:{self.config.port}/{self.config.database}"
             )
-            
+
+            # Scaleway managed databases require SSL
+            connect_args = {"sslmode": "require"}
             self.engine = create_async_engine(
                 database_url,
+                connect_args=connect_args,
                 pool_size=self.config.pool_size,
                 max_overflow=self.config.max_overflow,
                 echo=False,  # Set to True for SQL debugging
@@ -454,25 +515,30 @@ class PostGISDatabase:
                 expire_on_commit=False
             )
             
-            # Create direct asyncpg pool for raw queries (ensure search_path)
-            async def _init_conn(conn):
-                try:
-                    await conn.execute("SET search_path TO public")
-                except Exception:
-                    pass
+            # Create asyncpg pool for raw queries (Scaleway-compatible, same as Atlas Intelligence)
+            # Scaleway managed databases require SSL
+            logger.info(f"🔄 Creating asyncpg pool for {self.config.host}:{self.config.port}/{self.config.database}")
+
+            async def init_conn(conn):
+                """Configure each connection with search_path"""
+                await conn.execute("SET search_path TO public")
+
             self.pool = await asyncpg.create_pool(
                 host=self.config.host,
                 port=self.config.port,
-                database=self.config.database,
                 user=self.config.username,
                 password=self.config.password,
+                database=self.config.database,
+                ssl='require',  # Required for Scaleway Managed PostgreSQL
                 min_size=5,
                 max_size=20,
-                timeout=30,  # Connection timeout in seconds
-                command_timeout=60,  # Query timeout in seconds
-                max_inactive_connection_lifetime=300,  # 5 minutes
-                init=_init_conn
+                timeout=30,
+                command_timeout=60,
+                max_inactive_connection_lifetime=300,
+                init=init_conn
             )
+
+            logger.info("✅ asyncpg pool created successfully")
             
             # Ensure PostGIS extension is enabled
             await self._ensure_postgis_extension()
@@ -512,12 +578,14 @@ class PostGISDatabase:
         if not self.pool:
             return
         async with self.pool.acquire() as conn:
-            exists = await conn.fetchval("SELECT to_regclass('public.bra_statistics') IS NOT NULL")
-            if not exists:
+            exists = await conn.fetchrow("SELECT to_regclass('public.bra_statistics') IS NOT NULL")
+            if not exists or not exists[0]:
                 return
 
-            update_result = await conn.execute("UPDATE bra_statistics SET offence_code = 'ALL' WHERE offence_code IS NULL")
-            delete_result = await conn.execute(
+            result = await conn.execute("UPDATE bra_statistics SET offence_code = 'ALL' WHERE offence_code IS NULL")
+            updated = int(result.split()[-1]) if result and result.split() else 0
+
+            result = await conn.execute(
                 """
                 DELETE FROM bra_statistics a
                 USING bra_statistics b
@@ -528,20 +596,15 @@ class PostGISDatabase:
                   AND COALESCE(a.offence_code, 'ALL') = COALESCE(b.offence_code, 'ALL')
                 """
             )
+            deduped = int(result.split()[-1]) if result and result.split() else 0
+
             await conn.execute(
                 """
                 CREATE UNIQUE INDEX IF NOT EXISTS idx_bra_statistics_unique
                 ON bra_statistics (table_id, region_code, period, offence_code)
                 """
             )
-            try:
-                updated = int(update_result.split()[-1]) if update_result else 0
-            except Exception:
-                updated = 0
-            try:
-                deduped = int(delete_result.split()[-1]) if delete_result else 0
-            except Exception:
-                deduped = 0
+
             if updated or deduped:
                 logger.info(
                     "🧹 Normalized existing Brå statistics rows (offence_code updated=%s, duplicates removed=%s)",
@@ -671,26 +734,27 @@ class PostGISDatabase:
             
             # Spatial query with PostGIS
             query = """
-            SELECT 
+            SELECT
                 id, incident_type, severity, description,
                 latitude, longitude,
                 occurred_at, source, confidence_score,
-                ST_Distance(location, ST_Point($1, $2)::geography) as distance_meters
-            FROM crime_incidents 
-            WHERE 
-                ST_DWithin(location, ST_Point($1, $2)::geography, $3)
-                AND occurred_at >= $4
+                ST_Distance(location, ST_Point(%s, %s)::geography) as distance_meters
+            FROM crime_incidents
+            WHERE
+                ST_DWithin(location, ST_Point(%s, %s)::geography, %s)
+                AND occurred_at >= %s
                 AND status = 'active'
             ORDER BY distance_meters ASC
-            LIMIT $5;
+            LIMIT %s;
             """
-            
+
             async with self.pool.acquire() as conn:
-                rows = await conn.fetch(
-                    query, 
-                    longitude, latitude, radius_meters, time_threshold, limit
+                await conn.execute(
+                    query,
+                    (longitude, latitude, longitude, latitude, radius_meters, time_threshold, limit)
                 )
-                
+                rows = await conn.fetch()
+
                 incidents = []
                 for row in rows:
                     incidents.append({
@@ -742,14 +806,15 @@ class PostGISDatabase:
     async def get_user_by_username(self, username: str) -> Optional[Dict[str, Any]]:
         """Get user by username for authentication"""
         query = """
-        SELECT id, username, email, hashed_password, full_name, role, 
+        SELECT id, username, email, hashed_password, full_name, role,
                is_active, is_verified, created_at, last_login
-        FROM users 
-        WHERE username = $1 AND is_active = true;
+        FROM users
+        WHERE username = %s AND is_active = true;
         """
-        
+
         async with self.pool.acquire() as conn:
-            row = await conn.fetchrow(query, username)
+            await conn.execute(query, (username,))
+            row = await conn.fetchrow()
             if row:
                 return dict(row)
             return None
@@ -813,25 +878,26 @@ class PostGISDatabase:
     async def get_cached_predictions(
         self,
         latitude: float,
-        longitude: float, 
+        longitude: float,
         radius_meters: float = 1000
     ) -> List[Dict[str, Any]]:
         """Get cached predictions near location"""
         query = """
-        SELECT 
+        SELECT
             id, crime_type, predicted_probability, confidence_score,
             prediction_start, prediction_end, model_version,
-            ST_Distance(location, ST_Point($1, $2)::geography) as distance_meters
-        FROM prediction_cache 
-        WHERE 
-            ST_DWithin(location, ST_Point($1, $2)::geography, $3)
+            ST_Distance(location, ST_Point(%s, %s)::geography) as distance_meters
+        FROM prediction_cache
+        WHERE
+            ST_DWithin(location, ST_Point(%s, %s)::geography, %s)
             AND expires_at > NOW()
         ORDER BY distance_meters ASC;
         """
-        
+
         async with self.pool.acquire() as conn:
-            rows = await conn.fetch(query, longitude, latitude, radius_meters)
-            
+            await conn.execute(query, (longitude, latitude, longitude, latitude, radius_meters))
+            rows = await conn.fetch()
+
             predictions = []
             for row in rows:
                 predictions.append({
@@ -844,24 +910,24 @@ class PostGISDatabase:
                     'model_version': row['model_version'],
                     'distance_meters': float(row['distance_meters'])
                 })
-            
+
             return predictions
     
     async def cleanup_expired_data(self):
         """Clean up expired predictions and old data"""
         async with self.pool.acquire() as conn:
             # Clean expired predictions
-            deleted_predictions = await conn.execute(
-                "DELETE FROM prediction_cache WHERE expires_at < NOW();"
-            )
-            
+            result = await conn.execute("DELETE FROM prediction_cache WHERE expires_at < NOW();")
+            deleted_predictions = int(result.split()[-1]) if result and result.split() else 0
+
             # Clean old alerts (older than 30 days)
             thirty_days_ago = datetime.utcnow() - timedelta(days=30)
-            deleted_alerts = await conn.execute(
+            result = await conn.execute(
                 "DELETE FROM user_alerts WHERE created_at < $1;",
                 thirty_days_ago
             )
-            
+            deleted_alerts = int(result.split()[-1]) if result and result.split() else 0
+
             logger.info(f"🧹 Cleaned {deleted_predictions} predictions, {deleted_alerts} alerts")
 
     # -------------- SCB population support --------------
@@ -880,7 +946,7 @@ class PostGISDatabase:
             ))
         insert_sql = """
             INSERT INTO scb_population (id, region_code, region_name, period, population, created_at)
-            VALUES ($1,$2,$3,$4,$5,NOW())
+            VALUES (%s,%s,%s,%s,%s,NOW())
         """
         async with self.pool.acquire() as conn:
             await conn.executemany(insert_sql, prepared)
@@ -906,7 +972,7 @@ class PostGISDatabase:
         insert_sql = """
             INSERT INTO bra_features (
                 id, region_code, region_name, period, total_offences, offences_per_100k, clearance_rate, sources, created_at
-            ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,NOW())
+            ) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,NOW())
         """
         async with self.pool.acquire() as conn:
             await conn.executemany(insert_sql, prepared)
@@ -926,11 +992,12 @@ class PostGISDatabase:
         sql = """
             SELECT total_offences, offences_per_100k, clearance_rate
             FROM bra_features
-            WHERE COALESCE(region_code,'') = $1 AND period = $2
+            WHERE COALESCE(region_code,'') = %s AND period = %s
             LIMIT 1
         """
         async with self.pool.acquire() as conn:
-            row = await conn.fetchrow(sql, region_code, period)
+            await conn.execute(sql, (region_code, period))
+            row = await conn.fetchrow()
         if not row:
             return {
                 'total_offences': 0.0,
@@ -1000,7 +1067,7 @@ class PostGISDatabase:
             INSERT INTO bra_statistics (
                 id, table_id, region_code, region_name, offence_code, offence_name,
                 period, period_date, value, unit, extra, created_at
-            ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11, NOW())
+            ) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s, NOW())
             ON CONFLICT (table_id, region_code, period, offence_code)
             DO UPDATE SET
                 region_name = COALESCE(EXCLUDED.region_name, bra_statistics.region_name),
@@ -1067,10 +1134,10 @@ class PostGISDatabase:
                 wind_direction_deg, humidity, pressure_hpa, snow_depth_cm,
                 conditions, created_at, updated_at
             ) VALUES (
-                $1, $2, $3, $4, $5, $6,
-                $7, $8, $9, $10,
-                $11, $12, $13, $14,
-                $15, NOW(), NOW()
+                %s, %s, %s, %s, %s, %s,
+                %s, %s, %s, %s,
+                %s, %s, %s, %s,
+                %s, NOW(), NOW()
             )
             ON CONFLICT (h3_8, observation_time, source)
             DO UPDATE SET
@@ -1133,8 +1200,8 @@ class PostGISDatabase:
                 avg_severity, rolling_7d, rolling_30d, population, features,
                 created_at, updated_at
             ) VALUES (
-                $1, $2, $3, $4, $5, $6,
-                $7, $8, $9, $10, $11,
+                %s, %s, %s, %s, %s, %s,
+                %s, %s, %s, %s, %s,
                 NOW(), NOW()
             )
             ON CONFLICT (h3, feature_date, crime_family)
@@ -1174,42 +1241,43 @@ class PostGISDatabase:
         async with self.pool.acquire() as conn:
             while True:
                 where_clause = " OR ".join(f"{col} IS NULL" for col in target_columns)
-                rows = await conn.fetch(
+                await conn.execute(
                     f"""
                         SELECT id, latitude, longitude
                         FROM historical_crime_data
                         WHERE {where_clause}
-                        LIMIT $1
+                        LIMIT %s
                     """,
-                    chunk_size,
+                    (chunk_size,)
                 )
+                rows = await conn.fetch()
                 if not rows:
                     break
 
-                updates = []
-                for row in rows:
-                    lat = row['latitude']
-                    lon = row['longitude']
-                    indexes = h3_utils.event_h3_indexes(lat, lon, resolutions)
-                    updates.append(
-                        (
-                            indexes.get(8),
-                            indexes.get(9),
-                            row['id'],
+                    updates = []
+                    for row in rows:
+                        lat = row['latitude']
+                        lon = row['longitude']
+                        indexes = h3_utils.event_h3_indexes(lat, lon, resolutions)
+                        updates.append(
+                            (
+                                indexes.get(8),
+                                indexes.get(9),
+                                row['id'],
+                            )
                         )
-                    )
 
-                await conn.executemany(
-                    """
-                        UPDATE historical_crime_data
-                        SET
-                            h3_8 = COALESCE($1, h3_8),
-                            h3_9 = COALESCE($2, h3_9)
-                        WHERE id = $3
-                    """,
-                    updates,
-                )
-                updated_rows += len(updates)
+                    await conn.executemany(
+                        """
+                            UPDATE historical_crime_data
+                            SET
+                                h3_8 = COALESCE(%s, h3_8),
+                                h3_9 = COALESCE(%s, h3_9)
+                            WHERE id = %s
+                        """,
+                        updates,
+                    )
+                    updated_rows += len(updates)
 
         if updated_rows:
             logger.info("Backfilled H3 indexes for %s records", updated_rows)
@@ -1250,8 +1318,8 @@ class PostGISDatabase:
                 break_name, week_of_year, month, weekday, extras,
                 created_at, updated_at
             ) VALUES (
-                $1, $2, $3, $4,
-                $5, $6, $7, $8, $9,
+                %s, %s, %s, %s,
+                %s, %s, %s, %s, %s,
                 NOW(), NOW()
             )
             ON CONFLICT (calendar_date)
@@ -1315,8 +1383,8 @@ class PostGISDatabase:
                 latitude, longitude, h3_8, h3_9, attributes,
                 created_at, updated_at
             ) VALUES (
-                $1, $2, $3, $4, $5, $6,
-                $7, $8, $9, $10, $11,
+                %s, %s, %s, %s, %s, %s,
+                %s, %s, %s, %s, %s,
                 NOW(), NOW()
             )
             ON CONFLICT (source, external_id)
@@ -1354,12 +1422,13 @@ class PostGISDatabase:
         query = """
             SELECT offence_code, offence_name, SUM(value) AS v
             FROM bra_statistics
-            WHERE table_id = $1 AND region_code = $2 AND period = $3
+            WHERE table_id = %s AND region_code = %s AND period = %s
             GROUP BY offence_code, offence_name
             ORDER BY v DESC
         """
         async with self.pool.acquire() as conn:
-            rows = await conn.fetch(query, table_id, region_code, period)
+            await conn.execute(query, (table_id, region_code, period))
+            rows = await conn.fetch()
 
         if not rows:
             return {
@@ -1382,33 +1451,36 @@ class PostGISDatabase:
         """Get database health and performance metrics"""
         async with self.pool.acquire() as conn:
             # Database size
-            db_size_row = await conn.fetchrow(
-                "SELECT pg_size_pretty(pg_database_size($1)) as size;",
-                self.config.database
+            await conn.execute(
+                "SELECT pg_size_pretty(pg_database_size(%s)) as size;",
+                (self.config.database,)
             )
-            
+            db_size_row = await conn.fetchrow()
+
             # Table row counts
-            tables_info = await conn.fetch("""
+            await conn.execute("""
                 SELECT schemaname, tablename, n_tup_ins, n_tup_upd, n_tup_del
-                FROM pg_stat_user_tables 
+                FROM pg_stat_user_tables
                 WHERE schemaname = 'public';
             """)
-            
+            tables_info = await conn.fetch()
+
             # Connection stats
-            conn_stats = await conn.fetchrow("""
+            await conn.execute("""
                 SELECT count(*) as total_connections,
                        count(*) FILTER (WHERE state = 'active') as active_connections
-                FROM pg_stat_activity 
+                FROM pg_stat_activity
                 WHERE datname = $1;
             """, self.config.database)
-            
-            return {
-                'database_size': db_size_row['size'],
-                'total_connections': conn_stats['total_connections'],
-                'active_connections': conn_stats['active_connections'],
-                'tables': [dict(row) for row in tables_info],
-                'pool_size': len(self.pool._holders) if self.pool else 0
-            }
+            conn_stats = await conn.fetchrow()
+
+        return {
+            'database_size': db_size_row['size'],
+            'total_connections': conn_stats['total_connections'],
+            'active_connections': conn_stats['active_connections'],
+            'tables': [dict(row) for row in tables_info],
+            'pool_size': self.pool.get_size() if self.pool else 0
+        }
     
     async def store_crime_incident(self, incident_data: Dict[str, Any]) -> str:
         """Store crime incident - alias for store_incident"""
@@ -1432,18 +1504,19 @@ class PostGISDatabase:
     async def get_recent_incidents(self, hours_back: int = 24, limit: int = 100) -> List[Dict[str, Any]]:
         """Get recent incidents within specified hours"""
         cutoff_time = datetime.utcnow() - timedelta(hours=hours_back)
-        
+
         query = """
         SELECT id, incident_type, severity, description, latitude, longitude,
                occurred_at, source, confidence_score
-        FROM crime_incidents 
-        WHERE occurred_at >= $1 AND status = 'active'
-        ORDER BY occurred_at DESC 
-        LIMIT $2;
+        FROM crime_incidents
+        WHERE occurred_at >= %s AND status = 'active'
+        ORDER BY occurred_at DESC
+        LIMIT %s;
         """
-        
+
         async with self.pool.acquire() as conn:
-            rows = await conn.fetch(query, cutoff_time, limit)
+            await conn.execute(query, (cutoff_time, limit))
+            rows = await conn.fetch()
             return [dict(row) for row in rows]
     
     async def get_incidents_in_area_timeframe(
@@ -1459,35 +1532,39 @@ class PostGISDatabase:
         query = """
         SELECT id, incident_type, severity, description, latitude, longitude,
                occurred_at, source, confidence_score,
-               ST_Distance(location, ST_Point($2, $1)) as distance_meters
-        FROM crime_incidents 
-        WHERE ST_DWithin(location, ST_Point($2, $1), $3)
-          AND occurred_at BETWEEN $4 AND $5
+               ST_Distance(location, ST_Point(%s, %s)) as distance_meters
+        FROM crime_incidents
+        WHERE ST_DWithin(location, ST_Point(%s, %s), %s)
+          AND occurred_at BETWEEN %s AND %s
           AND status = 'active'
         ORDER BY distance_meters ASC, occurred_at DESC
-        LIMIT $6;
+        LIMIT %s;
         """
-        
+
         async with self.pool.acquire() as conn:
-            rows = await conn.fetch(
-                query, 
-                center_lat, center_lng, radius_km * 1000,  # Convert km to meters
-                start_time, end_time, limit
+            await conn.execute(
+                query,
+                (center_lng, center_lat, center_lng, center_lat, radius_km * 1000,
+                 start_time, end_time, limit)
             )
+            rows = await conn.fetch()
             return [dict(row) for row in rows]
     
     async def get_database_stats(self) -> Dict[str, Any]:
         """Get database statistics"""
         async with self.pool.acquire() as conn:
             # Count incidents
-            incident_count = await conn.fetchval("SELECT COUNT(*) FROM crime_incidents WHERE status = 'active';")
-            
-            # Count users  
-            user_count = await conn.fetchval("SELECT COUNT(*) FROM users WHERE is_active = true;")
-            
+            await conn.execute("SELECT COUNT(*) FROM crime_incidents WHERE status = 'active';")
+            incident_count = (await conn.fetchrow())[0]
+
+            # Count users
+            await conn.execute("SELECT COUNT(*) FROM users WHERE is_active = true;")
+            user_count = (await conn.fetchrow())[0]
+
             # Count cached predictions
-            prediction_count = await conn.fetchval("SELECT COUNT(*) FROM prediction_cache WHERE expires_at > NOW();")
-            
+            await conn.execute("SELECT COUNT(*) FROM prediction_cache WHERE expires_at > NOW();")
+            prediction_count = (await conn.fetchrow())[0]
+
             return {
                 'total_incidents': incident_count or 0,
                 'active_users': user_count or 0,
@@ -1501,20 +1578,24 @@ class PostGISDatabase:
     async def execute_query(self, query: str, *params) -> List[Dict[str, Any]]:
         """Execute raw SQL query and return results as list of dictionaries"""
         async with self.pool.acquire() as conn:
-            rows = await conn.fetch(query, *params)
+            if params:
+                rows = await conn.fetch(query, *params)
+            else:
+                rows = await conn.fetch(query)
             return [dict(row) for row in rows]
-    
+
     async def execute_query_single(self, query: str, *params) -> Optional[Dict[str, Any]]:
         """Execute raw SQL query and return single result as dictionary"""
         async with self.pool.acquire() as conn:
-            row = await conn.fetchrow(query, *params)
+            await conn.execute(query, params if params else None)
+            row = await conn.fetchrow()
             return dict(row) if row else None
-    
+
     async def execute_non_query(self, query: str, *params) -> int:
         """Execute non-query SQL statement and return affected row count"""
         async with self.pool.acquire() as conn:
             result = await conn.execute(query, *params)
-            return int(result.split()[-1]) if result else 0
+            return int(result.split()[-1]) if result and result.split() else 0
 
     async def close(self):
         """Close database connections"""
@@ -1522,20 +1603,23 @@ class PostGISDatabase:
             await self.pool.close()
         if self.engine:
             await self.engine.dispose()
-        logger.info("🔒 Database connections closed")
+        logger.info("Database connections closed")
 
 # Singleton instance
-# Check for Railway's DATABASE_URL first, then fall back to individual vars
-_database_config = None
-if os.getenv('DATABASE_URL'):
-    _database_config = DatabaseConfig.from_url(os.getenv('DATABASE_URL'))
-else:
-    _database_config = DatabaseConfig()
-
-database = PostGISDatabase(_database_config)
+_database = None
 
 async def get_database() -> PostGISDatabase:
     """Get database instance - Railway compatible"""
-    if not database.engine:
-        await database.initialize()
-    return database
+    global _database
+    if _database is None:
+        # Create config at runtime, not at module import time
+        # This ensures environment variables are available
+        if os.getenv('DATABASE_URL'):
+            config = DatabaseConfig.from_url(os.getenv('DATABASE_URL'))
+        else:
+            config = DatabaseConfig()
+        _database = PostGISDatabase(config)
+
+    if not _database.engine:
+        await _database.initialize()
+    return _database

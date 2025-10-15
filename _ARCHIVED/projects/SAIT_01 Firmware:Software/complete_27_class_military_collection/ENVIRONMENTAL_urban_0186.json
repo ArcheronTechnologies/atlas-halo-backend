@@ -1,0 +1,22 @@
+{
+  "threat_type": "ENVIRONMENTAL",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "urban",
+  "generated_at": "2025-09-22T11:11:04.881991",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.19349424366807838,
+  "filename": "ENVIRONMENTAL_urban_0186.wav",
+  "file_path": "complete_27_class_military_collection/ENVIRONMENTAL_urban_0186.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.19349424540996552,
+    "dynamic_range_db": 52.811697916973685,
+    "snr_db": 3.064425958240629,
+    "thd_percent": 197.1183192131215
+  },
+  "sample_index": 186,
+  "threat_category": "NON_THREAT",
+  "priority_level": "LOW"
+}

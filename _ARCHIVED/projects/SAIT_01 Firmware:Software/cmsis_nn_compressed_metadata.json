@@ -1,0 +1,24 @@
+{
+  "source_model": "enhanced_qadt_r_compressed.pth",
+  "target_format": "CMSIS-NN q7 (compressed)",
+  "enhanced_with_drone_acoustics": true,
+  "output_classes": 30,
+  "total_compressed_parameters": 1297971,
+  "compression_ratio": 0.1797370296969636,
+  "flash_utilization_percent": 123.78416061401367,
+  "layers_converted": [
+    "conv_scale1",
+    "conv_scale2",
+    "conv_scale3",
+    "conv2",
+    "conv3",
+    "feature_fc1",
+    "feature_fc2",
+    "env_adaptation",
+    "specific_head",
+    "binary_head",
+    "category_head",
+    "confidence_head"
+  ],
+  "compression_timestamp": "Phase_2_5_compressed_conversion"
+}

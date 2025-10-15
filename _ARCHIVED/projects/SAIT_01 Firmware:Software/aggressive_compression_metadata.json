@@ -1,0 +1,10 @@
+{
+  "source_model": "enhanced_qadt_r_best.pth",
+  "compression_type": "aggressive_sparse",
+  "total_memory_bytes": 575300,
+  "flash_utilization_percent": 54.86488342285156,
+  "compression_achieved": true,
+  "layers_compressed": 8,
+  "enhanced_with_drones": true,
+  "output_classes": 30
+}

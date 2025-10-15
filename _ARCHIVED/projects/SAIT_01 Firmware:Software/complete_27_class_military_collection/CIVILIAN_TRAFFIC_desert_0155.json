@@ -1,0 +1,22 @@
+{
+  "threat_type": "CIVILIAN_TRAFFIC",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "desert",
+  "generated_at": "2025-09-22T11:11:06.218257",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.26459278527704666,
+  "filename": "CIVILIAN_TRAFFIC_desert_0155.wav",
+  "file_path": "complete_27_class_military_collection/CIVILIAN_TRAFFIC_desert_0155.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.2645927667617798,
+    "dynamic_range_db": 48.72163269234843,
+    "snr_db": 0.6313540425557114,
+    "thd_percent": 82.6269411675531
+  },
+  "sample_index": 155,
+  "threat_category": "NON_THREAT",
+  "priority_level": "LOW"
+}

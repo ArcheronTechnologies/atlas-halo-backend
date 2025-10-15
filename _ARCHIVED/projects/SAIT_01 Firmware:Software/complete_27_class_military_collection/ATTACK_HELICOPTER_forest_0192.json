@@ -1,0 +1,22 @@
+{
+  "threat_type": "ATTACK_HELICOPTER",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "forest",
+  "generated_at": "2025-09-22T11:11:21.362455",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.35527526471716786,
+  "filename": "ATTACK_HELICOPTER_forest_0192.wav",
+  "file_path": "complete_27_class_military_collection/ATTACK_HELICOPTER_forest_0192.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.3552752733230591,
+    "dynamic_range_db": 49.40560607788258,
+    "snr_db": 1.7077674935364104,
+    "thd_percent": 451.24016254484525
+  },
+  "sample_index": 192,
+  "threat_category": "DIRECT_COMBAT",
+  "priority_level": "HIGH"
+}

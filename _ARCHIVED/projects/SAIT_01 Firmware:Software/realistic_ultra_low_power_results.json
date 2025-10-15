@@ -1,0 +1,465 @@
+{
+  "test_results": [
+    {
+      "battery_type": "high_capacity",
+      "battery_capacity_mah": 5000,
+      "scenario": "remote_surveillance",
+      "mode": "stealth_mode",
+      "days_of_operation": 69.92313613136344,
+      "years_of_operation": 0.19143911329599844,
+      "daily_energy_wh": 0.20787111111111112,
+      "effective_capacity_wh": 14.534999999999998,
+      "energy_analysis": {
+        "total_energy_uj": 748336.0,
+        "daily_energy_mwh": 207.8711111111111,
+        "energy_breakdown": {
+          "system_off": 31680.000000000004,
+          "analog_detector_base": 0.0,
+          "analog_detector_enhanced": 18000.0,
+          "motion_sensor": 691200.0,
+          "wake_and_processing": 7456.0,
+          "radio_transmissions": 0.0
+        },
+        "time_breakdown": {
+          "system_off_hours": 22.0,
+          "base_monitoring_hours": 0,
+          "enhanced_monitoring_hours": 2.0
+        },
+        "event_counts": {
+          "total_wake_events": 16.0,
+          "threat_events": 0.32,
+          "transmission_events": 0,
+          "motion_events": 2.0
+        }
+      },
+      "mode_config": {
+        "description": "Minimum power, motion-activated monitoring",
+        "base_duty_cycle": 0.02,
+        "motion_activation": true,
+        "enhanced_duration_hours": 1,
+        "transmission_enabled": false,
+        "detection_threshold_db": 55
+      }
+    },
+    {
+      "battery_type": "high_capacity",
+      "battery_capacity_mah": 5000,
+      "scenario": "perimeter_guard",
+      "mode": "patrol_mode",
+      "days_of_operation": 66.89535983531309,
+      "years_of_operation": 0.18314951358059708,
+      "daily_energy_wh": 0.21727964444444445,
+      "effective_capacity_wh": 14.534999999999998,
+      "energy_analysis": {
+        "total_energy_uj": 782206.72,
+        "daily_energy_mwh": 217.27964444444444,
+        "energy_breakdown": {
+          "system_off": 27360.000000000004,
+          "analog_detector_base": 0.0,
+          "analog_detector_enhanced": 45000.0,
+          "motion_sensor": 691200.0,
+          "wake_and_processing": 18640.0,
+          "radio_transmissions": 6.719999999999999
+        },
+        "time_breakdown": {
+          "system_off_hours": 19.0,
+          "base_monitoring_hours": 0,
+          "enhanced_monitoring_hours": 5.0
+        },
+        "event_counts": {
+          "total_wake_events": 40.0,
+          "threat_events": 0.8,
+          "transmission_events": 0.5599999999999999,
+          "motion_events": 10.0
+        }
+      },
+      "mode_config": {
+        "description": "Balanced power and detection capability",
+        "base_duty_cycle": 0.1,
+        "motion_activation": true,
+        "enhanced_duration_hours": 0.5,
+        "transmission_enabled": true,
+        "detection_threshold_db": 50
+      }
+    },
+    {
+      "battery_type": "ultra_high",
+      "battery_capacity_mah": 7000,
+      "scenario": "remote_surveillance",
+      "mode": "stealth_mode",
+      "days_of_operation": 97.8923905839088,
+      "years_of_operation": 0.26801475861439783,
+      "daily_energy_wh": 0.20787111111111112,
+      "effective_capacity_wh": 20.348999999999997,
+      "energy_analysis": {
+        "total_energy_uj": 748336.0,
+        "daily_energy_mwh": 207.8711111111111,
+        "energy_breakdown": {
+          "system_off": 31680.000000000004,
+          "analog_detector_base": 0.0,
+          "analog_detector_enhanced": 18000.0,
+          "motion_sensor": 691200.0,
+          "wake_and_processing": 7456.0,
+          "radio_transmissions": 0.0
+        },
+        "time_breakdown": {
+          "system_off_hours": 22.0,
+          "base_monitoring_hours": 0,
+          "enhanced_monitoring_hours": 2.0
+        },
+        "event_counts": {
+          "total_wake_events": 16.0,
+          "threat_events": 0.32,
+          "transmission_events": 0,
+          "motion_events": 2.0
+        }
+      },
+      "mode_config": {
+        "description": "Minimum power, motion-activated monitoring",
+        "base_duty_cycle": 0.02,
+        "motion_activation": true,
+        "enhanced_duration_hours": 1,
+        "transmission_enabled": false,
+        "detection_threshold_db": 55
+      }
+    },
+    {
+      "battery_type": "ultra_high",
+      "battery_capacity_mah": 7000,
+      "scenario": "perimeter_guard",
+      "mode": "patrol_mode",
+      "days_of_operation": 93.65350376943832,
+      "years_of_operation": 0.2564093190128359,
+      "daily_energy_wh": 0.21727964444444445,
+      "effective_capacity_wh": 20.348999999999997,
+      "energy_analysis": {
+        "total_energy_uj": 782206.72,
+        "daily_energy_mwh": 217.27964444444444,
+        "energy_breakdown": {
+          "system_off": 27360.000000000004,
+          "analog_detector_base": 0.0,
+          "analog_detector_enhanced": 45000.0,
+          "motion_sensor": 691200.0,
+          "wake_and_processing": 18640.0,
+          "radio_transmissions": 6.719999999999999
+        },
+        "time_breakdown": {
+          "system_off_hours": 19.0,
+          "base_monitoring_hours": 0,
+          "enhanced_monitoring_hours": 5.0
+        },
+        "event_counts": {
+          "total_wake_events": 40.0,
+          "threat_events": 0.8,
+          "transmission_events": 0.5599999999999999,
+          "motion_events": 10.0
+        }
+      },
+      "mode_config": {
+        "description": "Balanced power and detection capability",
+        "base_duty_cycle": 0.1,
+        "motion_activation": true,
+        "enhanced_duration_hours": 0.5,
+        "transmission_enabled": true,
+        "detection_threshold_db": 50
+      }
+    }
+  ],
+  "successful_configs": [
+    {
+      "battery_type": "ultra_high",
+      "battery_capacity_mah": 7000,
+      "scenario": "remote_surveillance",
+      "mode": "guard_mode",
+      "days_of_operation": 687.5068293323691,
+      "years_of_operation": 1.8822911138463219,
+      "daily_energy_wh": 0.028449344,
+      "effective_capacity_wh": 20.348999999999997,
+      "energy_analysis": {
+        "total_energy_uj": 102417.6384,
+        "daily_energy_mwh": 28.449344,
+        "energy_breakdown": {
+          "system_off": 24192.000000000004,
+          "analog_detector_base": 64800.0,
+          "analog_detector_enhanced": 0.0,
+          "motion_sensor": 0,
+          "wake_and_processing": 13420.8,
+          "radio_transmissions": 4.838399999999999
+        },
+        "time_breakdown": {
+          "system_off_hours": 16.8,
+          "base_monitoring_hours": 7.199999999999999,
+          "enhanced_monitoring_hours": 0
+        },
+        "event_counts": {
+          "total_wake_events": 28.799999999999997,
+          "threat_events": 0.576,
+          "transmission_events": 0.40319999999999995,
+          "motion_events": 2.0
+        }
+      },
+      "mode_config": {
+        "description": "Enhanced detection with moderate power",
+        "base_duty_cycle": 0.3,
+        "motion_activation": false,
+        "enhanced_duration_hours": 0,
+        "transmission_enabled": true,
+        "detection_threshold_db": 45
+      }
+    },
+    {
+      "battery_type": "ultra_high",
+      "battery_capacity_mah": 7000,
+      "scenario": "perimeter_guard",
+      "mode": "guard_mode",
+      "days_of_operation": 687.5068293323691,
+      "years_of_operation": 1.8822911138463219,
+      "daily_energy_wh": 0.028449344,
+      "effective_capacity_wh": 20.348999999999997,
+      "energy_analysis": {
+        "total_energy_uj": 102417.6384,
+        "daily_energy_mwh": 28.449344,
+        "energy_breakdown": {
+          "system_off": 24192.000000000004,
+          "analog_detector_base": 64800.0,
+          "analog_detector_enhanced": 0.0,
+          "motion_sensor": 0,
+          "wake_and_processing": 13420.8,
+          "radio_transmissions": 4.838399999999999
+        },
+        "time_breakdown": {
+          "system_off_hours": 16.8,
+          "base_monitoring_hours": 7.199999999999999,
+          "enhanced_monitoring_hours": 0
+        },
+        "event_counts": {
+          "total_wake_events": 28.799999999999997,
+          "threat_events": 0.576,
+          "transmission_events": 0.40319999999999995,
+          "motion_events": 10.0
+        }
+      },
+      "mode_config": {
+        "description": "Enhanced detection with moderate power",
+        "base_duty_cycle": 0.3,
+        "motion_activation": false,
+        "enhanced_duration_hours": 0,
+        "transmission_enabled": true,
+        "detection_threshold_db": 45
+      }
+    },
+    {
+      "battery_type": "ultra_high",
+      "battery_capacity_mah": 7000,
+      "scenario": "urban_patrol",
+      "mode": "guard_mode",
+      "days_of_operation": 687.5068293323691,
+      "years_of_operation": 1.8822911138463219,
+      "daily_energy_wh": 0.028449344,
+      "effective_capacity_wh": 20.348999999999997,
+      "energy_analysis": {
+        "total_energy_uj": 102417.6384,
+        "daily_energy_mwh": 28.449344,
+        "energy_breakdown": {
+          "system_off": 24192.000000000004,
+          "analog_detector_base": 64800.0,
+          "analog_detector_enhanced": 0.0,
+          "motion_sensor": 0,
+          "wake_and_processing": 13420.8,
+          "radio_transmissions": 4.838399999999999
+        },
+        "time_breakdown": {
+          "system_off_hours": 16.8,
+          "base_monitoring_hours": 7.199999999999999,
+          "enhanced_monitoring_hours": 0
+        },
+        "event_counts": {
+          "total_wake_events": 28.799999999999997,
+          "threat_events": 0.576,
+          "transmission_events": 0.40319999999999995,
+          "motion_events": 30.0
+        }
+      },
+      "mode_config": {
+        "description": "Enhanced detection with moderate power",
+        "base_duty_cycle": 0.3,
+        "motion_activation": false,
+        "enhanced_duration_hours": 0,
+        "transmission_enabled": true,
+        "detection_threshold_db": 45
+      }
+    },
+    {
+      "battery_type": "ultra_high",
+      "battery_capacity_mah": 7000,
+      "scenario": "active_combat",
+      "mode": "guard_mode",
+      "days_of_operation": 687.5068293323691,
+      "years_of_operation": 1.8822911138463219,
+      "daily_energy_wh": 0.028449344,
+      "effective_capacity_wh": 20.348999999999997,
+      "energy_analysis": {
+        "total_energy_uj": 102417.6384,
+        "daily_energy_mwh": 28.449344,
+        "energy_breakdown": {
+          "system_off": 24192.000000000004,
+          "analog_detector_base": 64800.0,
+          "analog_detector_enhanced": 0.0,
+          "motion_sensor": 0,
+          "wake_and_processing": 13420.8,
+          "radio_transmissions": 4.838399999999999
+        },
+        "time_breakdown": {
+          "system_off_hours": 16.8,
+          "base_monitoring_hours": 7.199999999999999,
+          "enhanced_monitoring_hours": 0
+        },
+        "event_counts": {
+          "total_wake_events": 28.799999999999997,
+          "threat_events": 0.576,
+          "transmission_events": 0.40319999999999995,
+          "motion_events": 80.0
+        }
+      },
+      "mode_config": {
+        "description": "Enhanced detection with moderate power",
+        "base_duty_cycle": 0.3,
+        "motion_activation": false,
+        "enhanced_duration_hours": 0,
+        "transmission_enabled": true,
+        "detection_threshold_db": 45
+      }
+    }
+  ],
+  "firmware_config": {
+    "ultra_low_power_system": {
+      "hardware_requirements": {
+        "analog_wake_detector": {
+          "type": "comparator_based",
+          "power_consumption_uw": 2.5,
+          "detection_threshold_mv": 10,
+          "response_time_ms": 1
+        },
+        "motion_sensor": {
+          "type": "accelerometer_interrupt",
+          "power_consumption_uw": 8,
+          "sensitivity_mg": 50,
+          "sample_rate_hz": 10
+        },
+        "primary_battery": {
+          "chemistry": "Li-SOCI2",
+          "capacity_mah": 5000,
+          "nominal_voltage_v": 3.6,
+          "cutoff_voltage_v": 2.7
+        }
+      },
+      "power_states": {
+        "system_off": 0.4,
+        "deep_sleep": 1.5,
+        "analog_wake_detector": 2.5,
+        "cpu_startup": 2000,
+        "audio_processing": 45000,
+        "radio_tx_low": 4000,
+        "motion_sensor": 8
+      },
+      "operational_modes": {
+        "stealth_mode": {
+          "description": "Minimum power, motion-activated monitoring",
+          "base_duty_cycle": 0.02,
+          "motion_activation": true,
+          "enhanced_duration_hours": 1,
+          "transmission_enabled": false,
+          "detection_threshold_db": 55
+        },
+        "patrol_mode": {
+          "description": "Balanced power and detection capability",
+          "base_duty_cycle": 0.1,
+          "motion_activation": true,
+          "enhanced_duration_hours": 0.5,
+          "transmission_enabled": true,
+          "detection_threshold_db": 50
+        },
+        "guard_mode": {
+          "description": "Enhanced detection with moderate power",
+          "base_duty_cycle": 0.3,
+          "motion_activation": false,
+          "enhanced_duration_hours": 0,
+          "transmission_enabled": true,
+          "detection_threshold_db": 45
+        },
+        "emergency_mode": {
+          "description": "Maximum detection capability",
+          "base_duty_cycle": 0.8,
+          "motion_activation": false,
+          "enhanced_duration_hours": 0,
+          "transmission_enabled": true,
+          "detection_threshold_db": 40
+        }
+      },
+      "duty_cycling": {
+        "wake_interval_base_s": 600,
+        "wake_duration_ms": 100,
+        "motion_enhancement_factor": 5,
+        "threat_enhancement_duration_s": 3600
+      },
+      "adaptive_algorithms": {
+        "quiet_period_detection": {
+          "enabled": true,
+          "threshold_db": 30,
+          "min_duration_min": 30,
+          "duty_cycle_reduction": 0.5
+        },
+        "activity_based_adjustment": {
+          "enabled": true,
+          "motion_threshold_mg": 50,
+          "enhancement_duration_min": 60
+        },
+        "battery_conservation": {
+          "enabled": true,
+          "low_battery_threshold_percent": 20,
+          "critical_battery_threshold_percent": 5,
+          "conservation_mode_duty_reduction": 0.3
+        }
+      }
+    },
+    "performance_maintenance": {
+      "ml_model_optimizations": {
+        "quantization": "Q7",
+        "sparsity_level": 0.9,
+        "inference_time_budget_ms": 10,
+        "accuracy_target_percent": 95
+      },
+      "threat_detection": {
+        "confidence_threshold": 0.6,
+        "false_positive_rate_target": 0.02,
+        "detection_latency_budget_ms": 15
+      },
+      "communication": {
+        "transmission_power_dbm": -12,
+        "mesh_hop_limit": 3,
+        "transmission_on_threat_only": true,
+        "heartbeat_interval_hours": 24
+      }
+    },
+    "deployment_configurations": {
+      "stealth_surveillance": {
+        "target_battery_life_years": 2.5,
+        "duty_cycle_percent": 2,
+        "motion_activation": true,
+        "transmission_enabled": false
+      },
+      "perimeter_guard": {
+        "target_battery_life_years": 1.5,
+        "duty_cycle_percent": 10,
+        "motion_activation": true,
+        "transmission_enabled": true
+      },
+      "urban_patrol": {
+        "target_battery_life_years": 1.0,
+        "duty_cycle_percent": 30,
+        "motion_activation": true,
+        "transmission_enabled": true
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "threat_type": "INCOMING_MISSILE",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "forest",
+  "generated_at": "2025-09-22T11:11:10.432822",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.25269308242137045,
+  "filename": "INCOMING_MISSILE_forest_0117.wav",
+  "file_path": "complete_27_class_military_collection/INCOMING_MISSILE_forest_0117.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.2526930868625641,
+    "dynamic_range_db": 53.050642185951816,
+    "snr_db": 3.474320633402004,
+    "thd_percent": 43.29976799497727
+  },
+  "sample_index": 117,
+  "threat_category": "IMMEDIATE_LETHAL",
+  "priority_level": "CRITICAL"
+}

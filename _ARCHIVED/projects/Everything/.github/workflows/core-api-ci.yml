@@ -1,0 +1,38 @@
+name: core-api-ci
+
+on:
+  push:
+    paths:
+      - 'services/core-api/**'
+      - '.github/workflows/core-api-ci.yml'
+  pull_request:
+    paths:
+      - 'services/core-api/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: services/core-api
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e .[dev]
+      - name: Lint
+        run: |
+          ruff --version || true
+          ruff check app || true
+      - name: Type check
+        run: |
+          mypy --version || true
+          mypy app || true
+      - name: Import check
+        run: python -c "import app.main; print('Import OK')"
+      - name: Tests
+        run: pytest -q

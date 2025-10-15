@@ -1,0 +1,22 @@
+{
+  "threat_type": "COMMUNICATIONS",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "maritime",
+  "generated_at": "2025-09-22T11:11:35.277527",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.20069516100977552,
+  "filename": "COMMUNICATIONS_maritime_0023.wav",
+  "file_path": "complete_27_class_military_collection/COMMUNICATIONS_maritime_0023.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.20069517195224762,
+    "dynamic_range_db": 55.76941071215305,
+    "snr_db": 3.5283394712742027,
+    "thd_percent": 550.7680634567121
+  },
+  "sample_index": 23,
+  "threat_category": "PERSONNEL_ACTIVITY",
+  "priority_level": "MEDIUM"
+}

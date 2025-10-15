@@ -1,0 +1,22 @@
+{
+  "threat_type": "SNIPER_FIRE",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "forest",
+  "generated_at": "2025-09-22T11:11:11.131035",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.050162419140249256,
+  "filename": "SNIPER_FIRE_forest_0002.wav",
+  "file_path": "complete_27_class_military_collection/SNIPER_FIRE_forest_0002.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.0501624196767807,
+    "dynamic_range_db": 76.14913799229565,
+    "snr_db": 13.212884144546532,
+    "thd_percent": 368.02937304440894
+  },
+  "sample_index": 2,
+  "threat_category": "IMMEDIATE_LETHAL",
+  "priority_level": "CRITICAL"
+}

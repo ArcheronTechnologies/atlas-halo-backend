@@ -1,0 +1,63 @@
+{
+  "urban_patrol": {
+    "accuracy": 1.0,
+    "avg_inference_time": 0.09392949104309083,
+    "avg_confidence": 0.2078489249944687,
+    "false_positives": 0,
+    "missed_detections": 0
+  },
+  "rural_surveillance": {
+    "accuracy": 1.0,
+    "avg_inference_time": 0.003173637390136719,
+    "avg_confidence": 0.1858503431081772,
+    "false_positives": 0,
+    "missed_detections": 0
+  },
+  "convoy_protection": {
+    "accuracy": 1.0,
+    "avg_inference_time": 0.003354644775390625,
+    "avg_confidence": 0.23805762469768524,
+    "false_positives": 0,
+    "missed_detections": 0
+  },
+  "base_perimeter": {
+    "accuracy": 1.0,
+    "avg_inference_time": 0.0031615161895751955,
+    "avg_confidence": 0.1998748904466629,
+    "false_positives": 0,
+    "missed_detections": 0
+  },
+  "streaming": {
+    "processing_rate": 1.0,
+    "real_time_success": 1.0,
+    "avg_latency": 0.008877015113830567,
+    "max_latency": 0.024274110794067383,
+    "dropped_chunks": 0
+  },
+  "stress": {
+    "low_snr": {
+      "success_rate": 1.0,
+      "avg_inference_time": 0.0035639405250549316,
+      "avg_confidence": 0.28088818341493604,
+      "total_tests": 20
+    },
+    "rapid_transitions": {
+      "success_rate": 1.0,
+      "avg_inference_time": 0.0035366892814636232,
+      "avg_confidence": 0.23107611611485482,
+      "total_tests": 20
+    },
+    "multiple_threats": {
+      "success_rate": 1.0,
+      "avg_inference_time": 0.00372922420501709,
+      "avg_confidence": 0.21443009823560716,
+      "total_tests": 20
+    },
+    "interference_heavy": {
+      "success_rate": 1.0,
+      "avg_inference_time": 0.0032706856727600098,
+      "avg_confidence": 0.21535998433828354,
+      "total_tests": 20
+    }
+  }
+}

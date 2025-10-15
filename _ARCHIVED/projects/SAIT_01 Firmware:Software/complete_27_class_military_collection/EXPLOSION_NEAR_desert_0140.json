@@ -1,0 +1,22 @@
+{
+  "threat_type": "EXPLOSION_NEAR",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "desert",
+  "generated_at": "2025-09-22T11:11:14.996535",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.09107294654238758,
+  "filename": "EXPLOSION_NEAR_desert_0140.wav",
+  "file_path": "complete_27_class_military_collection/EXPLOSION_NEAR_desert_0140.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.0910729393362999,
+    "dynamic_range_db": 75.80239956697885,
+    "snr_db": 21.10871566763744,
+    "thd_percent": 6.082272008679071
+  },
+  "sample_index": 140,
+  "threat_category": "IMMEDIATE_LETHAL",
+  "priority_level": "CRITICAL"
+}

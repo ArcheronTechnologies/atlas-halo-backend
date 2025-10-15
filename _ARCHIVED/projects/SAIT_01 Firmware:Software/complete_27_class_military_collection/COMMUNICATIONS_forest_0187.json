@@ -1,0 +1,22 @@
+{
+  "threat_type": "COMMUNICATIONS",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "forest",
+  "generated_at": "2025-09-22T11:11:36.559498",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.1960634989271814,
+  "filename": "COMMUNICATIONS_forest_0187.wav",
+  "file_path": "complete_27_class_military_collection/COMMUNICATIONS_forest_0187.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.19606348872184753,
+    "dynamic_range_db": 55.0783612591073,
+    "snr_db": 3.4733159368272917,
+    "thd_percent": 236.05378902742422
+  },
+  "sample_index": 187,
+  "threat_category": "PERSONNEL_ACTIVITY",
+  "priority_level": "MEDIUM"
+}

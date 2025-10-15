@@ -1,0 +1,259 @@
+{
+  "taxonomy_metadata": {
+    "version": "2.0",
+    "total_classes": 27,
+    "hierarchy_levels": 3,
+    "military_priority_based": true,
+    "description": "SAIT_01 Hierarchical Battlefield Threat Classification System"
+  },
+  "threat_classes": {
+    "BACKGROUND_QUIET": {
+      "class_id": 0,
+      "category": "NON_THREAT",
+      "priority": "LOW",
+      "description": "No significant audio activity",
+      "accuracy_target": 0.85,
+      "response_time_ms": 1000
+    },
+    "ENVIRONMENTAL": {
+      "class_id": 1,
+      "category": "NON_THREAT",
+      "priority": "LOW",
+      "description": "Wind, rain, animals, etc.",
+      "accuracy_target": 0.85,
+      "response_time_ms": 1000
+    },
+    "CIVILIAN_TRAFFIC": {
+      "class_id": 2,
+      "category": "NON_THREAT",
+      "priority": "LOW",
+      "description": "Civilian vehicles (context-dependent)",
+      "accuracy_target": 0.85,
+      "response_time_ms": 1000
+    },
+    "FRIENDLY_VEHICLE": {
+      "class_id": 3,
+      "category": "NON_THREAT",
+      "priority": "LOW",
+      "description": "Friendly force vehicles (IFF integration)",
+      "accuracy_target": 0.85,
+      "response_time_ms": 1000
+    },
+    "INCOMING_ARTILLERY": {
+      "class_id": 4,
+      "category": "IMMEDIATE_LETHAL",
+      "priority": "CRITICAL",
+      "description": "Incoming shells/mortars (whistling/impact signatures)",
+      "accuracy_target": 0.98,
+      "response_time_ms": 100
+    },
+    "INCOMING_MISSILE": {
+      "class_id": 5,
+      "category": "IMMEDIATE_LETHAL",
+      "priority": "CRITICAL",
+      "description": "Missile approach signatures (rocket motor + aerodynamics)",
+      "accuracy_target": 0.98,
+      "response_time_ms": 100
+    },
+    "SNIPER_FIRE": {
+      "class_id": 6,
+      "category": "IMMEDIATE_LETHAL",
+      "priority": "CRITICAL",
+      "description": "Supersonic crack + muzzle blast correlation",
+      "accuracy_target": 0.98,
+      "response_time_ms": 100
+    },
+    "RPG_LAUNCH": {
+      "class_id": 7,
+      "category": "IMMEDIATE_LETHAL",
+      "priority": "CRITICAL",
+      "description": "RPG ignition and flight signature",
+      "accuracy_target": 0.98,
+      "response_time_ms": 100
+    },
+    "EXPLOSION_NEAR": {
+      "class_id": 8,
+      "category": "IMMEDIATE_LETHAL",
+      "priority": "CRITICAL",
+      "description": "Nearby detonations (IED, grenade, etc.)",
+      "accuracy_target": 0.98,
+      "response_time_ms": 100
+    },
+    "MORTAR_LAUNCH": {
+      "class_id": 9,
+      "category": "IMMEDIATE_LETHAL",
+      "priority": "CRITICAL",
+      "description": "Outgoing mortar tube signature (indicates incoming return fire)",
+      "accuracy_target": 0.98,
+      "response_time_ms": 100
+    },
+    "TANK_TRACKED": {
+      "class_id": 10,
+      "category": "DIRECT_COMBAT",
+      "priority": "HIGH",
+      "description": "Heavy tracked combat vehicles",
+      "accuracy_target": 0.95,
+      "response_time_ms": 500
+    },
+    "IFV_APC": {
+      "class_id": 11,
+      "category": "DIRECT_COMBAT",
+      "priority": "HIGH",
+      "description": "Infantry fighting vehicles / armored personnel carriers",
+      "accuracy_target": 0.95,
+      "response_time_ms": 500
+    },
+    "ATTACK_HELICOPTER": {
+      "class_id": 12,
+      "category": "DIRECT_COMBAT",
+      "priority": "HIGH",
+      "description": "Attack helicopters (rotor + weapons signatures)",
+      "accuracy_target": 0.95,
+      "response_time_ms": 500
+    },
+    "JET_FIGHTER": {
+      "class_id": 13,
+      "category": "DIRECT_COMBAT",
+      "priority": "HIGH",
+      "description": "Fighter aircraft (engine + afterburner signatures)",
+      "accuracy_target": 0.95,
+      "response_time_ms": 500
+    },
+    "ATTACK_DRONE": {
+      "class_id": 14,
+      "category": "DIRECT_COMBAT",
+      "priority": "HIGH",
+      "description": "Armed UAVs (propeller + motor signatures)",
+      "accuracy_target": 0.95,
+      "response_time_ms": 500
+    },
+    "TRUCK_MILITARY": {
+      "class_id": 15,
+      "category": "LOGISTICS_TRANSPORT",
+      "priority": "MEDIUM",
+      "description": "Military logistics vehicles",
+      "accuracy_target": 0.85,
+      "response_time_ms": 1000
+    },
+    "TRANSPORT_HELICOPTER": {
+      "class_id": 16,
+      "category": "LOGISTICS_TRANSPORT",
+      "priority": "MEDIUM",
+      "description": "Transport helicopters (troop movement)",
+      "accuracy_target": 0.85,
+      "response_time_ms": 1000
+    },
+    "TRANSPORT_AIRCRAFT": {
+      "class_id": 17,
+      "category": "LOGISTICS_TRANSPORT",
+      "priority": "MEDIUM",
+      "description": "Military transport planes",
+      "accuracy_target": 0.85,
+      "response_time_ms": 1000
+    },
+    "BOAT_MILITARY": {
+      "class_id": 18,
+      "category": "LOGISTICS_TRANSPORT",
+      "priority": "MEDIUM",
+      "description": "Military watercraft",
+      "accuracy_target": 0.85,
+      "response_time_ms": 1000
+    },
+    "MOTORCYCLE_MILITARY": {
+      "class_id": 19,
+      "category": "LOGISTICS_TRANSPORT",
+      "priority": "MEDIUM",
+      "description": "Military motorcycles/ATVs",
+      "accuracy_target": 0.85,
+      "response_time_ms": 1000
+    },
+    "PERSONNEL_ARMED": {
+      "class_id": 20,
+      "category": "PERSONNEL_ACTIVITY",
+      "priority": "MEDIUM",
+      "description": "Armed personnel movement (equipment signatures)",
+      "accuracy_target": 0.85,
+      "response_time_ms": 1000
+    },
+    "PERSONNEL_VEHICLE": {
+      "class_id": 21,
+      "category": "PERSONNEL_ACTIVITY",
+      "priority": "MEDIUM",
+      "description": "Personnel entering/exiting vehicles",
+      "accuracy_target": 0.85,
+      "response_time_ms": 1000
+    },
+    "DIGGING_CONSTRUCTION": {
+      "class_id": 22,
+      "category": "PERSONNEL_ACTIVITY",
+      "priority": "MEDIUM",
+      "description": "Potential IED placement or fortification",
+      "accuracy_target": 0.85,
+      "response_time_ms": 1000
+    },
+    "COMMUNICATIONS": {
+      "class_id": 23,
+      "category": "PERSONNEL_ACTIVITY",
+      "priority": "MEDIUM",
+      "description": "Radio chatter indicating presence",
+      "accuracy_target": 0.85,
+      "response_time_ms": 1000
+    },
+    "SURVEILLANCE_DRONE": {
+      "class_id": 24,
+      "category": "SURVEILLANCE_RECON",
+      "priority": "LOW_MEDIUM",
+      "description": "Reconnaissance UAVs",
+      "accuracy_target": 0.80,
+      "response_time_ms": 1000
+    },
+    "RECON_AIRCRAFT": {
+      "class_id": 25,
+      "category": "SURVEILLANCE_RECON",
+      "priority": "LOW_MEDIUM",
+      "description": "Surveillance aircraft",
+      "accuracy_target": 0.80,
+      "response_time_ms": 1000
+    },
+    "ELECTRONIC_JAMMING": {
+      "class_id": 26,
+      "category": "SURVEILLANCE_RECON",
+      "priority": "LOW_MEDIUM",
+      "description": "Electronic warfare signatures",
+      "accuracy_target": 0.80,
+      "response_time_ms": 1000
+    }
+  },
+  "categories": {
+    "NON_THREAT": {
+      "category_id": 0,
+      "priority_weight": 1.0,
+      "classes": ["BACKGROUND_QUIET", "ENVIRONMENTAL", "CIVILIAN_TRAFFIC", "FRIENDLY_VEHICLE"]
+    },
+    "IMMEDIATE_LETHAL": {
+      "category_id": 1,
+      "priority_weight": 10.0,
+      "classes": ["INCOMING_ARTILLERY", "INCOMING_MISSILE", "SNIPER_FIRE", "RPG_LAUNCH", "EXPLOSION_NEAR", "MORTAR_LAUNCH"]
+    },
+    "DIRECT_COMBAT": {
+      "category_id": 2,
+      "priority_weight": 5.0,
+      "classes": ["TANK_TRACKED", "IFV_APC", "ATTACK_HELICOPTER", "JET_FIGHTER", "ATTACK_DRONE"]
+    },
+    "LOGISTICS_TRANSPORT": {
+      "category_id": 3,
+      "priority_weight": 2.0,
+      "classes": ["TRUCK_MILITARY", "TRANSPORT_HELICOPTER", "TRANSPORT_AIRCRAFT", "BOAT_MILITARY", "MOTORCYCLE_MILITARY"]
+    },
+    "PERSONNEL_ACTIVITY": {
+      "category_id": 4,
+      "priority_weight": 2.0,
+      "classes": ["PERSONNEL_ARMED", "PERSONNEL_VEHICLE", "DIGGING_CONSTRUCTION", "COMMUNICATIONS"]
+    },
+    "SURVEILLANCE_RECON": {
+      "category_id": 5,
+      "priority_weight": 1.5,
+      "classes": ["SURVEILLANCE_DRONE", "RECON_AIRCRAFT", "ELECTRONIC_JAMMING"]
+    }
+  }
+}

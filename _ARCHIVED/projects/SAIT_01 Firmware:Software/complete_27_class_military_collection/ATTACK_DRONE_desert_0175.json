@@ -1,0 +1,22 @@
+{
+  "threat_type": "ATTACK_DRONE",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "desert",
+  "generated_at": "2025-09-22T11:11:24.087679",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.3360840419649628,
+  "filename": "ATTACK_DRONE_desert_0175.wav",
+  "file_path": "complete_27_class_military_collection/ATTACK_DRONE_desert_0175.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.3360840380191803,
+    "dynamic_range_db": 50.81366158516302,
+    "snr_db": 3.4582747713470203,
+    "thd_percent": 60.228108947711554
+  },
+  "sample_index": 175,
+  "threat_category": "DIRECT_COMBAT",
+  "priority_level": "HIGH"
+}

@@ -1,0 +1,401 @@
+# SAIT_01 Distributed Mesh - Renode Simulation Script
+# Multi-node mesh network simulation for stress testing
+
+using sysbus
+
+# =============================================================================
+# SIMULATION CONFIGURATION
+# =============================================================================
+
+$bin?=@sait01_autonomous_main.elf
+$node_count?=5
+
+logLevel 3 uart
+
+# =============================================================================  
+# NODE TEMPLATE DEFINITION
+# =============================================================================
+
+define create_sait01_node
+"""
+    # Create nRF5340 machine
+    mach create $name
+    machine LoadPlatformDescription @platforms/cpus/nrf5340.repl
+    
+    # Load firmware binary
+    sysbus LoadELF $bin
+    
+    # Configure UART for logging
+    showAnalyzer sysbus.uart0
+    
+    # Set unique node ID in memory
+    sysbus WriteDoubleWord 0x20000000 $node_id
+    
+    # Configure BLE mesh parameters  
+    sysbus WriteDoubleWord 0x20000004 0x1234  # Mesh network key
+    sysbus WriteDoubleWord 0x20000008 $mesh_addr  # Mesh address
+    
+    # Set initial battery level
+    sysbus WriteWord 0x20000010 $battery_level
+    
+    # Configure capabilities
+    sysbus WriteByte 0x20000012 $capabilities
+"""
+
+# =============================================================================
+# CREATE SENSOR NODE NETWORK
+# =============================================================================
+
+# Node 1 - Primary coordinator candidate
+$name = "sait01_node1"
+$node_id = 0x1001
+$mesh_addr = 0x0001
+$battery_level = 95
+$capabilities = 0x3F  # All capabilities
+i $create_sait01_node
+
+# Node 2 - Secondary coordinator
+$name = "sait01_node2" 
+$node_id = 0x1002
+$mesh_addr = 0x0002
+$battery_level = 88
+$capabilities = 0x37  # Most capabilities
+i $create_sait01_node
+
+# Node 3 - Standard sensor node
+$name = "sait01_node3"
+$node_id = 0x1003
+$mesh_addr = 0x0003
+$battery_level = 75
+$capabilities = 0x21  # Basic audio + coordinator
+i $create_sait01_node
+
+# Node 4 - Low power node
+$name = "sait01_node4"
+$node_id = 0x1004
+$mesh_addr = 0x0004
+$battery_level = 45
+$capabilities = 0x01  # Audio only
+i $create_sait01_node
+
+# Node 5 - Edge node with UWB
+$name = "sait01_node5"
+$node_id = 0x1005
+$mesh_addr = 0x0005
+$battery_level = 92
+$capabilities = 0x23  # Audio + UWB + coordinator
+i $create_sait01_node
+
+# =============================================================================
+# NETWORK CONNECTIVITY CONFIGURATION
+# =============================================================================
+
+# Create wireless medium for BLE mesh communication
+emulation CreateWirelessMedium "ble_mesh_medium"
+ble_mesh_medium SetRangeWirelessFunction 100
+
+# Connect all nodes to mesh network
+mach set "sait01_node1"
+connector Connect sysbus.radio ble_mesh_medium
+
+mach set "sait01_node2"
+connector Connect sysbus.radio ble_mesh_medium
+
+mach set "sait01_node3"  
+connector Connect sysbus.radio ble_mesh_medium
+
+mach set "sait01_node4"
+connector Connect sysbus.radio ble_mesh_medium
+
+mach set "sait01_node5"
+connector Connect sysbus.radio ble_mesh_medium
+
+# Configure mesh topology with realistic signal strengths
+# Node 1 (center) - strong connection to all
+ble_mesh_medium SetLossRange 0 10   # Node 1 range: 0-10m (strong)
+
+# Node 2 - good connectivity 
+ble_mesh_medium SetLossRange 1 15   # Node 2 range: 0-15m (good)
+
+# Node 3 - moderate connectivity
+ble_mesh_medium SetLossRange 2 20   # Node 3 range: 0-20m (moderate)
+
+# Node 4 - limited range (low power)
+ble_mesh_medium SetLossRange 3 8    # Node 4 range: 0-8m (limited)
+
+# Node 5 - good range (edge node)
+ble_mesh_medium SetLossRange 4 18   # Node 5 range: 0-18m (good)
+
+# =============================================================================
+# ENVIRONMENTAL SIMULATION
+# =============================================================================
+
+define inject_audio_detection
+"""
+    # Inject audio detection event into specified node
+    mach set $target_node
+    
+    # Write detection class to trigger buffer
+    sysbus WriteByte 0x20001000 $detection_class
+    
+    # Write confidence level  
+    sysbus WriteByte 0x20001001 $confidence
+    
+    # Write timestamp
+    sysbus WriteDoubleWord 0x20001004 $timestamp
+    
+    # Trigger detection processing interrupt
+    sysbus WriteByte 0x20001008 0x01
+    
+    echo "Injected $detection_class detection (confidence: $confidence) into $target_node"
+"""
+
+define simulate_mesh_interference
+"""
+    # Simulate mesh network interference
+    ble_mesh_medium SetLossRange $node_index $reduced_range
+    echo "Reduced range for node $node_index to $reduced_range meters"
+"""
+
+define simulate_node_failure
+"""
+    # Simulate node failure by pausing execution
+    mach set $failed_node
+    pause
+    echo "Simulated failure of $failed_node"
+"""
+
+define restore_node
+"""
+    # Restore failed node
+    mach set $restored_node  
+    start
+    echo "Restored $restored_node"
+"""
+
+# =============================================================================
+# STRESS TEST SCENARIOS
+# =============================================================================
+
+define stress_scenario_1
+"""
+    echo "=== Stress Scenario 1: High Detection Frequency ==="
+    
+    # Generate rapid detection events across multiple nodes
+    for i in range(1, 6):
+        $target_node = "sait01_node{0}".format(i)
+        $detection_class = i % 7 + 1  # Rotate through detection classes
+        $confidence = 10 + (i * 2) % 6  # Confidence 10-15
+        $timestamp = 1000 * i
+        i $inject_audio_detection
+    
+    echo "High frequency detection injection complete"
+"""
+
+define stress_scenario_2  
+"""
+    echo "=== Stress Scenario 2: Network Fragmentation ==="
+    
+    # Create network partitions to test mesh resilience
+    $node_index = 2  # Fragment node 3
+    $reduced_range = 5  # Reduce to 5m range
+    i $simulate_mesh_interference
+    
+    $node_index = 3  # Fragment node 4  
+    $reduced_range = 3  # Reduce to 3m range
+    i $simulate_mesh_interference
+    
+    echo "Network fragmentation simulation active"
+"""
+
+define stress_scenario_3
+"""
+    echo "=== Stress Scenario 3: Coordinator Failure ==="
+    
+    # Fail the primary coordinator to trigger election
+    $failed_node = "sait01_node1"
+    i $simulate_node_failure
+    
+    # Wait for election to complete (simulated)
+    # In real test, this would be timed based on protocol
+    
+    echo "Coordinator failure simulated - election should begin"
+"""
+
+define stress_scenario_4
+"""  
+    echo "=== Stress Scenario 4: Concurrent Detection Burst ==="
+    
+    # Inject simultaneous detections from all nodes
+    $detection_class = 6  # Gunshot detection
+    $confidence = 15      # High confidence
+    
+    for i in range(1, 6):
+        $target_node = "sait01_node{0}".format(i)
+        $timestamp = 5000 + i  # Nearly simultaneous
+        i $inject_audio_detection
+    
+    echo "Concurrent detection burst injected - fusion correlation expected"
+"""
+
+define stress_scenario_5
+"""
+    echo "=== Stress Scenario 5: Battery Degradation ==="
+    
+    # Simulate progressive battery drain across nodes
+    mach set "sait01_node3"
+    sysbus WriteWord 0x20000010 30  # 30% battery
+    
+    mach set "sait01_node4"  
+    sysbus WriteWord 0x20000010 15  # 15% battery (critical)
+    
+    mach set "sait01_node5"
+    sysbus WriteWord 0x20000010 25  # 25% battery
+    
+    echo "Battery degradation simulated - low power behavior expected"
+"""
+
+# =============================================================================
+# MONITORING AND ANALYSIS
+# =============================================================================
+
+define setup_monitoring
+"""
+    # Create log analyzers for all nodes
+    for i in range(1, 6):
+        node_name = "sait01_node{0}".format(i)
+        mach set node_name
+        logFile @logs/sait01_node{0}.log
+        
+    echo "Monitoring setup complete - logs will be written to logs/ directory"
+"""
+
+define collect_statistics
+"""
+    echo "=== Network Statistics Collection ==="
+    
+    # Query mesh network statistics from each node
+    for i in range(1, 6):
+        node_name = "sait01_node{0}".format(i)
+        mach set node_name
+        
+        # Read statistics from memory-mapped registers
+        $detections = `sysbus ReadDoubleWord 0x20002000`
+        $mesh_tx = `sysbus ReadDoubleWord 0x20002004` 
+        $mesh_rx = `sysbus ReadDoubleWord 0x20002008`
+        $alerts = `sysbus ReadDoubleWord 0x2000200C`
+        
+        echo "Node $i: Detections=$detections, TX=$mesh_tx, RX=$mesh_rx, Alerts=$alerts"
+    
+    # Calculate network-wide totals
+    echo "Statistics collection complete"
+"""
+
+# =============================================================================
+# MAIN SIMULATION EXECUTION
+# =============================================================================
+
+macro reset
+"""
+    # Reset all nodes to initial state
+    for i in range(1, 6):
+        node_name = "sait01_node{0}".format(i)
+        mach set node_name
+        sysbus Reset
+    
+    echo "All nodes reset to initial state"
+"""
+
+macro start_all
+"""
+    # Start execution on all nodes
+    for i in range(1, 6):
+        node_name = "sait01_node{0}".format(i)
+        mach set node_name
+        start
+    
+    echo "All nodes started - mesh network initializing"
+"""
+
+macro pause_all
+"""
+    # Pause execution on all nodes
+    for i in range(1, 6):
+        node_name = "sait01_node{0}".format(i)
+        mach set node_name
+        pause
+    
+    echo "All nodes paused"
+"""
+
+# =============================================================================
+# AUTOMATED STRESS TEST SEQUENCE
+# =============================================================================
+
+macro run_full_stress_test
+"""
+    echo "Starting SAIT_01 Distributed Mesh Stress Test"
+    echo "=============================================="
+    
+    # Initialize monitoring
+    i $setup_monitoring
+    
+    # Start all nodes
+    start_all
+    
+    # Wait for mesh initialization
+    sleep 5
+    echo "Mesh network initialized - beginning stress scenarios"
+    
+    # Scenario 1: High frequency detections
+    i $stress_scenario_1
+    sleep 10
+    
+    # Scenario 2: Network fragmentation  
+    i $stress_scenario_2
+    sleep 15
+    
+    # Scenario 3: Coordinator failure
+    i $stress_scenario_3
+    sleep 10
+    
+    # Scenario 4: Concurrent detection burst
+    i $stress_scenario_4
+    sleep 10
+    
+    # Scenario 5: Battery degradation
+    i $stress_scenario_5
+    sleep 10
+    
+    # Collect final statistics
+    i $collect_statistics
+    
+    echo "=============================================="  
+    echo "SAIT_01 Stress Test Complete"
+    echo "Check logs/ directory for detailed analysis"
+"""
+
+# =============================================================================
+# INTERACTIVE COMMANDS
+# =============================================================================
+
+echo "SAIT_01 Distributed Mesh Simulation Loaded"
+echo ""
+echo "Available Commands:"
+echo "  start_all          - Start all sensor nodes"
+echo "  pause_all          - Pause all nodes"  
+echo "  reset              - Reset all nodes to initial state"
+echo "  run_full_stress_test - Execute complete stress test sequence"
+echo ""
+echo "Individual Stress Scenarios:"
+echo "  stress_scenario_1  - High detection frequency"
+echo "  stress_scenario_2  - Network fragmentation"
+echo "  stress_scenario_3  - Coordinator failure" 
+echo "  stress_scenario_4  - Concurrent detection burst"
+echo "  stress_scenario_5  - Battery degradation"
+echo ""
+echo "Monitoring:"
+echo "  setup_monitoring   - Initialize log collection"
+echo "  collect_statistics - Gather network statistics"
+echo ""
+echo "To start: Type 'start_all' and then 'run_full_stress_test'"

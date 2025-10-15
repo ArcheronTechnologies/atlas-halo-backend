@@ -1,0 +1,22 @@
+{
+  "threat_type": "RECON_AIRCRAFT",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "desert",
+  "generated_at": "2025-09-22T11:11:38.003055",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.2963036796407939,
+  "filename": "RECON_AIRCRAFT_desert_0010.wav",
+  "file_path": "complete_27_class_military_collection/RECON_AIRCRAFT_desert_0010.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.2963036894798279,
+    "dynamic_range_db": 48.03223622070024,
+    "snr_db": 0.19219174783191922,
+    "thd_percent": 10.955391701705667
+  },
+  "sample_index": 10,
+  "threat_category": "SURVEILLANCE_RECON",
+  "priority_level": "LOW_MEDIUM"
+}

@@ -1,0 +1,80 @@
+[
+  {
+    "cycle": "Cycle 1 - Aircraft Fix",
+    "overall_accuracy": 0.765,
+    "class_accuracies": {
+      "background": 0.765,
+      "vehicle": 0.56,
+      "aircraft": 0.97
+    },
+    "meets_95_target": false,
+    "worst_class": "vehicle",
+    "worst_accuracy": 0.56,
+    "model_path": "sait01_aircraft_quick_fix.h5"
+  },
+  {
+    "cycle": "Cycle 2 - Balanced Multi-class",
+    "overall_accuracy": 0.8783333333333333,
+    "class_accuracies": {
+      "background": 0.885,
+      "vehicle": 0.88,
+      "aircraft": 0.87
+    },
+    "meets_95_target": false,
+    "worst_class": "aircraft",
+    "worst_accuracy": 0.87,
+    "model_path": "sait01_balanced_multiclass.h5"
+  },
+  {
+    "cycle": "Cycle 2 - Best Checkpoint",
+    "overall_accuracy": 0.8933333333333333,
+    "class_accuracies": {
+      "background": 0.9,
+      "vehicle": 0.895,
+      "aircraft": 0.885
+    },
+    "meets_95_target": false,
+    "worst_class": "aircraft",
+    "worst_accuracy": 0.885,
+    "model_path": "balanced_multiclass_best.h5"
+  },
+  {
+    "cycle": "Cycle 3 - Background Specialist",
+    "overall_accuracy": 0.8066666666666666,
+    "class_accuracies": {
+      "background": 0.855,
+      "vehicle": 0.715,
+      "aircraft": 0.85
+    },
+    "meets_95_target": false,
+    "worst_class": "vehicle",
+    "worst_accuracy": 0.715,
+    "model_path": "sait01_background_specialist.h5"
+  },
+  {
+    "cycle": "Cycle 3 - Vehicle Specialist",
+    "overall_accuracy": 0.7516666666666667,
+    "class_accuracies": {
+      "background": 0.485,
+      "vehicle": 0.87,
+      "aircraft": 0.9
+    },
+    "meets_95_target": false,
+    "worst_class": "background",
+    "worst_accuracy": 0.485,
+    "model_path": "sait01_vehicle_specialist.h5"
+  },
+  {
+    "cycle": "Cycle 3 - Aircraft Specialist",
+    "overall_accuracy": 0.83,
+    "class_accuracies": {
+      "background": 0.83,
+      "vehicle": 0.76,
+      "aircraft": 0.9
+    },
+    "meets_95_target": false,
+    "worst_class": "vehicle",
+    "worst_accuracy": 0.76,
+    "model_path": "sait01_aircraft_specialist.h5"
+  }
+]

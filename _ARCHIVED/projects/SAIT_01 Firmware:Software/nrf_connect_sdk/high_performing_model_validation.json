@@ -1,0 +1,188 @@
+{
+  "validation_date": "2025-09-20",
+  "validation_samples": 1200,
+  "models_tested": 3,
+  "models_meeting_target": 0,
+  "results": {
+    "ultimate_95_plus": {
+      "model_name": "ultimate_95_plus",
+      "model_path": "sait01_ultimate_95_plus_model.h5",
+      "claimed_accuracy": 0.9638,
+      "actual_accuracy": 0.5975,
+      "accuracy_difference": -0.36629999999999996,
+      "meets_95_target": false,
+      "class_accuracies": {
+        "background": 0.96,
+        "vehicle": 0.715,
+        "aircraft": 0.1175
+      },
+      "class_metrics": {
+        "background": {
+          "accuracy": 0.96,
+          "precision": 0.4948453608183654,
+          "recall": 0.9599999999759999,
+          "f1": 0.6530612199898191,
+          "samples": 400.0
+        },
+        "vehicle": {
+          "accuracy": 0.715,
+          "precision": 0.7688172042804081,
+          "recall": 0.7149999999821249,
+          "f1": 0.7409326374744288,
+          "samples": 400.0
+        },
+        "aircraft": {
+          "accuracy": 0.1175,
+          "precision": 0.9038461536723372,
+          "recall": 0.1174999999970625,
+          "f1": 0.20796459972452816,
+          "samples": 400.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          384,
+          16,
+          0
+        ],
+        [
+          109,
+          286,
+          5
+        ],
+        [
+          283,
+          70,
+          47
+        ]
+      ],
+      "confidence_stats": {
+        "mean": 0.8923030495643616,
+        "min": 0.370647132396698,
+        "max": 1.0
+      },
+      "inference_time_per_sample_ms": 28.80807340145111,
+      "model_parameters": 3268035
+    },
+    "battlefield": {
+      "model_name": "battlefield",
+      "model_path": "sait01_battlefield_model.h5",
+      "claimed_accuracy": 0.9611,
+      "actual_accuracy": 0.8683333333333333,
+      "accuracy_difference": -0.09276666666666666,
+      "meets_95_target": false,
+      "class_accuracies": {
+        "background": 0.8275,
+        "vehicle": 0.9375,
+        "aircraft": 0.84
+      },
+      "class_metrics": {
+        "background": {
+          "accuracy": 0.8275,
+          "precision": 0.9019073569236538,
+          "recall": 0.8274999999793125,
+          "f1": 0.8631029936829687,
+          "samples": 400.0
+        },
+        "vehicle": {
+          "accuracy": 0.9375,
+          "precision": 0.7763975155118759,
+          "recall": 0.9374999999765625,
+          "f1": 0.8493771184677481,
+          "samples": 400.0
+        },
+        "aircraft": {
+          "accuracy": 0.84,
+          "precision": 0.9599999999725715,
+          "recall": 0.839999999979,
+          "f1": 0.8959999949983289,
+          "samples": 400.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          331,
+          61,
+          8
+        ],
+        [
+          19,
+          375,
+          6
+        ],
+        [
+          17,
+          47,
+          336
+        ]
+      ],
+      "confidence_stats": {
+        "mean": 0.947908341884613,
+        "min": 0.37869885563850403,
+        "max": 1.0
+      },
+      "inference_time_per_sample_ms": 0.5592681964238485,
+      "model_parameters": 167939
+    },
+    "balanced_multiclass_best": {
+      "model_name": "balanced_multiclass_best",
+      "model_path": "balanced_multiclass_best.h5",
+      "claimed_accuracy": 0.9122,
+      "actual_accuracy": 0.885,
+      "accuracy_difference": -0.027200000000000002,
+      "meets_95_target": false,
+      "class_accuracies": {
+        "background": 0.89,
+        "vehicle": 0.8975,
+        "aircraft": 0.8675
+      },
+      "class_metrics": {
+        "background": {
+          "accuracy": 0.89,
+          "precision": 0.8640776698819398,
+          "recall": 0.88999999997775,
+          "f1": 0.8768472856198889,
+          "samples": 400.0
+        },
+        "vehicle": {
+          "accuracy": 0.8975,
+          "precision": 0.8348837209108166,
+          "recall": 0.8974999999775625,
+          "f1": 0.8650602359495427,
+          "samples": 400.0
+        },
+        "aircraft": {
+          "accuracy": 0.8675,
+          "precision": 0.969273742989685,
+          "recall": 0.8674999999783125,
+          "f1": 0.9155672773130931,
+          "samples": 400.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          356,
+          38,
+          6
+        ],
+        [
+          36,
+          359,
+          5
+        ],
+        [
+          20,
+          33,
+          347
+        ]
+      ],
+      "confidence_stats": {
+        "mean": 0.8999977707862854,
+        "min": 0.3504716455936432,
+        "max": 0.9999958276748657
+      },
+      "inference_time_per_sample_ms": 1.9084399938583374,
+      "model_parameters": 504931
+    }
+  }
+}

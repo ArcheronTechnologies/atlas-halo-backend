@@ -1,0 +1,22 @@
+{
+  "threat_type": "RPG_LAUNCH",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "urban",
+  "generated_at": "2025-09-22T11:11:12.693865",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.23808959112926908,
+  "filename": "RPG_LAUNCH_urban_0031.wav",
+  "file_path": "complete_27_class_military_collection/RPG_LAUNCH_urban_0031.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.23808959126472473,
+    "dynamic_range_db": 49.86914795207195,
+    "snr_db": 2.1775382106158476,
+    "thd_percent": 92.11403936252961
+  },
+  "sample_index": 31,
+  "threat_category": "IMMEDIATE_LETHAL",
+  "priority_level": "CRITICAL"
+}

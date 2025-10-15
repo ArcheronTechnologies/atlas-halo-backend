@@ -1,0 +1,22 @@
+{
+  "threat_type": "SNIPER_FIRE",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "urban",
+  "generated_at": "2025-09-22T11:11:11.735857",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.05130165570762012,
+  "filename": "SNIPER_FIRE_urban_0091.wav",
+  "file_path": "complete_27_class_military_collection/SNIPER_FIRE_urban_0091.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.05130165442824364,
+    "dynamic_range_db": 77.20871863978631,
+    "snr_db": 15.564185556245736,
+    "thd_percent": 457.2513101028886
+  },
+  "sample_index": 91,
+  "threat_category": "IMMEDIATE_LETHAL",
+  "priority_level": "CRITICAL"
+}

@@ -1,0 +1,22 @@
+{
+  "threat_type": "TRUCK_MILITARY",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "urban",
+  "generated_at": "2025-09-22T11:11:24.929326",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.29726231011956145,
+  "filename": "TRUCK_MILITARY_urban_0096.wav",
+  "file_path": "complete_27_class_military_collection/TRUCK_MILITARY_urban_0096.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.2972623407840729,
+    "dynamic_range_db": 51.973741170442544,
+    "snr_db": 2.4973139795210053,
+    "thd_percent": 1.7584537245196326
+  },
+  "sample_index": 96,
+  "threat_category": "LOGISTICS_TRANSPORT",
+  "priority_level": "MEDIUM"
+}

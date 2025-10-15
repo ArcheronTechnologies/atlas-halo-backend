@@ -1,0 +1,6 @@
+{
+  "aircraft_boost": 0.5,
+  "background_penalty": 0.7,
+  "aircraft_detection_rate": 0.095,
+  "overall_accuracy": 0.6,
+  "fix_successful": 

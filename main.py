@@ -46,6 +46,8 @@ from backend.database.postgis_database import get_database
 # Import background services
 from backend.services.data_ingestion_service import start_ingestion_service, stop_ingestion_service, IngestionConfig
 from backend.services.prediction_scheduler import start_prediction_scheduler, stop_prediction_scheduler
+from backend.workers.daily_retrain import daily_retrain_job
+from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
 # Initialize logging
 logging.basicConfig(level=logging.INFO)
@@ -137,9 +139,33 @@ async def lifespan(app: FastAPI):
     # Prediction scheduler disabled - queries Atlas Intelligence directly via proxy
     logger.info("⚠️  Prediction scheduler disabled - using Atlas Intelligence proxy")
 
+    # Start daily retraining scheduler
+    scheduler = AsyncIOScheduler()
+    try:
+        scheduler.add_job(
+            daily_retrain_job,
+            'cron',
+            hour=2,
+            minute=0,
+            id='daily_retrain',
+            name='Daily AI Model Retraining'
+        )
+        scheduler.start()
+        logger.info("✅ Daily retraining scheduler started (runs at 02:00 UTC)")
+    except Exception as e:
+        logger.error(f"❌ Failed to start retraining scheduler: {e}")
+        logger.info("⚠️  Continuing without scheduled retraining")
+
     logger.info("🎉 Halo Backend ready")
 
     yield
+
+    # Shutdown scheduler
+    try:
+        scheduler.shutdown()
+        logger.info("✅ Scheduler stopped")
+    except:
+        pass
 
     # Shutdown
     logger.info("🔄 Halo Backend shutting down gracefully...")
@@ -264,8 +290,8 @@ app.include_router(admin_router)  # Admin endpoints for data collection & system
 app.include_router(websocket_router)
 app.include_router(sensor_fusion_router)
 app.include_router(ml_training_router)
-app.include_router(predictions_proxy_router)  # ML predictions API (PostGIS-free)
-app.include_router(predictions_geojson_router)  # Predictions with OSM GeoJSON boundaries from predictions table
+app.include_router(predictions_proxy_router)  # ML predictions API with boundary support ✅ ACTIVE
+# app.include_router(predictions_geojson_router)  # Predictions with OSM GeoJSON boundaries - different endpoints
 # app.include_router(predictions_router)  # Original predictions disabled - requires PostGIS
 app.include_router(ai_analysis_router)  # AI-powered photo/video/audio analysis
 app.include_router(clustering_router)  # Anonymous incident report clustering

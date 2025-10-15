@@ -1,0 +1,22 @@
+{
+  "threat_type": "ATTACK_DRONE",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "forest",
+  "generated_at": "2025-09-22T11:11:24.207670",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.3443245698542042,
+  "filename": "ATTACK_DRONE_forest_0192.wav",
+  "file_path": "complete_27_class_military_collection/ATTACK_DRONE_forest_0192.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.3443245589733124,
+    "dynamic_range_db": 50.5635568597198,
+    "snr_db": 3.3183846309118774,
+    "thd_percent": 62.95786503536917
+  },
+  "sample_index": 192,
+  "threat_category": "DIRECT_COMBAT",
+  "priority_level": "HIGH"
+}

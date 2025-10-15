@@ -1,0 +1,22 @@
+{
+  "threat_type": "PERSONNEL_VEHICLE",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "desert",
+  "generated_at": "2025-09-22T11:11:32.666971",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.3644187702784578,
+  "filename": "PERSONNEL_VEHICLE_desert_0005.wav",
+  "file_path": "complete_27_class_military_collection/PERSONNEL_VEHICLE_desert_0005.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.36441877484321594,
+    "dynamic_range_db": 62.85186074795587,
+    "snr_db": 19.088832826067218,
+    "thd_percent": 33.09959977123272
+  },
+  "sample_index": 5,
+  "threat_category": "PERSONNEL_ACTIVITY",
+  "priority_level": "MEDIUM"
+}

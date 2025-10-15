@@ -1,0 +1,22 @@
+{
+  "threat_type": "MORTAR_LAUNCH",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "mountain",
+  "generated_at": "2025-09-22T11:11:15.648941",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.06539256194268898,
+  "filename": "MORTAR_LAUNCH_mountain_0029.wav",
+  "file_path": "complete_27_class_military_collection/MORTAR_LAUNCH_mountain_0029.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.06539256125688553,
+    "dynamic_range_db": 74.6849390673752,
+    "snr_db": 12.34596137098741,
+    "thd_percent": 581.9125168512355
+  },
+  "sample_index": 29,
+  "threat_category": "IMMEDIATE_LETHAL",
+  "priority_level": "CRITICAL"
+}

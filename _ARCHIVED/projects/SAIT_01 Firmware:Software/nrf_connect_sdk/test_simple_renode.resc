@@ -1,0 +1,20 @@
+# Simple Renode test to verify basic functionality
+using sysbus
+
+# Create a simple nRF5340 machine
+mach create "test_node"
+machine LoadPlatformDescription @platforms/cpus/nrf5340.repl
+
+# Show UART analyzer  
+showAnalyzer sysbus.uart0
+
+# Set some test values in memory
+sysbus WriteDoubleWord 0x20000000 0x12345678
+sysbus WriteDoubleWord 0x20000004 0xABCDEF00
+
+# Start the machine
+start
+
+echo "Simple Renode test loaded - nRF5340 machine created and started"
+echo "UART analyzer should be visible"
+echo "Test memory values written to 0x20000000 and 0x20000004"

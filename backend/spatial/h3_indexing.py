@@ -1,10 +1,18 @@
 """H3 spatial indexing service"""
 import logging
-import h3
-from typing import List, Tuple, Dict
+try:
+    import h3
+    H3_AVAILABLE = True
+except ImportError:
+    H3_AVAILABLE = False
+
+from typing import List, Tuple, Dict, Optional
 from pydantic import BaseModel
 
 logger = logging.getLogger(__name__)
+
+if not H3_AVAILABLE:
+    logger.warning("⚠️ H3 library not available - geospatial indexing disabled. Install h3 for full functionality.")
 
 class H3Cell(BaseModel):
     """H3 cell representation"""
@@ -18,17 +26,25 @@ class H3SpatialIndex:
 
     def __init__(self, resolution: int = 8):
         self.resolution = resolution
-        logger.info(f"H3SpatialIndex initialized (resolution={resolution})")
+        self.available = H3_AVAILABLE
+        if self.available:
+            logger.info(f"H3SpatialIndex initialized (resolution={resolution})")
+        else:
+            logger.warning("H3SpatialIndex initialized in MOCK mode (h3 not available)")
 
-    def latlon_to_h3(self, lat: float, lon: float) -> str:
+    def latlon_to_h3(self, lat: float, lon: float) -> Optional[str]:
         """Convert lat/lon to H3 cell"""
+        if not self.available:
+            return None
         try:
             return h3.geo_to_h3(lat, lon, self.resolution)
         except:
             return None
 
-    def h3_to_latlon(self, h3_address: str) -> Tuple[float, float]:
+    def h3_to_latlon(self, h3_address: str) -> Optional[Tuple[float, float]]:
         """Convert H3 cell to lat/lon"""
+        if not self.available:
+            return (None, None)
         try:
             return h3.h3_to_geo(h3_address)
         except:
@@ -36,14 +52,18 @@ class H3SpatialIndex:
 
     def get_neighbors(self, h3_address: str, k: int = 1) -> List[str]:
         """Get neighboring H3 cells"""
+        if not self.available:
+            return []
         try:
             return list(h3.k_ring(h3_address, k))
         except:
             return []
 
-    def get_cell(self, lat: float, lon: float) -> H3Cell:
+    def get_cell(self, lat: float, lon: float) -> Optional[H3Cell]:
         """Get H3 cell for coordinates"""
         h3_index = self.latlon_to_h3(lat, lon)
+        if h3_index is None:
+            return None
         return H3Cell(
             h3_index=h3_index,
             latitude=lat,

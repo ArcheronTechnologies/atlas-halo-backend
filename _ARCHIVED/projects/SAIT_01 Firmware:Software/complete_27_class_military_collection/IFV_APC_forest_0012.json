@@ -1,0 +1,22 @@
+{
+  "threat_type": "IFV_APC",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "forest",
+  "generated_at": "2025-09-22T11:11:18.578102",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.2444751201893926,
+  "filename": "IFV_APC_forest_0012.wav",
+  "file_path": "complete_27_class_military_collection/IFV_APC_forest_0012.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.2444751262664795,
+    "dynamic_range_db": 51.279797686299574,
+    "snr_db": 0.16447022461418545,
+    "thd_percent": 16856.898254527554
+  },
+  "sample_index": 12,
+  "threat_category": "DIRECT_COMBAT",
+  "priority_level": "HIGH"
+}

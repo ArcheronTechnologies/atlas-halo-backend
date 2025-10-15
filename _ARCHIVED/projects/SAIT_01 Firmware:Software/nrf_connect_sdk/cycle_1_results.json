@@ -1,0 +1,11 @@
+{
+  "overall_accuracy": 0.7333333333333333,
+  "class_accuracies": {
+    "background": 0.7466666666666667,
+    "vehicle": 0.48,
+    "aircraft": 0.9733333333333334
+  },
+  "meets_95_target": false,
+  "worst_class": "vehicle",
+  "worst_accuracy": 0.48
+}

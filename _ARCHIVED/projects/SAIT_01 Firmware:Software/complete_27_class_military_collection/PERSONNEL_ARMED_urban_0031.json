@@ -1,0 +1,22 @@
+{
+  "threat_type": "PERSONNEL_ARMED",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "urban",
+  "generated_at": "2025-09-22T11:11:31.417171",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.1970803745098216,
+  "filename": "PERSONNEL_ARMED_urban_0031.wav",
+  "file_path": "complete_27_class_military_collection/PERSONNEL_ARMED_urban_0031.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.19708037376403809,
+    "dynamic_range_db": 53.379819511718,
+    "snr_db": 1.3593616725822963,
+    "thd_percent": 104.2170062201772
+  },
+  "sample_index": 31,
+  "threat_category": "PERSONNEL_ACTIVITY",
+  "priority_level": "MEDIUM"
+}

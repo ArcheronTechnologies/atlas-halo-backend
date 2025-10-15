@@ -21,6 +21,7 @@ import time
 import re
 import json
 from pathlib import Path
+from difflib import SequenceMatcher
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -50,7 +51,7 @@ def load_osm_boundaries() -> Dict[str, Dict[str, Dict]]:
     if OSM_BOUNDARIES:
         return OSM_BOUNDARIES
 
-    boundaries_file = Path(__file__).parent.parent / "constants" / "neighborhood_boundaries.json"
+    boundaries_file = Path(__file__).parent.parent / "constants" / "neighborhood_polygons.json"
 
     if not boundaries_file.exists():
         logger.warning(f"OSM boundaries file not found: {boundaries_file}")
@@ -66,9 +67,18 @@ def load_osm_boundaries() -> Dict[str, Dict[str, Dict]]:
         return {}
 
 
+def fuzzy_string_similarity(str1: str, str2: str) -> float:
+    """
+    Calculate similarity ratio between two strings using SequenceMatcher
+    Returns float between 0.0 and 1.0 where 1.0 is perfect match
+    """
+    return SequenceMatcher(None, str1.lower(), str2.lower()).ratio()
+
+
 def find_matching_osm_neighborhood(city: str, neighborhood: str, lat: float, lon: float) -> Optional[Dict]:
     """
     Find matching OSM neighborhood boundary for a given neighborhood name and location
+    Uses multiple matching strategies including fuzzy matching
     Returns boundary data with coordinates if found, None otherwise
     """
     boundaries = load_osm_boundaries()
@@ -78,31 +88,53 @@ def find_matching_osm_neighborhood(city: str, neighborhood: str, lat: float, lon
 
     city_neighborhoods = boundaries[city]
 
-    # Exact match
+    # Strategy 1: Exact match
     if neighborhood in city_neighborhoods:
+        logger.debug(f"✓ Exact match: {neighborhood} → {neighborhood}")
         return city_neighborhoods[neighborhood]
 
-    # Fuzzy match (case-insensitive, handle variations)
     neighborhood_lower = neighborhood.lower()
+
+    # Strategy 2: Case-insensitive exact match
+    for osm_name, osm_data in city_neighborhoods.items():
+        if osm_name.lower() == neighborhood_lower:
+            logger.debug(f"✓ Case-insensitive match: {neighborhood} → {osm_name}")
+            return osm_data
+
+    # Strategy 3: One name contains the other
     for osm_name, osm_data in city_neighborhoods.items():
         osm_name_lower = osm_name.lower()
-
-        # Check various match strategies:
-        # 1. Exact lowercase match
-        if osm_name_lower == neighborhood_lower:
-            return osm_data
-
-        # 2. One name contains the other
         if neighborhood_lower in osm_name_lower or osm_name_lower in neighborhood_lower:
+            logger.debug(f"✓ Contains match: {neighborhood} → {osm_name}")
             return osm_data
 
-        # 3. Remove common suffixes/prefixes
-        cleaned_neighborhood = neighborhood_lower.replace(' centrum', '').replace('området', '').strip()
-        cleaned_osm = osm_name_lower.replace(' centrum', '').replace('området', '').strip()
+    # Strategy 4: Remove common suffixes/prefixes and try again
+    cleaned_neighborhood = neighborhood_lower.replace(' centrum', '').replace('området', '').replace(' norra', '').replace(' södra', '').replace(' östra', '').replace(' västra', '').strip()
+    for osm_name, osm_data in city_neighborhoods.items():
+        cleaned_osm = osm_name.lower().replace(' centrum', '').replace('området', '').replace(' norra', '').replace(' södra', '').replace(' östra', '').replace(' västra', '').strip()
         if cleaned_neighborhood == cleaned_osm:
+            logger.debug(f"✓ Cleaned match: {neighborhood} → {osm_name}")
             return osm_data
 
-    # No match found - could fall back to nearest neighborhood by distance
+    # Strategy 5: Fuzzy matching with 75% threshold
+    # This catches typos, abbreviations, and similar variations
+    best_match = None
+    best_score = 0.0
+    fuzzy_threshold = 0.75  # 75% similarity required
+
+    for osm_name, osm_data in city_neighborhoods.items():
+        score = fuzzy_string_similarity(neighborhood, osm_name)
+        if score > best_score and score >= fuzzy_threshold:
+            best_score = score
+            best_match = (osm_name, osm_data)
+
+    if best_match:
+        osm_name, osm_data = best_match
+        logger.info(f"✓ Fuzzy match ({int(best_score*100)}%): {neighborhood} → {osm_name}")
+        return osm_data
+
+    # No match found
+    logger.debug(f"✗ No match for: {neighborhood} in {city}")
     return None
 
 
@@ -429,8 +461,13 @@ async def generate_country_predictions(conn: asyncpg.Connection):
 
             # If we have OSM data, use its coordinates; otherwise use grid + offset
             if osm_boundary:
-                display_lat = osm_boundary["lat"]
-                display_lon = osm_boundary["lon"]
+                # Handle both old format (lat/lon) and new format (center.lat/center.lon)
+                if "center" in osm_boundary:
+                    display_lat = osm_boundary["center"]["lat"]
+                    display_lon = osm_boundary["center"]["lon"]
+                else:
+                    display_lat = osm_boundary.get("lat", grid_lat + lat_offset)
+                    display_lon = osm_boundary.get("lon", grid_lon + lon_offset)
                 logger.debug(f"Using OSM coordinates for {neighborhood_name}: {display_lat}, {display_lon}")
             else:
                 display_lat = grid_lat + lat_offset
@@ -462,6 +499,12 @@ async def generate_country_predictions(conn: asyncpg.Connection):
                     logger.debug(f"Using polygon boundary for {neighborhood_name}: {osm_boundary['geometry']['type']}")
                 else:
                     # Fallback to point if no polygon available
+                    # Handle both old format (lat/lon) and new format (center.lat/center.lon)
+                    if "center" in osm_boundary:
+                        point_coords = [osm_boundary["center"]["lon"], osm_boundary["center"]["lat"]]
+                    else:
+                        point_coords = [osm_boundary.get("lon", display_lon), osm_boundary.get("lat", display_lat)]
+
                     boundary_geojson = {
                         "type": "Feature",
                         "properties": {
@@ -470,9 +513,14 @@ async def generate_country_predictions(conn: asyncpg.Connection):
                         },
                         "geometry": {
                             "type": "Point",
-                            "coordinates": [osm_boundary["lon"], osm_boundary["lat"]]
+                            "coordinates": point_coords
                         }
                     }
+
+            # Skip generic "Area" predictions - only show actual neighborhoods
+            if neighborhood_name.endswith(" Area") or neighborhood_name.startswith("Area_"):
+                logger.debug(f"Skipping generic area prediction: {neighborhood_name}")
+                continue
 
             predictions_to_insert.append({
                 "grid_lat": grid_lat,

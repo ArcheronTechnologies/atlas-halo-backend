@@ -1,0 +1,22 @@
+{
+  "threat_type": "ATTACK_DRONE",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "urban",
+  "generated_at": "2025-09-22T11:11:23.848353",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.3271512414282133,
+  "filename": "ATTACK_DRONE_urban_0146.wav",
+  "file_path": "complete_27_class_military_collection/ATTACK_DRONE_urban_0146.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.32715123891830444,
+    "dynamic_range_db": 51.17357125228911,
+    "snr_db": 3.22117019412808,
+    "thd_percent": 29.64323645190004
+  },
+  "sample_index": 146,
+  "threat_category": "DIRECT_COMBAT",
+  "priority_level": "HIGH"
+}

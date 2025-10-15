@@ -1,0 +1,22 @@
+{
+  "threat_type": "ENVIRONMENTAL",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "mountain",
+  "generated_at": "2025-09-22T11:11:03.931362",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.19966850704909045,
+  "filename": "ENVIRONMENTAL_mountain_0069.wav",
+  "file_path": "complete_27_class_military_collection/ENVIRONMENTAL_mountain_0069.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.1996685117483139,
+    "dynamic_range_db": 53.1105058690367,
+    "snr_db": 2.1623129903720844,
+    "thd_percent": 178.7522548474022
+  },
+  "sample_index": 69,
+  "threat_category": "NON_THREAT",
+  "priority_level": "LOW"
+}

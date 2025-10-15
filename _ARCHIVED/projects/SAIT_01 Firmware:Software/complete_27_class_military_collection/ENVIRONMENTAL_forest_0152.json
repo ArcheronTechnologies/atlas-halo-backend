@@ -1,0 +1,22 @@
+{
+  "threat_type": "ENVIRONMENTAL",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "forest",
+  "generated_at": "2025-09-22T11:11:04.611402",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.21132979159740486,
+  "filename": "ENVIRONMENTAL_forest_0152.wav",
+  "file_path": "complete_27_class_military_collection/ENVIRONMENTAL_forest_0152.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.21132980287075043,
+    "dynamic_range_db": 52.99808914765808,
+    "snr_db": 1.4559324597974923,
+    "thd_percent": 444.9776873725472
+  },
+  "sample_index": 152,
+  "threat_category": "NON_THREAT",
+  "priority_level": "LOW"
+}

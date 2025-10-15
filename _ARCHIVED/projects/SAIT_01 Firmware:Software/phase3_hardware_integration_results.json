@@ -1,0 +1,71 @@
+{
+  "model_loading": {
+    "files_found": 2,
+    "total_size": 1700805,
+    "memory_constraints_met": true,
+    "flash_utilization": 54.86488342285156,
+    "ram_utilization": 57.14285714285714
+  },
+  "audio_pipeline": {
+    "preprocessing_time_ms": 1.21875,
+    "inference_time_ms": 6.7890625,
+    "postprocessing_time_ms": 0.25,
+    "total_pipeline_time_ms": 8.2578125,
+    "memory_usage_bytes": 278528,
+    "real_time_capable": true,
+    "timing_margin_ms": 55.7421875
+  },
+  "threat_detection": {
+    "scenarios_tested": 4,
+    "overall_accuracy": 1.0,
+    "scenario_accuracies": {
+      "urban_patrol": 1.0,
+      "rural_surveillance": 1.0,
+      "convoy_protection": 1.0,
+      "base_perimeter": 1.0
+    },
+    "stress_performance": {
+      "overall_stress_success": 1.0,
+      "individual_tests": {
+        "low_snr": {
+          "success_rate": 1.0,
+          "avg_inference_time": 0.0035639405250549316,
+          "avg_confidence": 0.28088818341493604,
+          "total_tests": 20
+        },
+        "rapid_transitions": {
+          "success_rate": 1.0,
+          "avg_inference_time": 0.0035366892814636232,
+          "avg_confidence": 0.23107611611485482,
+          "total_tests": 20
+        },
+        "multiple_threats": {
+          "success_rate": 1.0,
+          "avg_inference_time": 0.00372922420501709,
+          "avg_confidence": 0.21443009823560716,
+          "total_tests": 20
+        },
+        "interference_heavy": {
+          "success_rate": 1.0,
+          "avg_inference_time": 0.0032706856727600098,
+          "avg_confidence": 0.21535998433828354,
+          "total_tests": 20
+        }
+      }
+    }
+  },
+  "power_consumption": {
+    "active_power_mw": 71.5,
+    "sleep_power_mw": 2.5,
+    "duty_cycle": 0.1290283203125,
+    "average_power_mw": 11.4029541015625,
+    "power_efficiency": 0.8405181244536714,
+    "battery_life_estimate_hours": 210.47177587701927
+  },
+  "firmware_build": {
+    "cmake_files_found": true,
+    "weight_files_integrated": true,
+    "cmsis_nn_headers": true,
+    "build_simulation_success": true
+  }
+}

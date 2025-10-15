@@ -1,0 +1,597 @@
+{
+  "test_summary": {
+    "total_models_tested": 7,
+    "average_accuracy": 61.857142857142854,
+    "maximum_accuracy": 95.66666666666667,
+    "models_95_plus": 2,
+    "deployment_ready": 1
+  },
+  "best_models": {
+    "highest_accuracy": {
+      "model_name": "Ultimate 95% Model",
+      "accuracy": 0.9566666666666667,
+      "inference_time_ms": 1.5008004506429038,
+      "model_size_kb": 9448.484375,
+      "parameters": 796835,
+      "confusion_matrix": [
+        [
+          96,
+          4,
+          0
+        ],
+        [
+          6,
+          93,
+          1
+        ],
+        [
+          2,
+          0,
+          98
+        ]
+      ],
+      "classification_report": {
+        "background": {
+          "precision": 0.9230769230769231,
+          "recall": 0.96,
+          "f1-score": 0.9411764705882353,
+          "support": 100.0
+        },
+        "vehicle": {
+          "precision": 0.9587628865979382,
+          "recall": 0.93,
+          "f1-score": 0.9441624365482234,
+          "support": 100.0
+        },
+        "aircraft": {
+          "precision": 0.98989898989899,
+          "recall": 0.98,
+          "f1-score": 0.9849246231155779,
+          "support": 100.0
+        },
+        "accuracy": 0.9566666666666667,
+        "macro avg": {
+          "precision": 0.9572462665246171,
+          "recall": 0.9566666666666667,
+          "f1-score": 0.9567545100840121,
+          "support": 300.0
+        },
+        "weighted avg": {
+          "precision": 0.9572462665246171,
+          "recall": 0.9566666666666667,
+          "f1-score": 0.9567545100840122,
+          "support": 300.0
+        }
+      },
+      "target_95_achieved": true
+    },
+    "best_production": {
+      "model_name": "Quickfix TFLite (TFLite)",
+      "accuracy": 0.5333333333333333,
+      "inference_time_ms": 0.3691236178080241,
+      "model_size_kb": 182.0703125,
+      "parameters": "N/A (TFLite)",
+      "confusion_matrix": [
+        [
+          0,
+          68,
+          32
+        ],
+        [
+          0,
+          95,
+          5
+        ],
+        [
+          0,
+          35,
+          65
+        ]
+      ],
+      "classification_report": {
+        "background": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 100.0
+        },
+        "vehicle": {
+          "precision": 0.4797979797979798,
+          "recall": 0.95,
+          "f1-score": 0.6375838926174496,
+          "support": 100.0
+        },
+        "aircraft": {
+          "precision": 0.6372549019607843,
+          "recall": 0.65,
+          "f1-score": 0.6435643564356436,
+          "support": 100.0
+        },
+        "accuracy": 0.5333333333333333,
+        "macro avg": {
+          "precision": 0.37235096058625466,
+          "recall": 0.5333333333333333,
+          "f1-score": 0.42704941635103105,
+          "support": 300.0
+        },
+        "weighted avg": {
+          "precision": 0.37235096058625466,
+          "recall": 0.5333333333333333,
+          "f1-score": 0.42704941635103105,
+          "support": 300.0
+        }
+      },
+      "target_95_achieved": false,
+      "tflite_optimized": true
+    },
+    "first_95_target": {
+      "model_name": "Ultimate 95% Model",
+      "accuracy": 0.9566666666666667,
+      "inference_time_ms": 1.5008004506429038,
+      "model_size_kb": 9448.484375,
+      "parameters": 796835,
+      "confusion_matrix": [
+        [
+          96,
+          4,
+          0
+        ],
+        [
+          6,
+          93,
+          1
+        ],
+        [
+          2,
+          0,
+          98
+        ]
+      ],
+      "classification_report": {
+        "background": {
+          "precision": 0.9230769230769231,
+          "recall": 0.96,
+          "f1-score": 0.9411764705882353,
+          "support": 100.0
+        },
+        "vehicle": {
+          "precision": 0.9587628865979382,
+          "recall": 0.93,
+          "f1-score": 0.9441624365482234,
+          "support": 100.0
+        },
+        "aircraft": {
+          "precision": 0.98989898989899,
+          "recall": 0.98,
+          "f1-score": 0.9849246231155779,
+          "support": 100.0
+        },
+        "accuracy": 0.9566666666666667,
+        "macro avg": {
+          "precision": 0.9572462665246171,
+          "recall": 0.9566666666666667,
+          "f1-score": 0.9567545100840121,
+          "support": 300.0
+        },
+        "weighted avg": {
+          "precision": 0.9572462665246171,
+          "recall": 0.9566666666666667,
+          "f1-score": 0.9567545100840122,
+          "support": 300.0
+        }
+      },
+      "target_95_achieved": true
+    }
+  },
+  "all_results": [
+    {
+      "model_name": "Ultimate 95% Model",
+      "accuracy": 0.9566666666666667,
+      "inference_time_ms": 1.5008004506429038,
+      "model_size_kb": 9448.484375,
+      "parameters": 796835,
+      "confusion_matrix": [
+        [
+          96,
+          4,
+          0
+        ],
+        [
+          6,
+          93,
+          1
+        ],
+        [
+          2,
+          0,
+          98
+        ]
+      ],
+      "classification_report": {
+        "background": {
+          "precision": 0.9230769230769231,
+          "recall": 0.96,
+          "f1-score": 0.9411764705882353,
+          "support": 100.0
+        },
+        "vehicle": {
+          "precision": 0.9587628865979382,
+          "recall": 0.93,
+          "f1-score": 0.9441624365482234,
+          "support": 100.0
+        },
+        "aircraft": {
+          "precision": 0.98989898989899,
+          "recall": 0.98,
+          "f1-score": 0.9849246231155779,
+          "support": 100.0
+        },
+        "accuracy": 0.9566666666666667,
+        "macro avg": {
+          "precision": 0.9572462665246171,
+          "recall": 0.9566666666666667,
+          "f1-score": 0.9567545100840121,
+          "support": 300.0
+        },
+        "weighted avg": {
+          "precision": 0.9572462665246171,
+          "recall": 0.9566666666666667,
+          "f1-score": 0.9567545100840122,
+          "support": 300.0
+        }
+      },
+      "target_95_achieved": true
+    },
+    {
+      "model_name": "Production Model",
+      "accuracy": 0.9566666666666667,
+      "inference_time_ms": 0.8418234189351399,
+      "model_size_kb": 2052.84375,
+      "parameters": 167939,
+      "confusion_matrix": [
+        [
+          92,
+          7,
+          1
+        ],
+        [
+          0,
+          100,
+          0
+        ],
+        [
+          0,
+          5,
+          95
+        ]
+      ],
+      "classification_report": {
+        "background": {
+          "precision": 1.0,
+          "recall": 0.92,
+          "f1-score": 0.9583333333333334,
+          "support": 100.0
+        },
+        "vehicle": {
+          "precision": 0.8928571428571429,
+          "recall": 1.0,
+          "f1-score": 0.9433962264150944,
+          "support": 100.0
+        },
+        "aircraft": {
+          "precision": 0.9895833333333334,
+          "recall": 0.95,
+          "f1-score": 0.9693877551020408,
+          "support": 100.0
+        },
+        "accuracy": 0.9566666666666667,
+        "macro avg": {
+          "precision": 0.9608134920634921,
+          "recall": 0.9566666666666667,
+          "f1-score": 0.9570391049501561,
+          "support": 300.0
+        },
+        "weighted avg": {
+          "precision": 0.960813492063492,
+          "recall": 0.9566666666666667,
+          "f1-score": 0.9570391049501562,
+          "support": 300.0
+        }
+      },
+      "target_95_achieved": true
+    },
+    {
+      "model_name": "Multiscale TFLite (TFLite)",
+      "accuracy": 0.6033333333333334,
+      "inference_time_ms": 3.7477286656697593,
+      "model_size_kb": 854.1328125,
+      "parameters": "N/A (TFLite)",
+      "confusion_matrix": [
+        [
+          15,
+          74,
+          11
+        ],
+        [
+          0,
+          99,
+          1
+        ],
+        [
+          0,
+          33,
+          67
+        ]
+      ],
+      "classification_report": {
+        "background": {
+          "precision": 1.0,
+          "recall": 0.15,
+          "f1-score": 0.2608695652173913,
+          "support": 100.0
+        },
+        "vehicle": {
+          "precision": 0.48058252427184467,
+          "recall": 0.99,
+          "f1-score": 0.6470588235294118,
+          "support": 100.0
+        },
+        "aircraft": {
+          "precision": 0.8481012658227848,
+          "recall": 0.67,
+          "f1-score": 0.7486033519553073,
+          "support": 100.0
+        },
+        "accuracy": 0.6033333333333334,
+        "macro avg": {
+          "precision": 0.7762279300315432,
+          "recall": 0.6033333333333334,
+          "f1-score": 0.5521772469007035,
+          "support": 300.0
+        },
+        "weighted avg": {
+          "precision": 0.7762279300315432,
+          "recall": 0.6033333333333334,
+          "f1-score": 0.5521772469007035,
+          "support": 300.0
+        }
+      },
+      "target_95_achieved": false,
+      "tflite_optimized": true
+    },
+    {
+      "model_name": "Quickfix Model",
+      "accuracy": 0.5333333333333333,
+      "inference_time_ms": 0.8240063985188801,
+      "model_size_kb": 2053.421875,
+      "parameters": 167939,
+      "confusion_matrix": [
+        [
+          0,
+          68,
+          32
+        ],
+        [
+          0,
+          95,
+          5
+        ],
+        [
+          0,
+          35,
+          65
+        ]
+      ],
+      "classification_report": {
+        "background": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 100.0
+        },
+        "vehicle": {
+          "precision": 0.4797979797979798,
+          "recall": 0.95,
+          "f1-score": 0.6375838926174496,
+          "support": 100.0
+        },
+        "aircraft": {
+          "precision": 0.6372549019607843,
+          "recall": 0.65,
+          "f1-score": 0.6435643564356436,
+          "support": 100.0
+        },
+        "accuracy": 0.5333333333333333,
+        "macro avg": {
+          "precision": 0.37235096058625466,
+          "recall": 0.5333333333333333,
+          "f1-score": 0.42704941635103105,
+          "support": 300.0
+        },
+        "weighted avg": {
+          "precision": 0.37235096058625466,
+          "recall": 0.5333333333333333,
+          "f1-score": 0.42704941635103105,
+          "support": 300.0
+        }
+      },
+      "target_95_achieved": false
+    },
+    {
+      "model_name": "Quickfix TFLite (TFLite)",
+      "accuracy": 0.5333333333333333,
+      "inference_time_ms": 0.3691236178080241,
+      "model_size_kb": 182.0703125,
+      "parameters": "N/A (TFLite)",
+      "confusion_matrix": [
+        [
+          0,
+          68,
+          32
+        ],
+        [
+          0,
+          95,
+          5
+        ],
+        [
+          0,
+          35,
+          65
+        ]
+      ],
+      "classification_report": {
+        "background": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 100.0
+        },
+        "vehicle": {
+          "precision": 0.4797979797979798,
+          "recall": 0.95,
+          "f1-score": 0.6375838926174496,
+          "support": 100.0
+        },
+        "aircraft": {
+          "precision": 0.6372549019607843,
+          "recall": 0.65,
+          "f1-score": 0.6435643564356436,
+          "support": 100.0
+        },
+        "accuracy": 0.5333333333333333,
+        "macro avg": {
+          "precision": 0.37235096058625466,
+          "recall": 0.5333333333333333,
+          "f1-score": 0.42704941635103105,
+          "support": 300.0
+        },
+        "weighted avg": {
+          "precision": 0.37235096058625466,
+          "recall": 0.5333333333333333,
+          "f1-score": 0.42704941635103105,
+          "support": 300.0
+        }
+      },
+      "target_95_achieved": false,
+      "tflite_optimized": true
+    },
+    {
+      "model_name": "Ultimate Fold Model",
+      "accuracy": 0.41,
+      "inference_time_ms": 29.471193154652912,
+      "model_size_kb": 38479.6640625,
+      "parameters": 3268035,
+      "confusion_matrix": [
+        [
+          31,
+          69,
+          0
+        ],
+        [
+          8,
+          92,
+          0
+        ],
+        [
+          60,
+          40,
+          0
+        ]
+      ],
+      "classification_report": {
+        "background": {
+          "precision": 0.31313131313131315,
+          "recall": 0.31,
+          "f1-score": 0.31155778894472363,
+          "support": 100.0
+        },
+        "vehicle": {
+          "precision": 0.4577114427860697,
+          "recall": 0.92,
+          "f1-score": 0.6112956810631229,
+          "support": 100.0
+        },
+        "aircraft": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 100.0
+        },
+        "accuracy": 0.41,
+        "macro avg": {
+          "precision": 0.25694758530579426,
+          "recall": 0.41,
+          "f1-score": 0.30761782333594884,
+          "support": 300.0
+        },
+        "weighted avg": {
+          "precision": 0.25694758530579426,
+          "recall": 0.41,
+          "f1-score": 0.30761782333594884,
+          "support": 300.0
+        }
+      },
+      "target_95_achieved": false
+    },
+    {
+      "model_name": "Aircraft Calibrated TFLite (TFLite)",
+      "accuracy": 0.33666666666666667,
+      "inference_time_ms": 27.454423904418945,
+      "model_size_kb": 3271.4296875,
+      "parameters": "N/A (TFLite)",
+      "confusion_matrix": [
+        [
+          100,
+          0,
+          0
+        ],
+        [
+          99,
+          1,
+          0
+        ],
+        [
+          100,
+          0,
+          0
+        ]
+      ],
+      "classification_report": {
+        "background": {
+          "precision": 0.33444816053511706,
+          "recall": 1.0,
+          "f1-score": 0.5012531328320802,
+          "support": 100.0
+        },
+        "vehicle": {
+          "precision": 1.0,
+          "recall": 0.01,
+          "f1-score": 0.019801980198019802,
+          "support": 100.0
+        },
+        "aircraft": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 100.0
+        },
+        "accuracy": 0.33666666666666667,
+        "macro avg": {
+          "precision": 0.44481605351170567,
+          "recall": 0.33666666666666667,
+          "f1-score": 0.1736850376767,
+          "support": 300.0
+        },
+        "weighted avg": {
+          "precision": 0.4448160535117057,
+          "recall": 0.33666666666666667,
+          "f1-score": 0.1736850376767,
+          "support": 300.0
+        }
+      },
+      "target_95_achieved": false,
+      "tflite_optimized": true
+    }
+  ]
+}

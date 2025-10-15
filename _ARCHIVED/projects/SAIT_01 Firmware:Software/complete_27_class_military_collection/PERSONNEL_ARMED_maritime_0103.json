@@ -1,0 +1,22 @@
+{
+  "threat_type": "PERSONNEL_ARMED",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "maritime",
+  "generated_at": "2025-09-22T11:11:31.933101",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.16436364454990612,
+  "filename": "PERSONNEL_ARMED_maritime_0103.wav",
+  "file_path": "complete_27_class_military_collection/PERSONNEL_ARMED_maritime_0103.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.16436365246772766,
+    "dynamic_range_db": 54.732299534276535,
+    "snr_db": 1.822662790884222,
+    "thd_percent": 308.0310375354408
+  },
+  "sample_index": 103,
+  "threat_category": "PERSONNEL_ACTIVITY",
+  "priority_level": "MEDIUM"
+}

@@ -1,0 +1,141 @@
+{
+  "power_optimization_results": {
+    "target_reduction_percent": 80.0,
+    "average_power_savings_percent": 64.60068471833178,
+    "target_achieved": false,
+    "mode_transition_results": [
+      {
+        "scenario": "Normal Operation",
+        "total_time_ms": 15000,
+        "total_energy_mwh": 0.03138888888888889,
+        "average_power_mw": 7.533333333333333,
+        "power_savings_percent": 49.77777777777778,
+        "target_met": false
+      },
+      {
+        "scenario": "Emergency Response",
+        "total_time_ms": 21000,
+        "total_energy_mwh": 0.036111111111111115,
+        "average_power_mw": 6.190476190476191,
+        "power_savings_percent": 58.730158730158735,
+        "target_met": false
+      },
+      {
+        "scenario": "Extended Monitoring",
+        "total_time_ms": 68000,
+        "total_energy_mwh": 0.04166666666666667,
+        "average_power_mw": 2.2058823529411766,
+        "power_savings_percent": 85.29411764705883,
+        "target_met": true
+      }
+    ],
+    "frequency_scaling_results": [
+      {
+        "scenario": "Real-time Threat Detection",
+        "cpu_load": 0.9,
+        "optimal_frequency_mhz": 128,
+        "optimal_power_mw": 10.8,
+        "baseline_power_mw": 10.8,
+        "power_savings_percent": 0.0,
+        "performance_met": true
+      },
+      {
+        "scenario": "Audio Processing",
+        "cpu_load": 0.6,
+        "optimal_frequency_mhz": 64,
+        "optimal_power_mw": 4.8,
+        "baseline_power_mw": 7.199999999999999,
+        "power_savings_percent": 33.33333333333333,
+        "performance_met": true
+      },
+      {
+        "scenario": "Background Monitoring",
+        "cpu_load": 0.3,
+        "optimal_frequency_mhz": 32,
+        "optimal_power_mw": 1.5,
+        "baseline_power_mw": 3.5999999999999996,
+        "power_savings_percent": 58.33333333333333,
+        "performance_met": true
+      },
+      {
+        "scenario": "Standby Mode",
+        "cpu_load": 0.1,
+        "optimal_frequency_mhz": 16,
+        "optimal_power_mw": 0.30000000000000004,
+        "baseline_power_mw": 1.2000000000000002,
+        "power_savings_percent": 75.0,
+        "performance_met": true
+      }
+    ],
+    "sleep_mode_results": [
+      {
+        "idle_time_ms": 100,
+        "sleep_mode": "LIGHT_SLEEP",
+        "sleep_power_mw": 3.0,
+        "total_energy_mwh": 0.00010416666666666669,
+        "active_energy_mwh": 0.0004166666666666667,
+        "energy_savings_percent": 75.0,
+        "efficiency": true
+      },
+      {
+        "idle_time_ms": 1000,
+        "sleep_mode": "LIGHT_SLEEP",
+        "sleep_power_mw": 3.0,
+        "total_energy_mwh": 0.0008541666666666666,
+        "active_energy_mwh": 0.004166666666666667,
+        "energy_savings_percent": 79.5,
+        "efficiency": true
+      },
+      {
+        "idle_time_ms": 5000,
+        "sleep_mode": "DEEP_SLEEP",
+        "sleep_power_mw": 0.5,
+        "total_energy_mwh": 0.0009027777777777778,
+        "active_energy_mwh": 0.020833333333333336,
+        "energy_savings_percent": 95.66666666666667,
+        "efficiency": true
+      },
+      {
+        "idle_time_ms": 30000,
+        "sleep_mode": "DEEP_SLEEP",
+        "sleep_power_mw": 0.5,
+        "total_energy_mwh": 0.0043749999999999995,
+        "active_energy_mwh": 0.125,
+        "energy_savings_percent": 96.5,
+        "efficiency": true
+      }
+    ],
+    "dma_optimization_results": [
+      {
+        "scenario": "Audio Streaming",
+        "data_size_kb": 16,
+        "frequency_hz": 16000,
+        "burst_mode": true,
+        "optimized_power_mw": 1.7,
+        "baseline_power_mw": 4.0,
+        "power_savings_percent": 57.49999999999999,
+        "efficiency_good": true
+      },
+      {
+        "scenario": "Spectrogram Transfer",
+        "data_size_kb": 4,
+        "frequency_hz": 100,
+        "burst_mode": true,
+        "optimized_power_mw": 1.7,
+        "baseline_power_mw": 4.0,
+        "power_savings_percent": 57.49999999999999,
+        "efficiency_good": true
+      },
+      {
+        "scenario": "Model Weights Load",
+        "data_size_kb": 24,
+        "frequency_hz": 1,
+        "burst_mode": false,
+        "optimized_power_mw": 2.0,
+        "baseline_power_mw": 4.0,
+        "power_savings_percent": 50.0,
+        "efficiency_good": true
+      }
+    ]
+  }
+}

@@ -78,11 +78,14 @@ async def health_check():
     try:
         analyzer = get_photo_analyzer()
 
+        # PhotoAnalyzer delegates to Atlas Intelligence - no local device
+        device = "atlas_intelligence"
+
         return {
             "status": "healthy",
             "models_loaded": True,
-            "device": analyzer.device,
-            "message": f"AI services ready on {analyzer.device}"
+            "device": device,
+            "message": f"AI services ready on {device}"
         }
     except Exception as e:
         logger.error(f"Health check failed: {str(e)}")
@@ -246,19 +249,16 @@ async def analyze_photo_batch(files: List[UploadFile] = File(...)):
 @router.get("/categories")
 async def get_categories():
     """
-    Get all available incident categories across taxonomies
+    Get all available incident categories (polisen.se taxonomy)
 
     Returns:
-    - Backend API categories (10 main types)
-    - Mobile app categories (6 main types)
-    - Polisen.se Swedish mappings
+    - Polisen.se Swedish incident categories
     """
     classifier = get_incident_classifier()
 
     return {
-        "backend_categories": classifier.BACKEND_CATEGORIES,
-        "mobile_categories": classifier.MOBILE_CATEGORIES,
-        "polisen_mapping": classifier.POLISEN_MAPPING
+        "polisen_categories": classifier.POLISEN_CATEGORIES,
+        "count": len(classifier.POLISEN_CATEGORIES)
     }
 
 

@@ -1,0 +1,22 @@
+{
+  "threat_type": "PERSONNEL_ARMED",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "forest",
+  "generated_at": "2025-09-22T11:11:32.452596",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.1844301898105085,
+  "filename": "PERSONNEL_ARMED_forest_0177.wav",
+  "file_path": "complete_27_class_military_collection/PERSONNEL_ARMED_forest_0177.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.18443018198013306,
+    "dynamic_range_db": 53.83054867175014,
+    "snr_db": 1.6072661371724575,
+    "thd_percent": 125.91316908682553
+  },
+  "sample_index": 177,
+  "threat_category": "PERSONNEL_ACTIVITY",
+  "priority_level": "MEDIUM"
+}

@@ -1,0 +1,18 @@
+{
+  "architecture": "transfer_learning_military_model",
+  "approach": "two_stage_transfer_learning",
+  "improvements": [
+    "Pre-trained audio domain features",
+    "Military-specific adaptation layers",
+    "Staged training (freeze \u2192 fine-tune)",
+    "Audio-specific attention mechanisms",
+    "Domain adaptation for tactical sounds"
+  ],
+  "stage1_accuracy": 0.019333333333333334,
+  "stage2_accuracy": 0.13933333333333334,
+  "final_accuracy": 0.13933333333333334,
+  "parameters": 76175,
+  "model_size_kb": 74.3896484375,
+  "inference_time_ms": 0.8671283721923828,
+  "hardware_compatible": true
+}

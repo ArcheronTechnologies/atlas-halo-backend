@@ -1,0 +1,22 @@
+{
+  "threat_type": "EXPLOSION_NEAR",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "forest",
+  "generated_at": "2025-09-22T11:11:14.463065",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.09168201865525107,
+  "filename": "EXPLOSION_NEAR_forest_0072.wav",
+  "file_path": "complete_27_class_military_collection/EXPLOSION_NEAR_forest_0072.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.09168201684951782,
+    "dynamic_range_db": 75.30040574866368,
+    "snr_db": 18.627898240776766,
+    "thd_percent": 4.179538191665404
+  },
+  "sample_index": 72,
+  "threat_category": "IMMEDIATE_LETHAL",
+  "priority_level": "CRITICAL"
+}

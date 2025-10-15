@@ -1,0 +1,28 @@
+{
+  "source_model": "enhanced_qadt_r_best.pth",
+  "target_format": "CMSIS-NN q7",
+  "enhanced_with_drone_acoustics": true,
+  "output_classes": 30,
+  "accuracy_achieved": 50.4,
+  "total_parameters": 1582384,
+  "layers_converted": [
+    "conv_scale1",
+    "conv_scale2",
+    "conv_scale3",
+    "conv2",
+    "conv3",
+    "attention_conv",
+    "feature_fc1",
+    "feature_fc2",
+    "attention_query",
+    "attention_key",
+    "attention_value",
+    "attention_output",
+    "env_adaptation",
+    "specific_head",
+    "binary_head",
+    "category_head",
+    "confidence_head"
+  ],
+  "conversion_timestamp": "Phase_2_5_enhanced_conversion"
+}

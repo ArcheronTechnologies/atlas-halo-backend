@@ -15,6 +15,8 @@ import json
 
 from ..database.postgis_database import get_database
 from ..auth.jwt_authentication import verify_token, get_current_user
+from ..services.sensor_fusion import get_sensor_fusion_service
+from ..workers.update_risk_scores import update_nearby_risk_scores
 
 logger = logging.getLogger(__name__)
 security = HTTPBearer()
@@ -313,18 +315,18 @@ async def list_incidents(
 
         # Format incidents
         incidents = []
-        now = datetime.now()
+        from datetime import timezone
+        now_utc = datetime.now(timezone.utc)  # Use UTC time for all calculations
         for row in results:
             metadata = parse_metadata(row.get('metadata'))
             # Calculate hours_ago
             occurred_at = row['occurred_at']
             if occurred_at.tzinfo is not None:
-                # If occurred_at has timezone, make now timezone-aware
-                from datetime import timezone
-                now_aware = now.replace(tzinfo=timezone.utc)
-                hours_ago = (now_aware - occurred_at).total_seconds() / 3600
+                hours_ago = (now_utc - occurred_at).total_seconds() / 3600
             else:
-                hours_ago = (now - occurred_at).total_seconds() / 3600
+                # If no timezone, assume UTC
+                occurred_at_utc = occurred_at.replace(tzinfo=timezone.utc)
+                hours_ago = (now_utc - occurred_at_utc).total_seconds() / 3600
 
             incidents.append(IncidentResponse(
                 id=str(row['id']),
@@ -498,7 +500,36 @@ async def create_incident(
             'metadata': base_metadata
         }
 
-        # Store incident
+        # Check for correlation with existing incidents (sensor fusion)
+        sensor_fusion = get_sensor_fusion_service()
+
+        correlation_data = {
+            'latitude': incident.latitude,
+            'longitude': incident.longitude,
+            'occurred_at': occurred_at or datetime.utcnow(),
+            'incident_type': incident.incident_type.value,
+            'video_id': base_metadata['media_ids'][0] if base_metadata['media_ids'] else None,
+            'user_id': str(current_user['id'])
+        }
+
+        # Try to correlate with existing incidents
+        merged_incident = await sensor_fusion.correlate_incident(
+            correlation_data,
+            db.connection
+        )
+
+        if merged_incident:
+            # Incident was correlated and merged
+            logger.info(f"✅ Incident correlated with existing: {merged_incident['id']}")
+
+            return {
+                "incident_id": str(merged_incident['id']),
+                "message": "Your report has been correlated with an existing incident",
+                "status": "corroborated",
+                "reporter_count": merged_incident['reporter_count']
+            }
+
+        # No correlation - store as new incident
         incident_id = await db.store_incident(incident_data)
 
         if not incident_id:
@@ -508,6 +539,19 @@ async def create_incident(
             )
 
         logger.info(f"✅ Incident created: {incident_id} by user {current_user['id']}")
+
+        # Update nearby prediction risk scores
+        try:
+            await update_nearby_risk_scores(
+                incident_location={'latitude': incident.latitude, 'longitude': incident.longitude},
+                incident_category=incident.incident_type.value,
+                db_connection=db.connection,
+                radius_km=2.0,
+                risk_increase=0.10
+            )
+        except Exception as e:
+            logger.warning(f"Failed to update risk scores: {e}")
+            # Don't fail incident creation if risk update fails
 
         return {
             "incident_id": str(incident_id),

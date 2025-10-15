@@ -1,0 +1,97 @@
+{
+  "all_cycles": [
+    {
+      "cycle": "Cycle 2 - Balanced Multi-class",
+      "overall_accuracy": 0.9122222222222223,
+      "class_accuracies": {
+        "background": 0.8933333333333333,
+        "vehicle": 0.9333333333333333,
+        "aircraft": 0.91
+      },
+      "meets_95_target": false,
+      "worst_class": "background",
+      "worst_accuracy": 0.8933333333333333,
+      "model_path": "sait01_balanced_multiclass.h5"
+    },
+    {
+      "cycle": "Cycle 2 - Best Checkpoint",
+      "overall_accuracy": 0.8955555555555555,
+      "class_accuracies": {
+        "background": 0.9,
+        "vehicle": 0.9,
+        "aircraft": 0.8866666666666667
+      },
+      "meets_95_target": false,
+      "worst_class": "aircraft",
+      "worst_accuracy": 0.8866666666666667,
+      "model_path": "balanced_multiclass_best.h5"
+    },
+    {
+      "cycle": "Cycle 3 - Aircraft Specialist",
+      "overall_accuracy": 0.8244444444444444,
+      "class_accuracies": {
+        "background": 0.8433333333333334,
+        "vehicle": 0.77,
+        "aircraft": 0.86
+      },
+      "meets_95_target": false,
+      "worst_class": "vehicle",
+      "worst_accuracy": 0.77,
+      "model_path": "sait01_aircraft_specialist.h5"
+    },
+    {
+      "cycle": "Cycle 3 - Background Specialist",
+      "overall_accuracy": 0.7755555555555556,
+      "class_accuracies": {
+        "background": 0.8066666666666666,
+        "vehicle": 0.6833333333333333,
+        "aircraft": 0.8366666666666667
+      },
+      "meets_95_target": false,
+      "worst_class": "vehicle",
+      "worst_accuracy": 0.6833333333333333,
+      "model_path": "sait01_background_specialist.h5"
+    },
+    {
+      "cycle": "Cycle 3 - Vehicle Specialist",
+      "overall_accuracy": 0.76,
+      "class_accuracies": {
+        "background": 0.48333333333333334,
+        "vehicle": 0.8966666666666666,
+        "aircraft": 0.9
+      },
+      "meets_95_target": false,
+      "worst_class": "background",
+      "worst_accuracy": 0.48333333333333334,
+      "model_path": "sait01_vehicle_specialist.h5"
+    },
+    {
+      "cycle": "Cycle 1 - Aircraft Fix",
+      "overall_accuracy": 0.7411111111111112,
+      "class_accuracies": {
+        "background": 0.73,
+        "vehicle": 0.5333333333333333,
+        "aircraft": 0.96
+      },
+      "meets_95_target": false,
+      "worst_class": "vehicle",
+      "worst_accuracy": 0.5333333333333333,
+      "model_path": "sait01_aircraft_quick_fix.h5"
+    }
+  ],
+  "successful_models": [],
+  "target_achieved": false,
+  "best_model": {
+    "cycle": "Cycle 2 - Balanced Multi-class",
+    "overall_accuracy": 0.9122222222222223,
+    "class_accuracies": {
+      "background": 0.8933333333333333,
+      "vehicle": 0.9333333333333333,
+      "aircraft": 0.91
+    },
+    "meets_95_target": false,
+    "worst_class": "background",
+    "worst_accuracy": 0.8933333333333333,
+    "model_path": "sait01_balanced_multiclass.h5"
+  }
+}

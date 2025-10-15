@@ -1,0 +1,22 @@
+{
+  "threat_type": "RECON_AIRCRAFT",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "urban",
+  "generated_at": "2025-09-22T11:11:39.135014",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.30898252091821576,
+  "filename": "RECON_AIRCRAFT_urban_0156.wav",
+  "file_path": "complete_27_class_military_collection/RECON_AIRCRAFT_urban_0156.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.3089825212955475,
+    "dynamic_range_db": 49.18545051349657,
+    "snr_db": 0.5282551095403585,
+    "thd_percent": 17.296914040770968
+  },
+  "sample_index": 156,
+  "threat_category": "SURVEILLANCE_RECON",
+  "priority_level": "LOW_MEDIUM"
+}

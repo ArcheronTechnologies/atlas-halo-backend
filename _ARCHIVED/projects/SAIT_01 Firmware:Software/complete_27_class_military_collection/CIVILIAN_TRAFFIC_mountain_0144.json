@@ -1,0 +1,22 @@
+{
+  "threat_type": "CIVILIAN_TRAFFIC",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "mountain",
+  "generated_at": "2025-09-22T11:11:06.134326",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.2692321801606218,
+  "filename": "CIVILIAN_TRAFFIC_mountain_0144.wav",
+  "file_path": "complete_27_class_military_collection/CIVILIAN_TRAFFIC_mountain_0144.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.2692321836948395,
+    "dynamic_range_db": 48.31888357785882,
+    "snr_db": 0.5450808617629852,
+    "thd_percent": 416.9749288903366
+  },
+  "sample_index": 144,
+  "threat_category": "NON_THREAT",
+  "priority_level": "LOW"
+}

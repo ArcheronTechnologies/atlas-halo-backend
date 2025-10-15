@@ -1,0 +1,22 @@
+{
+  "threat_type": "RECON_AIRCRAFT",
+  "duration": 3.0,
+  "sample_rate": 16000,
+  "environment": "mountain",
+  "generated_at": "2025-09-22T11:11:38.866635",
+  "audio_length": 48000,
+  "peak_amplitude": 0.9,
+  "rms_amplitude": 0.2989127357753742,
+  "filename": "RECON_AIRCRAFT_mountain_0119.wav",
+  "file_path": "complete_27_class_military_collection/RECON_AIRCRAFT_mountain_0119.wav",
+  "quality_assessment": {
+    "peak_amplitude": 0.8999999761581421,
+    "rms_amplitude": 0.29891273379325867,
+    "dynamic_range_db": 46.50381264928506,
+    "snr_db": 0.13113792849894979,
+    "thd_percent": 18.60118027460282
+  },
+  "sample_index": 119,
+  "threat_category": "SURVEILLANCE_RECON",
+  "priority_level": "LOW_MEDIUM"
+}
