@@ -8,6 +8,7 @@ from typing import Dict, Any
 import logging
 
 from ..services.data_ingestion_service import get_ingestion_service
+from ..workers.daily_retrain import daily_retrain_job
 # Removed: comprehensive_swedish_collector - now using Atlas Intelligence API
 
 logger = logging.getLogger(__name__)
@@ -54,6 +55,30 @@ async def trigger_collection() -> Dict[str, Any]:
     except Exception as e:
         logger.error(f"Failed to trigger collection: {e}")
         raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.post("/retrain/trigger")
+async def trigger_retraining() -> Dict[str, Any]:
+    """
+    Manually trigger the daily AI model retraining job
+
+    This is normally run automatically at 02:00 UTC but can be triggered manually for:
+    - Testing the retraining pipeline
+    - Immediate model updates after significant new incident data
+    - Recovery from failed automatic runs
+
+    Returns retraining results and statistics
+    """
+    try:
+        logger.info("Manual retraining triggered via API")
+        await daily_retrain_job()
+        return {
+            "status": "success",
+            "message": "AI model retraining completed successfully"
+        }
+    except Exception as e:
+        logger.error(f"Failed to trigger retraining: {e}", exc_info=True)
+        raise HTTPException(status_code=500, detail=f"Retraining failed: {str(e)}")
 
 
 @router.post("/bootstrap/historical-data")
