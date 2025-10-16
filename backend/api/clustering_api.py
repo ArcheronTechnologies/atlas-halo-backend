@@ -17,6 +17,11 @@ from ..database.postgis_database import get_database
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/api/v1/reports", tags=["reports"])
 
+@router.get("/ping")
+async def ping():
+    """Simple ping endpoint to test if router is working"""
+    return {"status": "ok", "message": "Clustering API is alive"}
+
 class SubmitReportRequest(BaseModel):
     incident_type: str
     latitude: float
