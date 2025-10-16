@@ -252,6 +252,26 @@ async def get_cluster_info(incident_id: str, db = Depends(get_database)):
         ]
     )
 
+@router.get("/debug/test-db-injection")
+async def test_db_injection(db = Depends(get_database)):
+    """
+    Test if dependency injection works
+    """
+    try:
+        return {
+            "status": "success",
+            "db_object": str(type(db)),
+            "has_pool": db.pool is not None if hasattr(db, 'pool') else False,
+            "has_engine": db.engine is not None if hasattr(db, 'engine') else False
+        }
+    except Exception as e:
+        return {
+            "status": "error",
+            "error_type": type(e).__name__,
+            "error_message": str(e),
+            "traceback": traceback.format_exc()
+        }
+
 @router.get("/debug/test-query")
 async def test_database_query(db = Depends(get_database)):
     """
@@ -259,6 +279,7 @@ async def test_database_query(db = Depends(get_database)):
     Returns detailed error information if query fails
     """
     try:
+        logger.info(f"Testing query with db: {type(db)}, pool: {db.pool}, engine: {db.engine}")
         # Simple test query
         result = await db.execute_query("SELECT COUNT(*) as count FROM crime_incidents")
 
