@@ -14,6 +14,9 @@ from datetime import datetime
 import os
 from pathlib import Path
 import uvicorn
+import sentry_sdk
+from sentry_sdk.integrations.fastapi import FastApiIntegration
+from sentry_sdk.integrations.asyncio import AsyncioIntegration
 
 # Security imports
 from backend.security.rate_limiting import RateLimitMiddleware, rate_limiter
@@ -52,6 +55,23 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler
 # Initialize logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+
+# Initialize Sentry for error tracking (optional)
+SENTRY_DSN = os.getenv('SENTRY_DSN')
+if SENTRY_DSN:
+    sentry_sdk.init(
+        dsn=SENTRY_DSN,
+        integrations=[
+            FastApiIntegration(),
+            AsyncioIntegration(),
+        ],
+        traces_sample_rate=0.1,  # 10% of requests for performance monitoring
+        environment=os.getenv('ENVIRONMENT', 'production'),
+        release=f"halo-backend@{os.getenv('VERSION', '1.0.0')}",
+    )
+    logger.info("✅ Sentry error tracking initialized")
+else:
+    logger.info("ℹ️  Sentry DSN not set - error tracking disabled")
 
 # Application metadata
 APP_VERSION = "1.0.0"
