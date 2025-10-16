@@ -21,14 +21,7 @@ scw config get secret-key
 scw config get default-organization-id
 ```
 
-### 2. Create Scaleway Registry Token
-
-1. Go to [Scaleway Console](https://console.scaleway.com/)
-2. Navigate to: **Container Registry** → **funcscwhalobackend4k1irws6**
-3. Click **Credentials** → **Generate credentials**
-4. Copy the generated token (it will only be shown once!)
-
-### 3. Add Secrets to GitHub
+### 2. Add Secrets to GitHub
 
 1. Go to your GitHub repository: `https://github.com/ArcheronTechnologies/atlas-halo-backend`
 2. Navigate to: **Settings** → **Secrets and variables** → **Actions**
@@ -39,7 +32,8 @@ scw config get default-organization-id
 | `SCW_ACCESS_KEY` | Your access key | `scw config get access-key` |
 | `SCW_SECRET_KEY` | Your secret key | `scw config get secret-key` |
 | `SCW_DEFAULT_ORGANIZATION_ID` | Your org ID | `scw config get default-organization-id` |
-| `SCW_REGISTRY_TOKEN` | Registry token | Scaleway Console → Container Registry → Credentials |
+
+**Note**: No separate registry token needed! The workflow uses `scw registry login` which authenticates with your SCW credentials.
 
 ## How It Works
 

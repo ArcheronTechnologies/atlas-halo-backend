@@ -46,12 +46,8 @@ jobs:
           scw config set default-region=fr-par
 
       - name: Login to Scaleway Container Registry
-        env:
-          SCW_REGISTRY_TOKEN: ${{ secrets.SCW_REGISTRY_TOKEN }}
         run: |
-          echo "$SCW_REGISTRY_TOKEN" | docker login \
-            rg.fr-par.scw.cloud/funcscwhalobackend4k1irws6 \
-            -u nologin --password-stdin
+          scw registry login program=docker region=fr-par
 
       - name: Push Docker images
         run: |
