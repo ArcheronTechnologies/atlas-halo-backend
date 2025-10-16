@@ -1587,8 +1587,10 @@ class PostGISDatabase:
     async def execute_query_single(self, query: str, *params) -> Optional[Dict[str, Any]]:
         """Execute raw SQL query and return single result as dictionary"""
         async with self.pool.acquire() as conn:
-            await conn.execute(query, params if params else None)
-            row = await conn.fetchrow()
+            if params:
+                row = await conn.fetchrow(query, *params)
+            else:
+                row = await conn.fetchrow(query)
             return dict(row) if row else None
 
     async def execute_non_query(self, query: str, *params) -> int:
