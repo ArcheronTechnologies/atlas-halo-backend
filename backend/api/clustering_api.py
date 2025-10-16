@@ -10,8 +10,11 @@ from typing import Optional, List
 import hashlib
 from datetime import datetime
 import uuid
+import logging
+import traceback
 from ..database.postgis_database import get_database
 
+logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/api/v1/reports", tags=["reports"])
 
 class SubmitReportRequest(BaseModel):
@@ -244,31 +247,81 @@ async def get_cluster_info(incident_id: str, db = Depends(get_database)):
         ]
     )
 
+@router.get("/debug/test-query")
+async def test_database_query(db = Depends(get_database)):
+    """
+    Debug endpoint to test database connectivity and queries
+    Returns detailed error information if query fails
+    """
+    try:
+        # Simple test query
+        result = await db.execute_query("SELECT COUNT(*) as count FROM crime_incidents")
+
+        return {
+            "status": "success",
+            "database": "connected",
+            "total_incidents": result[0]['count'] if result else 0,
+            "query_type": "simple_count"
+        }
+    except Exception as e:
+        logger.error(f"Database test query failed: {str(e)}")
+        logger.error(traceback.format_exc())
+        return {
+            "status": "error",
+            "error_type": type(e).__name__,
+            "error_message": str(e),
+            "traceback": traceback.format_exc()
+        }
+
 @router.get("/stats")
 async def get_clustering_stats(db = Depends(get_database)):
     """
     Get overall clustering statistics
     """
-    stats = await db.execute_query_single(
-        """
-        SELECT
-            COUNT(*) FILTER (WHERE is_verified = true) as verified_incidents,
-            COUNT(*) FILTER (WHERE is_verified = false) as unverified_incidents,
-            AVG(unique_reporters) as avg_reporters_per_incident,
-            MAX(unique_reporters) as max_reporters_single_incident,
-            SUM(report_count) as total_reports
-        FROM crime_incidents
-        WHERE source = 'user_report'
-        """
-    )
+    try:
+        logger.info("Fetching clustering stats...")
+        stats = await db.execute_query_single(
+            """
+            SELECT
+                COUNT(*) FILTER (WHERE is_verified = true) as verified_incidents,
+                COUNT(*) FILTER (WHERE is_verified = false) as unverified_incidents,
+                AVG(unique_reporters) as avg_reporters_per_incident,
+                MAX(unique_reporters) as max_reporters_single_incident,
+                SUM(report_count) as total_reports
+            FROM crime_incidents
+            WHERE source = 'user_report'
+            """
+        )
 
-    return {
-        'verified_incidents': stats['verified_incidents'] or 0,
-        'unverified_incidents': stats['unverified_incidents'] or 0,
-        'avg_reporters_per_incident': float(stats['avg_reporters_per_incident'] or 0),
-        'max_reporters_single_incident': stats['max_reporters_single_incident'] or 0,
-        'total_reports': stats['total_reports'] or 0
-    }
+        logger.info(f"Stats retrieved: {stats}")
+
+        if not stats:
+            return {
+                'verified_incidents': 0,
+                'unverified_incidents': 0,
+                'avg_reporters_per_incident': 0.0,
+                'max_reporters_single_incident': 0,
+                'total_reports': 0
+            }
+
+        return {
+            'verified_incidents': stats['verified_incidents'] or 0,
+            'unverified_incidents': stats['unverified_incidents'] or 0,
+            'avg_reporters_per_incident': float(stats['avg_reporters_per_incident'] or 0),
+            'max_reporters_single_incident': stats['max_reporters_single_incident'] or 0,
+            'total_reports': stats['total_reports'] or 0
+        }
+    except Exception as e:
+        logger.error(f"Error fetching clustering stats: {str(e)}")
+        logger.error(traceback.format_exc())
+        raise HTTPException(
+            status_code=500,
+            detail={
+                "error": str(e),
+                "type": type(e).__name__,
+                "traceback": traceback.format_exc()
+            }
+        )
 
 @router.get("/cross-source-stats")
 async def get_cross_source_validation_stats(db = Depends(get_database)):
