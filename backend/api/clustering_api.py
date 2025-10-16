@@ -4,7 +4,7 @@ Automatically combines duplicate reports from multiple anonymous users
 Uses spatial-temporal-semantic matching to identify same incidents
 """
 
-from fastapi import APIRouter, HTTPException, Depends
+from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from typing import Optional, List
 import hashlib
@@ -51,10 +51,7 @@ class IncidentClusterInfo(BaseModel):
     reports: List[dict]
 
 @router.post("/submit", response_model=ReportResponse)
-async def submit_incident_report(
-    request: SubmitReportRequest,
-    db = Depends(get_database)
-):
+async def submit_incident_report(request: SubmitReportRequest):
     """
     Submit an incident report - automatically clusters with existing reports
 
@@ -72,6 +69,7 @@ async def submit_incident_report(
     device_fingerprint = hashlib.sha256(request.device_id.encode()).hexdigest()
 
     try:
+        db = await get_database()
         # Find matching cluster using smart spatial-temporal matching
         result = await db.execute_query(
             """
@@ -194,11 +192,13 @@ async def submit_incident_report(
         raise HTTPException(status_code=500, detail=f"Failed to submit report: {str(e)}")
 
 @router.get("/cluster/{incident_id}", response_model=IncidentClusterInfo)
-async def get_cluster_info(incident_id: str, db = Depends(get_database)):
+async def get_cluster_info(incident_id: str):
     """
     Get clustering information for an incident
     Shows how many people reported it (anonymously)
     """
+    db = await get_database()
+
     # Get incident cluster info
     incident = await db.execute_query_single(
         """
@@ -253,11 +253,12 @@ async def get_cluster_info(incident_id: str, db = Depends(get_database)):
     )
 
 @router.get("/debug/test-db-injection")
-async def test_db_injection(db = Depends(get_database)):
+async def test_db_injection():
     """
-    Test if dependency injection works
+    Test if direct database call works
     """
     try:
+        db = await get_database()
         return {
             "status": "success",
             "db_object": str(type(db)),
@@ -273,12 +274,13 @@ async def test_db_injection(db = Depends(get_database)):
         }
 
 @router.get("/debug/test-query")
-async def test_database_query(db = Depends(get_database)):
+async def test_database_query():
     """
     Debug endpoint to test database connectivity and queries
     Returns detailed error information if query fails
     """
     try:
+        db = await get_database()
         logger.info(f"Testing query with db: {type(db)}, pool: {db.pool}, engine: {db.engine}")
         # Simple test query
         result = await db.execute_query("SELECT COUNT(*) as count FROM crime_incidents")
@@ -300,11 +302,12 @@ async def test_database_query(db = Depends(get_database)):
         }
 
 @router.get("/stats")
-async def get_clustering_stats(db = Depends(get_database)):
+async def get_clustering_stats():
     """
     Get overall clustering statistics
     """
     try:
+        db = await get_database()
         logger.info("Fetching clustering stats...")
         stats = await db.execute_query_single(
             """
@@ -350,11 +353,12 @@ async def get_clustering_stats(db = Depends(get_database)):
         )
 
 @router.get("/cross-source-stats")
-async def get_cross_source_validation_stats(db = Depends(get_database)):
+async def get_cross_source_validation_stats():
     """
     Get statistics on cross-source validation
     Shows how many official Polisen.se incidents have been validated by user reports
     """
+    db = await get_database()
     stats = await db.execute_query_single(
         "SELECT * FROM get_cross_source_stats()"
     )
