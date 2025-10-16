@@ -1,0 +1,85 @@
+name: Deploy Backend to Scaleway
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'backend/**'
+      - 'main.py'
+      - 'requirements.txt'
+      - 'Dockerfile'
+      - '.github/workflows/scaleway-deploy.yml'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build AMD64 Docker image
+        run: |
+          docker build --platform=linux/amd64 \
+            -t rg.fr-par.scw.cloud/funcscwhalobackend4k1irws6/halo-backend:${{ github.sha }} \
+            -t rg.fr-par.scw.cloud/funcscwhalobackend4k1irws6/halo-backend:latest \
+            .
+
+      - name: Install Scaleway CLI
+        run: |
+          curl -o /tmp/scw -L "https://github.com/scaleway/scaleway-cli/releases/latest/download/scaleway-cli_$(uname -s | tr '[:upper:]' '[:lower:]')_amd64"
+          sudo install -m 755 /tmp/scw /usr/local/bin/scw
+          scw version
+
+      - name: Configure Scaleway CLI
+        env:
+          SCW_ACCESS_KEY: ${{ secrets.SCW_ACCESS_KEY }}
+          SCW_SECRET_KEY: ${{ secrets.SCW_SECRET_KEY }}
+          SCW_DEFAULT_ORGANIZATION_ID: ${{ secrets.SCW_DEFAULT_ORGANIZATION_ID }}
+        run: |
+          scw config set access-key=$SCW_ACCESS_KEY
+          scw config set secret-key=$SCW_SECRET_KEY
+          scw config set default-organization-id=$SCW_DEFAULT_ORGANIZATION_ID
+          scw config set default-region=fr-par
+
+      - name: Login to Scaleway Container Registry
+        env:
+          SCW_REGISTRY_TOKEN: ${{ secrets.SCW_REGISTRY_TOKEN }}
+        run: |
+          echo "$SCW_REGISTRY_TOKEN" | docker login \
+            rg.fr-par.scw.cloud/funcscwhalobackend4k1irws6 \
+            -u nologin --password-stdin
+
+      - name: Push Docker images
+        run: |
+          docker push rg.fr-par.scw.cloud/funcscwhalobackend4k1irws6/halo-backend:${{ github.sha }}
+          docker push rg.fr-par.scw.cloud/funcscwhalobackend4k1irws6/halo-backend:latest
+
+      - name: Update Scaleway Container
+        run: |
+          scw container container update 35a73370-0199-42de-862c-88b67af1890d \
+            registry-image="rg.fr-par.scw.cloud/funcscwhalobackend4k1irws6/halo-backend:latest" \
+            redeploy=true \
+            --wait
+
+      - name: Verify Deployment
+        run: |
+          echo "Waiting 30 seconds for container to stabilize..."
+          sleep 30
+
+          echo "Testing health endpoint..."
+          curl -f https://halobackend4k1irws6-halo-backend.functions.fnc.fr-par.scw.cloud/health || exit 1
+
+          echo "Testing AI health endpoint..."
+          curl -f https://halobackend4k1irws6-halo-backend.functions.fnc.fr-par.scw.cloud/api/v1/ai/health || exit 1
+
+          echo "✅ Deployment successful!"
+
+      - name: Notify on failure
+        if: failure()
+        run: |
+          echo "❌ Deployment failed. Check the logs above for details."
+          exit 1
