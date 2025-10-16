@@ -1577,6 +1577,8 @@ class PostGISDatabase:
 
     async def execute_query(self, query: str, *params) -> List[Dict[str, Any]]:
         """Execute raw SQL query and return results as list of dictionaries"""
+        if not self.pool:
+            raise RuntimeError("Database pool not initialized. Call initialize() first.")
         async with self.pool.acquire() as conn:
             if params:
                 rows = await conn.fetch(query, *params)
@@ -1586,6 +1588,8 @@ class PostGISDatabase:
 
     async def execute_query_single(self, query: str, *params) -> Optional[Dict[str, Any]]:
         """Execute raw SQL query and return single result as dictionary"""
+        if not self.pool:
+            raise RuntimeError("Database pool not initialized. Call initialize() first.")
         async with self.pool.acquire() as conn:
             if params:
                 row = await conn.fetchrow(query, *params)
@@ -1595,6 +1599,8 @@ class PostGISDatabase:
 
     async def execute_non_query(self, query: str, *params) -> int:
         """Execute non-query SQL statement and return affected row count"""
+        if not self.pool:
+            raise RuntimeError("Database pool not initialized. Call initialize() first.")
         async with self.pool.acquire() as conn:
             result = await conn.execute(query, *params)
             return int(result.split()[-1]) if result and result.split() else 0
@@ -1622,6 +1628,6 @@ async def get_database() -> PostGISDatabase:
             config = DatabaseConfig()
         _database = PostGISDatabase(config)
 
-    if not _database.engine:
+    if not _database.engine or not _database.pool:
         await _database.initialize()
     return _database
