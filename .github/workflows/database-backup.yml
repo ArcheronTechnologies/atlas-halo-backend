@@ -15,13 +15,26 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y postgresql-client
 
-      - name: Backup Database
+      - name: Debug - Check if secret exists
+        run: |
+          if [ -z "${{ secrets.DB_PASSWORD }}" ]; then
+            echo "ERROR: DB_PASSWORD secret is empty or not set"
+            exit 1
+          else
+            echo "✓ DB_PASSWORD secret is set (length: ${#DB_PASS} chars)"
+          fi
         env:
           DB_PASS: ${{ secrets.DB_PASSWORD }}
+
+      - name: Backup Database
+        env:
+          PGPASSWORD: ${{ secrets.DB_PASSWORD }}
         run: |
-          # Create .pgpass file to handle special characters
-          echo "51.159.27.120:19168:rdb:atlas_user:${DB_PASS}" > ~/.pgpass
-          chmod 600 ~/.pgpass
+          # Double-check password is set
+          if [ -z "$PGPASSWORD" ]; then
+            echo "ERROR: PGPASSWORD is empty"
+            exit 1
+          fi
 
           pg_dump \
             -h 51.159.27.120 \
@@ -29,10 +42,8 @@ jobs:
             -U atlas_user \
             -d rdb \
             -F c \
+            -w \
             -f halo_backup_$(date +%Y%m%d).dump
-
-          # Clean up
-          rm ~/.pgpass
 
       - name: Upload to Scaleway Object Storage
         env:
