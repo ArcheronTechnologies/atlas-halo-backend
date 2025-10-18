@@ -1,0 +1,82 @@
+name: Daily Database Backup
+
+on:
+  schedule:
+    - cron: '0 2 * * *'  # 2 AM UTC daily
+  workflow_dispatch:  # Manual trigger
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install PostgreSQL client
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y postgresql-client
+
+      - name: Backup Database
+        env:
+          PGPASSWORD: ${{ secrets.DB_PASSWORD }}
+        run: |
+          pg_dump \
+            -h 51.159.27.120 \
+            -p 19168 \
+            -U atlas_user \
+            -d rdb \
+            -F c \
+            -f halo_backup_$(date +%Y%m%d).dump
+
+      - name: Upload to Scaleway Object Storage
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.SCW_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.SCW_SECRET_KEY }}
+        run: |
+          # Install AWS CLI
+          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+          unzip awscliv2.zip
+          sudo ./aws/install
+
+          # Create bucket if doesn't exist (will fail silently if exists)
+          aws s3 mb s3://halo-backups \
+            --endpoint-url https://s3.fr-par.scw.cloud \
+            --region fr-par || true
+
+          # Upload backup with timestamp
+          aws s3 cp halo_backup_$(date +%Y%m%d).dump \
+            s3://halo-backups/$(date +%Y%m%d).dump \
+            --endpoint-url https://s3.fr-par.scw.cloud
+
+          echo "✅ Backup uploaded to s3://halo-backups/$(date +%Y%m%d).dump"
+
+      - name: List recent backups
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.SCW_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.SCW_SECRET_KEY }}
+        run: |
+          echo "Recent backups:"
+          aws s3 ls s3://halo-backups/ \
+            --endpoint-url https://s3.fr-par.scw.cloud | tail -10
+
+      - name: Clean up old backups (keep 30 days)
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.SCW_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.SCW_SECRET_KEY }}
+        run: |
+          # Calculate date 30 days ago (YYYYMMDD format)
+          CUTOFF_DATE=$(date -d "30 days ago" +%Y%m%d)
+
+          # List all backups and delete old ones
+          aws s3 ls s3://halo-backups/ \
+            --endpoint-url https://s3.fr-par.scw.cloud | \
+            awk '{print $4}' | \
+            while read filename; do
+              if [[ $filename =~ ^([0-9]{8})\.dump$ ]]; then
+                FILE_DATE="${BASH_REMATCH[1]}"
+                if [[ $FILE_DATE -lt $CUTOFF_DATE ]]; then
+                  echo "Deleting old backup: $filename"
+                  aws s3 rm s3://halo-backups/$filename \
+                    --endpoint-url https://s3.fr-par.scw.cloud
+                fi
+              fi
+            done
