@@ -16,14 +16,10 @@ jobs:
           sudo apt-get install -y postgresql-client
 
       - name: Backup Database
-        env:
-          PGPASSWORD: ${{ secrets.DB_PASSWORD }}
         run: |
+          # Use connection URI to handle special characters in password
           pg_dump \
-            -h 51.159.27.120 \
-            -p 19168 \
-            -U atlas_user \
-            -d rdb \
+            "postgresql://atlas_user:${{ secrets.DB_PASSWORD }}@51.159.27.120:19168/rdb" \
             -F c \
             -f halo_backup_$(date +%Y%m%d).dump
 
