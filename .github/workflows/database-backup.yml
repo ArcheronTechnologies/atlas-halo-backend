@@ -50,10 +50,7 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.SCW_ACCESS_KEY }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.SCW_SECRET_KEY }}
         run: |
-          # Install AWS CLI
-          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-          unzip awscliv2.zip
-          sudo ./aws/install
+          # AWS CLI is pre-installed on GitHub Actions runners
 
           # Create bucket if doesn't exist (will fail silently if exists)
           aws s3 mb s3://halo-backups \
