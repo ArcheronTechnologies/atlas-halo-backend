@@ -16,12 +16,23 @@ jobs:
           sudo apt-get install -y postgresql-client
 
       - name: Backup Database
+        env:
+          DB_PASS: ${{ secrets.DB_PASSWORD }}
         run: |
-          # Use connection URI to handle special characters in password
+          # Create .pgpass file to handle special characters
+          echo "51.159.27.120:19168:rdb:atlas_user:${DB_PASS}" > ~/.pgpass
+          chmod 600 ~/.pgpass
+
           pg_dump \
-            "postgresql://atlas_user:${{ secrets.DB_PASSWORD }}@51.159.27.120:19168/rdb" \
+            -h 51.159.27.120 \
+            -p 19168 \
+            -U atlas_user \
+            -d rdb \
             -F c \
             -f halo_backup_$(date +%Y%m%d).dump
+
+          # Clean up
+          rm ~/.pgpass
 
       - name: Upload to Scaleway Object Storage
         env:
